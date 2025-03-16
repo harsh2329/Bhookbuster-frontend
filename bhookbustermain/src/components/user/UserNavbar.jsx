@@ -31,12 +31,12 @@ const UserNavbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-left">
+      {/* <div className="navbar-left">
         <Link to="/">Home</Link>
         <Link to="/about">About Us</Link>
         <Link to="/menu">Menu</Link>
         <Link to="/offers">Special Offers</Link>
-      </div>
+      </div> */}
       
       <div className="navbar-center">
         <Link to="/">
@@ -45,6 +45,7 @@ const UserNavbar = () => {
       </div>
       
       <div className="navbar-right">
+      <Link to="/rsignup">Partner with us</Link> 
         <button 
           onClick={toggleTheme} 
           className="theme-toggle"

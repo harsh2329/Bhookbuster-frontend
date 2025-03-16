@@ -34,7 +34,7 @@ const UserLogin = ({ toggleForm }) => {
       }
       setTimeout(() => {
        
-        navigate('/user');
+        navigate('/');
         // handleLoginTransition();
       }, 1500);
     } catch (error) {
