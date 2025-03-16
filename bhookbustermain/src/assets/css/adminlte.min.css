@@ -2,9 +2,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--secondary-color);
+    background-color: transparent;
     padding: 1rem 2rem;
-    box-shadow: var(--shadow);
+    /* box-shadow: var(--shadow); */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -24,7 +24,8 @@
   }
   
   .navbar-logo {
-    height: 40px;
+    height: 60px;
+    width: auto;
     width: auto;
   }
   
