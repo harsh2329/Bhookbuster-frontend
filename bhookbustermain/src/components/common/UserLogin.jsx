@@ -45,7 +45,9 @@ const UserLogin = ({ toggleForm }) => {
   
   const handleSignupTransition = () => {
     setAnimating(true);
-    
+    setTimeout(() => {
+      navigate('/signup');
+    }, 500);
     
   }; // Fixed missing closing brace
   

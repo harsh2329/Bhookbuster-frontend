@@ -12,7 +12,7 @@ import Alogin from './components/Admin/Alogin';
 import axios from 'axios';
 import './app.css';
 import { useEffect } from 'react';
-import LandingPage from "./components/common/LandingPage";
+import LandingPage from './components/Landing page/LandingPage';
 import PrivateRoutes from "./hooks/PrivateRoutes";
 import LocationForm from "./components/Restuarant/LocationForm";
 

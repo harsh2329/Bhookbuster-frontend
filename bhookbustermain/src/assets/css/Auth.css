@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-color: #9127f5 ! important; 
-  --primary-hover: #9d7bfc;
+  --primary-color: #f57927 ! important; 
+  --primary-hover: #fcc07b;
   --secondary-color: #ffffff;
   --text-color: #f3f3f3;
   --input-bg: rgb(34, 17, 17);

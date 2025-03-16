@@ -61,8 +61,8 @@ const UserNavbar = () => {
         >
           {darkMode ? '☀️ Light' : '🌙 Dark'}
         </button>
-        <Link to="/user/login">Login</Link>
-        <Link to="/user/signup">Sign Up</Link>
+        <Link to="login">Login</Link>
+        <Link to="signup">Sign Up</Link>
       </div>
     </nav>
   );

@@ -35,6 +35,7 @@
     transition: var(--transition);
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
+    
   }
   
   .navbar a:hover {
@@ -43,11 +44,14 @@
   }
   
   .navbar-right a {
+    
     border: 1px solid transparent;
+    background-color: var(--primary-color);
   }
   
   .navbar-right a:hover {
     border-color: var(--border-color);
+    background-color: transparent;
   }
   
   .navbar-right a:last-child {
@@ -59,7 +63,7 @@
   }
   
   .navbar-right a:last-child:hover {
-    background-color: var(--primary-hover);
+    background-color: transparent;
     box-shadow: var(--glow);
   }
   
