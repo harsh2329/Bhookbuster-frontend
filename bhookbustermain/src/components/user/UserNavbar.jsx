@@ -40,7 +40,7 @@ const UserNavbar = () => {
       
       <div className="navbar-center">
         <Link to="/">
-          <img src={"/assets/items/logo.jpg"} alt="BHOOKBUSTER" className="navbar-logo" />
+          <img src={"/assets/items/logo.png"} alt="BHOOKBUSTER" className="navbar-logo" />
         </Link>
       </div>
       

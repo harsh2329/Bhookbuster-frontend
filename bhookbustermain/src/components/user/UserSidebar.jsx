@@ -15,7 +15,7 @@ const Usersidebar = () => {
         <div className="sidebar-brand">
           <a href="./index.html" className="brand-link">
             <img
-              src="/assets/items/logo.jpg"
+              src="/assets/items/logo.png"
               alt="Logo"
               className="brand-image opacity-75 shadow"
             />
