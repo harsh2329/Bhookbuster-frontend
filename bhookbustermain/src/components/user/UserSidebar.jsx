@@ -15,11 +15,11 @@ const Usersidebar = () => {
         <div className="sidebar-brand">
           <a href="./index.html" className="brand-link">
             <img
-              src="../../dist/assets/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
+              src="/assets/items/logo.jpg"
+              alt="Logo"
               className="brand-image opacity-75 shadow"
             />
-            <span className="brand-text fw-light">AdminLTE 4</span>
+            <span className="brand-text fw-light"> </span>
           </a>
         </div>
         <div
@@ -62,13 +62,13 @@ const Usersidebar = () => {
                   <li className="nav-item">
                     <a href="./index2.html" className="nav-link">
                       <i className="nav-icon bi bi-circle" />
-                      <p>Dashboard v2</p>
+                      <p>ADD Offers</p>
                     </a>
                   </li>
                   <li className="nav-item">
                     <a href="./index3.html" className="nav-link">
                       <i className="nav-icon bi bi-circle" />
-                      <p>Dashboard v3</p>
+                      <p>View Offers</p>
                     </a>
                   </li>
                 </ul>
@@ -76,14 +76,14 @@ const Usersidebar = () => {
               <li className="nav-item">
                 <a href="./generate/theme.html" className="nav-link">
                   <i className="nav-icon bi bi-palette" />
-                  <p>Theme Generate</p>
+                  <p>VIEW ALL OFFERS</p>
                 </a>
               </li>
               <li className="nav-item">
                 <a href="#" className="nav-link">
                   <i className="nav-icon bi bi-box-seam-fill" />
                   <p>
-                    Widgets
+                  
                     <i className="nav-arrow bi bi-chevron-right" />
                   </p>
                 </a>

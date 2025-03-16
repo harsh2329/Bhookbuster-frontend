@@ -47,10 +47,11 @@
 }
 
 .brand-image {
-  width: 40px;
-  height: 40px;
+  width: 220px;
+  height: 200px;
   margin-right: 0.8rem;
   border-radius: 4px;
+  
 }
 
 .brand-text {

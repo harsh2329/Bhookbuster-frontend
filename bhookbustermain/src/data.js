@@ -26,7 +26,5 @@ export const itemData = [
     {
         item_img: "/assets/items/Vada.jpg"
     },
-    {
-        item_img: "/assets/items/Bonda.jpg"
-    }
+ 
 ];
