@@ -1,26 +1,26 @@
 import React from 'react';
-import Rnav from './Rnav';
 import { Outlet } from 'react-router-dom';
 import '../../assets/css/adminlte.css';
+import { Link } from 'react-router-dom';
 
 const Rsidebar = () => {
   return (
     <>
-      <Rnav />
+   
       <aside
         className="app-sidebar bg-body-secondary shadow"
         data-bs-theme="dark"
       >
-        <div className="sidebar-brand">
+        {/* <div className="sidebar-brand">
           <a href="./index.html" className="brand-link">
             <img
               src="../../dist/assets/img/AdminLTELogo.png"
               alt="AdminLTE Logo"
               className="brand-image opacity-75 shadow"
             />
-            <span className="brand-text fw-light">AdminLTE 4</span>
+            <span className="brand-text fw-light"></span>
           </a>
-        </div>
+        </div> */}
         <div
           className=""
           data-overlayscrollbars-viewport="scrollbarHidden overflowXHidden overflowYScroll"
@@ -53,7 +53,7 @@ const Rsidebar = () => {
                 </a>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <Link to="./locationform" className="nav-link active">
+                    <Link to="/herores" className="nav-link active">
                       <p>ADD RESTAURANT</p>
                     </Link>
                   </li>

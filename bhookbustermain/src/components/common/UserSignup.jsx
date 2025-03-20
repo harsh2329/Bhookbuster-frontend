@@ -464,7 +464,7 @@ StateSchema
             </div>
 
             {/* Profile Picture */}
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="profilePic">Profile Picture</label>
               <input
                 type="file"
@@ -482,7 +482,24 @@ StateSchema
                   />
                 </div>
               )}
-            </div>
+            </div> */}
+            <div className="form-group">
+  <label htmlFor="profilePic">Profile Picture</label>
+  <input
+    type="file"
+    accept="image/*"
+    name="profilePic"
+    onChange={handleChange}
+    className={errors.profilePic ? "input-error" : ""}
+  />
+  {profilePic && (
+    <div className="file-indicator">
+     
+    
+     
+    </div>
+  )}
+</div>
 
             {/* Password */}
             <div className="form-group">

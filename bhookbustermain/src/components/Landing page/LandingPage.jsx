@@ -7,7 +7,7 @@ const LandingPage = () => {
     <div>
       <UserNavbar></UserNavbar>
       <Hero />
-       < ItemsDisplay />
+       {/* < ItemsDisplay /> */}
     </div>
   )
 }

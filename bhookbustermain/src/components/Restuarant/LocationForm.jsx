@@ -5,6 +5,8 @@ import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../../assets/css/Location.css';
+import Rsidebar from './Rsidebar';
+import { Link } from 'react-router-dom';
 
 
 const RestaurantRegistration = () => {
@@ -110,6 +112,8 @@ const RestaurantRegistration = () => {
   };
   
   return (
+    <>
+    <Rsidebar ></Rsidebar>
     <div className="restaurant-register-container ">
       <div className="restaurant-form-wrapper ">
         <div className="glow-effect"></div>
@@ -268,7 +272,26 @@ const RestaurantRegistration = () => {
               <option value="Both">Both</option>
             </select>
             {errors.foodtype && <p className="error-message">{errors.foodtype.message}</p>}
-          </div>
+          </div> 
+
+            {/* image path */}
+            <div className="form-group">
+            <label htmlFor="profilePic">Profile Picture</label>
+    <input
+      type="file"
+      accept="image/*"
+      name="profilePic"
+      onChange={handleChange}
+      className={errors.profilePic ? "input-error" : ""}
+  />
+    {profilePic && (
+      <div className="file-indicator">
+       
+       
+       
+      </div>
+            )}
+            </div>
           
           <div className="form-row">
             <div className="form-group">
@@ -327,6 +350,7 @@ const RestaurantRegistration = () => {
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
+    </>
    
   );
 };

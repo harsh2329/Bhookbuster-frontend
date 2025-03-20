@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../assets/css/ResHero.css';
+import Rsidebar from './Rsidebar';
 
 const LandingPage = () => {
   const [restaurantName, setRestaurantName] = useState('');
@@ -16,6 +17,8 @@ const LandingPage = () => {
   };
 
   return (
+    <>
+    <Rsidebar ></Rsidebar>
     <div className="landing-container">
       <div className="left-panel">
         <div className="left-content">
@@ -81,6 +84,7 @@ const LandingPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

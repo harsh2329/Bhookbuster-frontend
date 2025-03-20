@@ -10,7 +10,7 @@ const Hero = () => {
           <h1 className="hero-heading-text">You've Got Questions.</h1>
           <h1 className="hero-heading-text">We've Got Offers.</h1>
           <p className="hero-subtitle-text">
-            Explore your taste with special food offers in a your place. 
+            Explore your taste with special food offers<br /> in a your place. 
           </p>
           <div className="hero-button-section">
             <Link to="/menu" className="hero-text-link">View Offers</Link>
@@ -29,7 +29,13 @@ const Hero = () => {
       {/* Quarter Circle with Images */}
       <div className="quarter-circle-container">
         {/* Quarter Circle Background */}
+        
         <div id="quarter-circle-background"></div>
+        <img
+        src="/assets/items/hand.png"
+        alt="Hand Placement"
+        className="hands-image"
+      />
         
         {/* Udon SVG - animated with rotation */}
         <img
@@ -38,6 +44,7 @@ const Hero = () => {
           loading="eager"
           className="udon-image"
         />
+         
         
         {/* Sugar SVG - positioned at top of quarter circle */}
         {/* <img

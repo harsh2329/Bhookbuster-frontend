@@ -27,6 +27,7 @@
     background-size: cover;
     background-position: center;
     color: var(--text-color);
+    margin-left: 250px; 
   }
   
   .restaurant-form-wrapper {

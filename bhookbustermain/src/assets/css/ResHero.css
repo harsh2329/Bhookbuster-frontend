@@ -2,6 +2,7 @@
     display: flex;
     min-height: 100vh;
     overflow: hidden;
+    margin-left: 250px;
   }
   
   .left-panel {
@@ -201,6 +202,7 @@
   @media (max-width: 900px) {
     .landing-container {
       flex-direction: column;
+      margin-left: 0;
     }
     
     .left-panel {
