@@ -3,10 +3,13 @@ import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import '../../assets/css/Location.css';
+
 
 const RestaurantRegistration = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [areas, setAreas] = useState([]);
@@ -14,6 +17,8 @@ const RestaurantRegistration = () => {
   const [selectedCity, setSelectedCity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Get restaurant name from navigation state if it exists
+  const restaurantName = location.state?.restaurantName || '';
 
   useEffect(() => {
     getAllStates();
@@ -49,7 +54,8 @@ const RestaurantRegistration = () => {
   } = useForm({
     defaultValues: {
       active: true,
-      foodtype: 'Vegetarian'
+      foodtype: 'Vegetarian',
+      title: restaurantName // Set the restaurant name from landing page
     }
   });
   
@@ -104,10 +110,11 @@ const RestaurantRegistration = () => {
   };
   
   return (
-    <div className="restaurant-register-container">
-      <div className="restaurant-form-wrapper">
+    <div className="restaurant-register-container ">
+      <div className="restaurant-form-wrapper ">
         <div className="glow-effect"></div>
-        <h2>Register Your Restaurant</h2>
+        <h2>Register Your Restaurant </h2>
+        {restaurantName && <p className="pre-filled-notice">Welcome, {restaurantName}! Please complete your registration.</p>}
         
         <form onSubmit={handleSubmit(onSubmit)} className="restaurant-form">
           <div className="form-group">
@@ -118,6 +125,7 @@ const RestaurantRegistration = () => {
               placeholder="Enter restaurant name"
               {...register("title", { required: "Restaurant name is required" })}
               className={errors.title ? "input-error" : ""}
+              defaultValue={restaurantName}
             />
             {errors.title && <p className="error-message">{errors.title.message}</p>}
           </div>
@@ -319,6 +327,7 @@ const RestaurantRegistration = () => {
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
+   
   );
 };
 

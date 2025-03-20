@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import LandingPage from './components/Landing page/LandingPage';
 import PrivateRoutes from "./hooks/PrivateRoutes";
 import LocationForm from "./components/Restuarant/LocationForm";
+import ResHero from "./components/Restuarant/ResHero";
 
 function App() {
   useEffect(() => {
@@ -31,10 +32,12 @@ function App() {
         <Route path='/login' element={<UserLogin />} />
         <Route path='/signup' element={<UserSignup />} />
         <Route path='/' element={<LandingPage />} />
+        <Route path='/locationform' element={<LocationForm />} />
+        <Route path='/herores' element={<ResHero />} />
         
         <Route path="" element={<PrivateRoutes />}>
+    
           <Route path='/user' element={<Usersidebar />}>
-          <Route path='locationform' element={<LocationForm />} />
            
           </Route>
           <Route path='/restaurant' element={<Rsidebar />}>

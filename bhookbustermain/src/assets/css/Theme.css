@@ -1,74 +1,74 @@
 :root {
-    /* Light theme variables */
-    --primary-color: #ff6b6b;
-    --primary-hover: #ff5252;
-    --secondary-color: #ffffff;
-    --text-color: #333333;
-    --border-color: #dddddd;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    --glow: 0 0 5px rgba(255, 107, 107, 0.5);
-    --transition: all 0.3s ease;
-    --background-color: #f5f5f5;
-    --card-bg: #ffffff;
-  }
-  
-  /* Dark theme variables */
-  [data-theme="dark"] {
-    --primary-color: #ff6b6b;
-    --primary-hover: #ff5252;
-    --secondary-color: #1a1a1a;
-    --text-color: #f5f5f5;
-    --border-color: #444444;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    --glow: 0 0 5px rgba(255, 107, 107, 0.7);
-    --background-color: #121212;
-    --card-bg: #1e1e1e;
-  }
-  
-  /* Global theme styles */
-  body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  /* Theme specific classes */
-  .light-theme {
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
-  
-  .dark-theme {
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
-  
-  /* Additional common themed elements */
-  .card, .form-container, .auth-container {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
-  }
-  
-  input, select, textarea {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-  }
-  
-  /* Theme toggle button styling */
-  .theme-toggle {
-    background: none;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    padding: 0.5rem 0.75rem;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: var(--transition);
-  }
-  
-  .theme-toggle:hover {
-    background-color: var(--primary-color);
-    color: white;
-    box-shadow: var(--glow);
-  }
+  /* Light theme variables */
+  --primary-color: #ff6b6b;
+  --primary-hover: #ff5252;
+  --secondary-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #dddddd;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --glow: 0 0 5px rgba(255, 107, 107, 0.5);
+  --transition: all 0.3s ease;
+  --background-color: #f5f5f5;
+  --card-bg: #ffffff;
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+  --primary-color: #ff6b6b;
+  --primary-hover: #ff5252;
+  --secondary-color: #1a1a1a;
+  --text-color: #f5f5f5;
+  --border-color: #444444;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --glow: 0 0 5px rgba(255, 107, 107, 0.7);
+  --background-color: #121212;
+  --card-bg: #1e1e1e;
+}
+
+/* Global theme styles */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme specific classes */
+.light-theme {
+  background-color: var(--background-color);
+  color: #ff6101;
+}
+
+.dark-theme {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Additional common themed elements */
+.card, .form-container, .auth-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+input, select, textarea {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.theme-toggle:hover {
+  background-color: var(--primary-color);
+  color: white;
+  box-shadow: var(--glow);
+}
