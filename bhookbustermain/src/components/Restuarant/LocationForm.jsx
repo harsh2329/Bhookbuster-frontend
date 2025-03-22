@@ -113,245 +113,224 @@ const RestaurantRegistration = () => {
   
   return (
     <>
-    <Rsidebar ></Rsidebar>
-    <div className="restaurant-register-container ">
-      <div className="restaurant-form-wrapper ">
+    <Rsidebar></Rsidebar>
+    <div className="restaurant-register-container">
+      <div className="restaurant-form-wrapper">
         <div className="glow-effect"></div>
-        <h2>Register Your Restaurant </h2>
+        <h2>Register Your Restaurant</h2>
         {restaurantName && <p className="pre-filled-notice">Welcome, {restaurantName}! Please complete your registration.</p>}
         
-        <form onSubmit={handleSubmit(onSubmit)} className="restaurant-form">
-          <div className="form-group">
-            <label htmlFor="title">Restaurant Name</label>
-            <input
-              type="text"
-              id="title"
-              placeholder="Enter restaurant name"
-              {...register("title", { required: "Restaurant name is required" })}
-              className={errors.title ? "input-error" : ""}
-              defaultValue={restaurantName}
-            />
-            {errors.title && <p className="error-message">{errors.title.message}</p>}
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <select
-              id="category"
-              {...register("category", { required: "Category is required" })}
-              className={errors.category ? "input-error" : ""}
-            >
-              <option value="">Select a category</option>
-              <option value="Fine Dining">Fine Dining</option>
-              <option value="Casual Dining">Casual Dining</option>
-              <option value="Fast Food">Fast Food</option>
-              <option value="Cafe">Cafe</option>
-              <option value="Buffet">Buffet</option>
-              <option value="Food Truck">Food Truck</option>
-              <option value="Pub & Bar">Pub & Bar</option>
-              <option value="Bakery">Bakery</option>
-            </select>
-            {errors.category && <p className="error-message">{errors.category.message}</p>}
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              placeholder="Tell us about your restaurant"
-              rows="4"
-              {...register("description", { 
-                required: "Description is required",
-                minLength: { value: 20, message: "Description must be at least 20 characters" }
-              })}
-              className={errors.description ? "input-error" : ""}
-            ></textarea>
-            {errors.description && <p className="error-message">{errors.description.message}</p>}
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="timmings">Operating Hours</label>
-            <input
-              type="text"
-              id="timmings"
-              placeholder="e.g. Mon-Fri: 9AM-10PM, Sat-Sun: 10AM-11PM"
-              {...register("timmings", { required: "Operating hours are required" })}
-              className={errors.timmings ? "input-error" : ""}
-            />
-            {errors.timmings && <p className="error-message">{errors.timmings.message}</p>}
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="contactNumber">Contact Number</label>
-            <input
-              type="text"
-              id="contactNumber"
-              placeholder="Enter contact number"
-              {...register("contactNumber", { 
-                required: "Contact number is required",
-                pattern: { value: /^[0-9+\-\s()]{10,15}$/, message: "Please enter a valid phone number" }
-              })}
-              className={errors.contactNumber ? "input-error" : ""}
-            />
-            {errors.contactNumber && <p className="error-message">{errors.contactNumber.message}</p>}
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="address">Address</label>
-            <textarea
-              id="address"
-              placeholder="Enter full address"
-              rows="3"
-              {...register("address", { required: "Address is required" })}
-              className={errors.address ? "input-error" : ""}
-            ></textarea>
-            {errors.address && <p className="error-message">{errors.address.message}</p>}
-          </div>
-          
-          <div className="form-row">
+        {/* Added form-content-scroll div to enable scrolling */}
+        <div className="form-content-scroll">
+          <form onSubmit={handleSubmit(onSubmit)} className="restaurant-form">
             <div className="form-group">
-              <label htmlFor="stateId">State</label>
-              <select
-                id="stateId"
-                {...register("stateId", { required: "State is required" })}
-                className={errors.stateId ? "input-error" : ""}
-                onChange={(e) => getCityByStateId(e.target.value)}
-              >
-                <option value="">Select State</option>
-                {states.map((state) => (
-                  <option key={state._id} value={state._id}>{state.name}</option>
-                ))}
-              </select>
-              {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
+              <label htmlFor="title">Restaurant Name</label>
+              <input
+                type="text"
+                id="title"
+                placeholder="Enter restaurant name"
+                {...register("title", { required: "Restaurant name is required" })}
+                className={errors.title ? "input-error" : ""}
+                defaultValue={restaurantName}
+              />
+              {errors.title && <p className="error-message">{errors.title.message}</p>}
             </div>
             
             <div className="form-group">
-              <label htmlFor="cityId">City</label>
+              <label htmlFor="category">Category</label>
               <select
-                id="cityId"
-                {...register("cityId", { required: "City is required" })}
-                className={errors.cityId ? "input-error" : ""}
-                onChange={(e) => getAreaByCityId(e.target.value)}
-                // onChange={(e) => getAreaByCityId(e.target.value)}
-                // di sabled={!selectedState}
+                id="category"
+                {...register("category", { required: "Category is required" })}
+                className={errors.category ? "input-error" : ""}
               >
-                <option value="">Select City</option>     
-                {cities && cities.map((city) => (
-                  <option key={city._id} value={city._id}>{city.name || city._id}</option>
-                ))}
+                <option value="">Select a category</option>
+                <option value="Fine Dining">Fine Dining</option>
+                <option value="Casual Dining">Casual Dining</option>
+                <option value="Fast Food">Fast Food</option>
+                <option value="Cafe">Cafe</option>
+                <option value="Buffet">Buffet</option>
+                <option value="Food Truck">Food Truck</option>
+                <option value="Pub & Bar">Pub & Bar</option>
+                <option value="Bakery">Bakery</option>
               </select>
-              {errors.cityId && <p className="error-message">{errors.cityId.message}</p>}
+              {errors.category && <p className="error-message">{errors.category.message}</p>}
             </div>
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="areaId">Area</label>
-            <select
-              id="areaId"
-              {...register("areaId")}
-              
-
-              // disabled={!selectedCity}
-            >
-              <option value="">Select Area (Optional)</option>
-              {areas?.map((area) => (
-                    <option key={area._id} value={area._id}>{area.name}</option>
+            
+            <div className="form-group">
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                placeholder="Tell us about your restaurant"
+                rows="4"
+                {...register("description", { 
+                  required: "Description is required",
+                  minLength: { value: 20, message: "Description must be at least 20 characters" }
+                })}
+                className={errors.description ? "input-error" : ""}
+              ></textarea>
+              {errors.description && <p className="error-message">{errors.description.message}</p>}
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="timmings">Operating Hours</label>
+              <input
+                type="text"
+                id="timmings"
+                placeholder="e.g. Mon-Fri: 9AM-10PM, Sat-Sun: 10AM-11PM"
+                {...register("timmings", { required: "Operating hours are required" })}
+                className={errors.timmings ? "input-error" : ""}
+              />
+              {errors.timmings && <p className="error-message">{errors.timmings.message}</p>}
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="contactNumber">Contact Number</label>
+              <input
+                type="text"
+                id="contactNumber"
+                placeholder="Enter contact number"
+                {...register("contactNumber", { 
+                  required: "Contact number is required",
+                  pattern: { value: /^[0-9+\-\s()]{10,15}$/, message: "Please enter a valid phone number" }
+                })}
+                className={errors.contactNumber ? "input-error" : ""}
+              />
+              {errors.contactNumber && <p className="error-message">{errors.contactNumber.message}</p>}
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
+              <textarea
+                id="address"
+                placeholder="Enter full address"
+                rows="3"
+                {...register("address", { required: "Address is required" })}
+                className={errors.address ? "input-error" : ""}
+              ></textarea>
+              {errors.address && <p className="error-message">{errors.address.message}</p>}
+            </div>
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="stateId">State</label>
+                <select
+                  id="stateId"
+                  {...register("stateId", { required: "State is required" })}
+                  className={errors.stateId ? "input-error" : ""}
+                  onChange={(e) => getCityByStateId(e.target.value)}
+                >
+                  <option value="">Select State</option>
+                  {states.map((state) => (
+                    <option key={state._id} value={state._id}>{state.name}</option>
                   ))}
-            </select>
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="foodtype">Food Type</label>
-            <select
-              id="foodtype"
-              {...register("foodtype", { required: "Food type is required" })}
-              className={errors.foodtype ? "input-error" : ""}
-            >
-              <option value="Vegetarian">Vegetarian</option>
-              <option value="Non-Vegetarian">Non-Vegetarian</option>
-              <option value="Both">Both</option>
-            </select>
-            {errors.foodtype && <p className="error-message">{errors.foodtype.message}</p>}
-          </div> 
-
-            {/* image path */}
-            <div className="form-group">
-            <label htmlFor="profilePic">Profile Picture</label>
-    <input
-      type="file"
-      accept="image/*"
-      name="profilePic"
-      onChange={handleChange}
-      className={errors.profilePic ? "input-error" : ""}
-  />
-    {profilePic && (
-      <div className="file-indicator">
-       
-       
-       
-      </div>
-            )}
-            </div>
-          
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="latitude">Latitude</label>
-              <input
-                type="text"
-                id="latitude"
-                placeholder="Latitude"
-                {...register("latitude", { required: "Latitude is required" })}
-                className={errors.latitude ? "input-error" : ""}
-                readOnly
-              />
-              {errors.latitude && <p className="error-message">{errors.latitude.message}</p>}
+                </select>
+                {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="cityId">City</label>
+                <select
+                  id="cityId"
+                  {...register("cityId", { required: "City is required" })}
+                  className={errors.cityId ? "input-error" : ""}
+                  onChange={(e) => getAreaByCityId(e.target.value)}
+                >
+                  <option value="">Select City</option>     
+                  {cities && cities.map((city) => (
+                    <option key={city._id} value={city._id}>{city.name || city._id}</option>
+                  ))}
+                </select>
+                {errors.cityId && <p className="error-message">{errors.cityId.message}</p>}
+              </div>
             </div>
             
             <div className="form-group">
-              <label htmlFor="longtitude">Longitude</label>
-              <input
-                type="text"
-                id="longtitude"
-                placeholder="Longitude"
-                {...register("longtitude", { required: "Longitude is required" })}
-                className={errors.longtitude ? "input-error" : ""}
-                readOnly
-              />
-              {errors.longtitude && <p className="error-message">{errors.longtitude.message}</p>}
+              <label htmlFor="areaId">Area</label>
+              <select
+                id="areaId"
+                {...register("areaId")}
+              >
+                <option value="">Select Area (Optional)</option>
+                {areas?.map((area) => (
+                  <option key={area._id} value={area._id}>{area.name}</option>
+                ))}
+              </select>
             </div>
-          </div>
-          
-          <button 
-            type="button" 
-            className="location-button"
-            onClick={getCurrentLocation}
-            disabled={isLoading}
-          >
-            {isLoading ? 'Detecting Location...' : 'Get Current Location'}
-          </button>
-          
-          <div className="form-group checkbox-group">
-            <input
-              type="checkbox"
-              id="active"
-              {...register("active")}
-            />
-            <label htmlFor="active">List as Active Restaurant</label>
-          </div>
-          
-          <button 
-            type="submit" 
-            className="submit-button"
-            // disabled={isLoading}
-          >
-            {isLoading ? 'Processing...' : 'Register Restaurant'}
-          </button>
-        </form>
+            
+            <div className="form-group">
+              <label htmlFor="foodtype">Food Type</label>
+              <select
+                id="foodtype"
+                {...register("foodtype", { required: "Food type is required" })}
+                className={errors.foodtype ? "input-error" : ""}
+              >
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Non-Vegetarian">Non-Vegetarian</option>
+                <option value="Both">Both</option>
+              </select>
+              {errors.foodtype && <p className="error-message">{errors.foodtype.message}</p>}
+            </div> 
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="latitude">Latitude</label>
+                <input
+                  type="text"
+                  id="latitude"
+                  placeholder="Latitude"
+                  {...register("latitude", { required: "Latitude is required" })}
+                  className={errors.latitude ? "input-error" : ""}
+                  readOnly
+                />
+                {errors.latitude && <p className="error-message">{errors.latitude.message}</p>}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="longtitude">Longitude</label>
+                <input
+                  type="text"
+                  id="longtitude"
+                  placeholder="Longitude"
+                  {...register("longtitude", { required: "Longitude is required" })}
+                  className={errors.longtitude ? "input-error" : ""}
+                  readOnly
+                />
+                {errors.longtitude && <p className="error-message">{errors.longtitude.message}</p>}
+              </div>
+            </div>
+            
+            <button 
+              type="button" 
+              className="location-button"
+              onClick={getCurrentLocation}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Detecting Location...' : 'Get Current Location'}
+            </button>
+            
+            <div className="form-group checkbox-group">
+              <input
+                type="checkbox"
+                id="active"
+                {...register("active")}
+              />
+              <label htmlFor="active">List as Active Restaurant</label>
+            </div>
+          </form>
+        </div>
+        
+        {/* Button positioned outside the scrollable area */}
+        <button 
+          onClick={handleSubmit(onSubmit)} 
+          className="submit-button"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Processing...' : 'Register Restaurant'}
+        </button>
       </div>
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
     </>
-   
   );
 };
 

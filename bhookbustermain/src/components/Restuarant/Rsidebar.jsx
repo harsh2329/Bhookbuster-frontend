@@ -1,118 +1,111 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import '../../assets/css/adminlte.css';
+// SidebarComponent.jsx
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../../assets/css/RDasboard/Rsidebar.css';
+import Rnav from './Rnav';
 
 const Rsidebar = () => {
+  const [isOpen, setIsOpen] = useState(true);
+  const [expandedItem, setExpandedItem] = useState(null);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleItem = (item) => {
+    if (expandedItem === item) {
+      setExpandedItem(null);
+    } else {
+      setExpandedItem(item);
+    }
+  };
+
   return (
     <>
-   
-      <aside
-        className="app-sidebar bg-body-secondary shadow"
-        data-bs-theme="dark"
-      >
-        {/* <div className="sidebar-brand">
-          <a href="./index.html" className="brand-link">
-            <img
-              src="../../dist/assets/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
-              className="brand-image opacity-75 shadow"
-            />
-            <span className="brand-text fw-light"></span>
-          </a>
-        </div> */}
-        <div
-          className=""
-          data-overlayscrollbars-viewport="scrollbarHidden overflowXHidden overflowYScroll"
-          tabIndex={-1}
-          style={{
-            marginRight: "-16px",
-            marginBottom: "-16px",
-            marginLeft: 0,
-            top: "-8px",
-            right: "auto",
-            left: "-8px",
-            width: "calc(100% + 16px)",
-            padding: 8,
-          }}
-        >
-          <nav className="mt-2">
-            <ul
-              className="nav sidebar-menu flex-column"
-              data-lte-toggle="treeview"
-              role="menu"
-              data-accordion="false"
-            >
-              <li className="nav-item menu-open">
-                <a href="#" className="nav-link active">
-                  <i className="nav-icon bi bi-speedometer" />
-                  <p>
-                    Dashboard
-                    <i className="nav-arrow bi bi-chevron-right" />
-                  </p>
-                </a>
-                <ul className="nav nav-treeview">
-                  <li className="nav-item">
-                    <Link to="/herores" className="nav-link active">
-                      <p>ADD RESTAURANT</p>
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <a href="./index2.html" className="nav-link">
-                      <i className="nav-icon bi bi-circle" />
-                      <p>Dashboard v2</p>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="./index3.html" className="nav-link">
-                      <i className="nav-icon bi bi-circle" />
-                      <p>Dashboard v3</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item">
-                <a href="./generate/theme.html" className="nav-link">
-                  <i className="nav-icon bi bi-palette" />
-                  <p>Theme Generate</p>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#" className="nav-link">
-                  <i className="nav-icon bi bi-box-seam-fill" />
-                  <p>
-                    Widgets
-                    <i className="nav-arrow bi bi-chevron-right" />
-                  </p>
-                </a>
-                <ul className="nav nav-treeview">
-                  <li className="nav-item">
-                    <a href="./widgets/small-box.html" className="nav-link">
-                      <i className="nav-icon bi bi-circle" />
-                      <p>Small Box</p>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="./widgets/info-box.html" className="nav-link">
-                      <i className="nav-icon bi bi-circle" />
-                      <p>info Box</p>
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="./widgets/cards.html" className="nav-link">
-                      <i className="nav-icon bi bi-circle" />
-                      <p>Cards</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            
-          </nav>
-          
+    <Rnav></Rnav>
+    
+    <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
+      <div className="toggle-btn" onClick={toggleSidebar}>
+        {isOpen ? '◀' : '▶'}
+      </div>
+
+      <div className="sidebar-header">
+        <h3>Restaurant Dashboard</h3>
+      </div>
+
+      <div className="sidebar-items">
+        <div className="sidebar-item">
+          <div className="item-header" onClick={() => toggleItem('restaurant')}>
+            <i className="icon">🍽️</i>
+            <span>Restaurant</span>
+            <i className={`arrow ${expandedItem === 'restaurant' ? 'down' : 'right'}`}>▼</i>
+          </div>
+          {expandedItem === 'restaurant' && (
+            <div className="item-content">
+              <Link to="/locationform" className="nav-link">
+                <div className="sub-item">
+                  <i className="icon">➕</i>
+                  <span>Add Restaurant</span>
+                </div>
+              </Link>
+              <Link to="/add-branches" className="nav-link">
+                <div className="sub-item">
+                  <i className="icon">🏢</i>
+                  <span>Add Branches</span>
+                </div>
+              </Link>
+            </div>
+          )}
         </div>
-      </aside>
-      <Outlet />
+
+        <div className="separator"></div>
+
+        <div className="sidebar-item">
+          <div className="item-header" onClick={() => toggleItem('offers')}>
+            <i className="icon">🏷️</i>
+            <span>Offers</span>
+            <i className={`arrow ${expandedItem === 'offers' ? 'down' : 'right'}`}>▼</i>
+          </div>
+          {expandedItem === 'offers' && (
+            <div className="item-content">
+              <Link to="/add-offer" className="nav-link">
+                <div className="sub-item">
+                  <i className="icon">➕</i>
+                  <span>Add Offer</span>
+                </div>
+              </Link>
+              <Link to="/view-offers" className="nav-link">
+                <div className="sub-item">
+                  <i className="icon">👁️</i>
+                  <span>View Offers</span>
+                </div>
+              </Link>
+            </div>
+          )}
+        </div>
+
+       
+          <div className="sidebar-item">
+            <div className="item-header">
+              <i className="icon">🏢</i>
+              <span>View Branches</span>
+            </div>
+          </div>
+      
+
+        <div className="separator"></div>
+
+        
+          <div className="sidebar-item logout">
+            <div className="item-header">
+              <i className="icon">🚪</i>
+              <span>Logout</span>
+            </div>
+         
+          </div>
+     
+      </div>
+    </div>
     </>
   );
 };

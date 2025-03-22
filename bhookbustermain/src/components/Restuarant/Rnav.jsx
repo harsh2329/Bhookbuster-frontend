@@ -1,242 +1,46 @@
-import React from 'react'
-import '../../assets/css/adminlte.min.css';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../../assets/css/RDasboard/Rnav.css';
+const Rnavbar = () => {
+  const [restaurantName, setRestaurantName] = useState('');
+  
+  useEffect(() => {
+    // Retrieve restaurant name from localStorage on component mount
+    const storedRestaurantName = localStorage.getItem('restaurantName');
+    if (storedRestaurantName) {
+      setRestaurantName(storedRestaurantName);
+    }
+  }, []);
 
-const Rnav = () => {
   return (
-    <nav className="app-header navbar navbar-expand bg-body">
-  {/*begin::Container*/}
-  <div className="container-fluid">
-  <h1> this is restuarant page </h1>
-    {/*begin::Start Navbar Links*/}
-    <ul className="navbar-nav">
-      <li className="nav-item">
-        <a
-          className="nav-link"
-          data-lte-toggle="sidebar"
-          href="#"
-          role="button"
-        >
-          <i className="bi bi-list" />
-        </a>
-      </li>
-      <li className="nav-item d-none d-md-block">
-        <a href="#" className="nav-link">
-          Home
-        </a>
-      </li>
-      <li className="nav-item d-none d-md-block">
-        <a href="#" className="nav-link">
-          Contact
-        </a>
-      </li>
-    </ul>
-    {/*end::Start Navbar Links*/}
-    {/*begin::End Navbar Links*/}
-    <ul className="navbar-nav ms-auto">
-      {/*begin::Navbar Search*/}
-      <li className="nav-item">
-        <a
-          className="nav-link"
-          data-widget="navbar-search"
-          href="#"
-          role="button"
-        >
-          <i className="bi bi-search" />
-        </a>
-      </li>
-      {/*end::Navbar Search*/}
-      {/*begin::Messages Dropdown Menu*/}
-      <li className="nav-item dropdown">
-        <a className="nav-link" data-bs-toggle="dropdown" href="#">
-          <i className="bi bi-chat-text" />
-          <span className="navbar-badge badge text-bg-danger">3</span>
-        </a>
-        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-          <a href="#" className="dropdown-item">
-            {/*begin::Message*/}
-            <div className="d-flex">
-              <div className="flex-shrink-0">
-                <img
-                  src="../../dist/assets/img/user1-128x128.jpg"
-                  alt="User Avatar"
-                  className="img-size-50 rounded-circle me-3"
-                />
-              </div>
-              
-            </div>
-            {/*end::Message*/}
-          </a>
-          <div className="dropdown-divider" />
-          <a href="#" className="dropdown-item">
-            {/*begin::Message*/}
-            <div className="d-flex">
-                <h3>Search Food</h3>
-              <div className="flex-shrink-0">
-                <img
-                  src="../../dist/assets/img/user8-128x128.jpg"
-                  alt="User Avatar"
-                  className="img-size-50 rounded-circle me-3"
-                />
-              </div>
-              <div className="flex-grow-1">
-                <h3 className="dropdown-item-title">
-                  John Pierce
-                  <span className="float-end fs-7 text-secondary">
-                    <i className="bi bi-star-fill" />
-                  </span>
-                </h3>
-                <p className="fs-7">I got your message bro</p>
-                <p className="fs-7 text-secondary">
-                  <i className="bi bi-clock-fill me-1" /> 4 Hours Ago
-                </p>
-              </div>
-            </div>
-            {/*end::Message*/}
-          </a>
-          <div className="dropdown-divider" />
-          <a href="#" className="dropdown-item">
-            {/*begin::Message*/}
-            <div className="d-flex">
-              <div className="flex-shrink-0">
-                <img
-                  src="../../dist/assets/img/user3-128x128.jpg"
-                  alt="User Avatar"
-                  className="img-size-50 rounded-circle me-3"
-                />
-              </div>
-              <div className="flex-grow-1">
-                <h3 className="dropdown-item-title">
-                  Nora Silvester
-                  <span className="float-end fs-7 text-warning">
-                    <i className="bi bi-star-fill" />
-                  </span>
-                </h3>
-                <p className="fs-7">The subject goes here</p>
-                <p className="fs-7 text-secondary">
-                  <i className="bi bi-clock-fill me-1" /> 4 Hours Ago
-                </p>
-              </div>
-            </div>
-            {/*end::Message*/}
-          </a>
-          <div className="dropdown-divider" />
-          <a href="#" className="dropdown-item dropdown-footer">
-            See All Messages
-          </a>
+    <nav className="restaurant-navbar">
+      <div className="navbar-container">
+        {/* Left side logo/brand */}
+        <div className="navbar-brand">
+          <Link to="/">
+            <img src="/assets/images/logo.png" alt="FoodApp" className="logo" />
+          </Link>
         </div>
-      </li>
-      {/*end::Messages Dropdown Menu*/}
-      {/*begin::Notifications Dropdown Menu*/}
-      <li className="nav-item dropdown">
-        <a className="nav-link" data-bs-toggle="dropdown" href="#">
-          <i className="bi bi-bell-fill" />
-          <span className="navbar-badge badge text-bg-warning">15</span>
-        </a>
-        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-          <span className="dropdown-item dropdown-header">
-            15 Notifications
-          </span>
-          <div className="dropdown-divider" />
-          <a href="#" className="dropdown-item">
-            <i className="bi bi-envelope me-2" /> 4 new messages
-            <span className="float-end text-secondary fs-7">3 mins</span>
-          </a>
-          <div className="dropdown-divider" />
-          <a href="#" className="dropdown-item">
-            <i className="bi bi-people-fill me-2" /> 8 friend requests
-            <span className="float-end text-secondary fs-7">12 hours</span>
-          </a>
-          <div className="dropdown-divider" />
-          <a href="#" className="dropdown-item">
-            <i className="bi bi-file-earmark-fill me-2" /> 3 new reports
-            <span className="float-end text-secondary fs-7">2 days</span>
-          </a>
-          <div className="dropdown-divider" />
-          <a href="#" className="dropdown-item dropdown-footer">
-            {" "}
-            See All Notifications{" "}
-          </a>
+        
+        {/* Center area - Restaurant Name */}
+        <div className="navbar-center">
+          {restaurantName && (
+            <h2 className="restaurant-title">{restaurantName}</h2>
+          )}
         </div>
-      </li>
-      {/*end::Notifications Dropdown Menu*/}
-      {/*begin::Fullscreen Toggle*/}
-      <li className="nav-item">
-        <a className="nav-link" href="#" data-lte-toggle="fullscreen">
-          <i data-lte-icon="maximize" className="bi bi-arrows-fullscreen" />
-          <i
-            data-lte-icon="minimize"
-            className="bi bi-fullscreen-exit"
-            style={{ display: "none" }}
-          />
-        </a>
-      </li>
-      {/*end::Fullscreen Toggle*/}
-      {/*begin::User Menu Dropdown*/}
-      <li className="nav-item dropdown user-menu">
-        <a
-          href="#"
-          className="nav-link dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="../../dist/assets/img/user2-160x160.jpg"
-            className="user-image rounded-circle shadow"
-            alt="User Image"
-          />
-          <span className="d-none d-md-inline">Alexander Pierce</span>
-        </a>
-        <ul className="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-          {/*begin::User Image*/}
-          <li className="user-header text-bg-primary">
-            <img
-              src="../../dist/assets/img/user2-160x160.jpg"
-              className="rounded-circle shadow"
-              alt="User Image"
-            />
-            <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2023</small>
-            </p>
-          </li>
-          {/*end::User Image*/}
-          {/*begin::Menu Body*/}
-          <li className="user-body">
-            {/*begin::Row*/}
-            <div className="row">
-              <div className="col-4 text-center">
-                <a href="#">Followers</a>
-              </div>
-              <div className="col-4 text-center">
-                <a href="#">Sales</a>
-              </div>
-              <div className="col-4 text-center">
-                <a href="#">Friends</a>
-              </div>
-            </div>
-            {/*end::Row*/}
-          </li>
-          {/*end::Menu Body*/}
-          {/*begin::Menu Footer*/}
-          <li className="user-footer">
-            <a href="#" className="btn btn-default btn-flat">
-              Profile
-            </a>
-            <a href="#" className="btn btn-default btn-flat float-end">
-              Sign out
-            </a>
-          </li>
-          {/*end::Menu Footer*/}
-        </ul>
-      </li>
-      {/*end::User Menu Dropdown*/}
-    </ul>
-    {/*end::End Navbar Links*/}
-  </div>
-  {/*end::Container*/}
-</nav>
+        
+        {/* Right side navigation items */}
+        <div className="navbar-buttons">
+          <Link to="/register" className="nav-button register-button">
+            Register
+          </Link>
+          <Link to="/login" className="nav-button login-button">
+            Login
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
-  )
-}
-
-export default Rnav
+export default Rnavbar;

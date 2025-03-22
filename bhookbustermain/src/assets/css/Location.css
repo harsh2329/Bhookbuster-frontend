@@ -1,208 +1,265 @@
 :root {
-    --primary-color: #ff6b00 !important; 
-    --primary-hover: #ff8800;
-    --secondary-color: #111111;
-    --text-color: #f3f3f3;
-    --input-bg: transperent;
-    --card-bg: rgba(20, 20, 20, 0.7);
-    --light-text: #cccccc;
-    --border-color: rgb(247, 247, 247);
-    --error-color: #ff4545;
-    --success-color: #28c76f;
-    --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    --glow: 0 0 20px rgb(253, 252, 251);
-    --transition: all 0.3s ease;
-  }
+  --primary-color: #f1ecec !important; 
+  --primary-hover: #ece5e5;
+  --secondary-color: #2c3e50; /* Changed to match sidebar */
+  --text-color: #f3f3f3;
+  --input-bg: transparent;
+  --card-bg: rgba(44, 62, 80, 0.95); /* Adjusted to match sidebar */
+  --light-text: #cccccc;
+  --border-color: #34495e; /* Changed to match sidebar */
+  --error-color: #ff4545;
+  --success-color: #28c76f;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --glow: 0 0 20px rgb(253, 252, 251);
+  --transition: all 0.3s ease;
+  --scrollbar-width: 8px;
+  --scrollbar-track: #34495e;
+  --scrollbar-thumb: #f5f5f5;
+}
+
+/* Restaurant Registration Form Styles */
+.restaurant-register-container {
+  display: flex;
+  justify-content: flex-start; /* Changed to align with sidebar */
+  align-items: flex-start; /* Changed to align content at top */
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--secondary-color);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                    url('/assets/images/restaurant-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--text-color);
+  transition: var(--transition);
+  margin-left: 250px; /* Match sidebar width */
+  width: calc(100% - 250px);
+}
+
+/* Adjust container when sidebar is closed */
+.sidebar.closed ~ .restaurant-register-container {
+  margin-left: 60px;
+  width: calc(100% - 60px);
+}
+
+.restaurant-form-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 80vh; /* Fixed height for scrollable content */
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 10px; /* Reduced to match sidebar style */
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-content-scroll {
+  overflow-y: auto;
+  padding-right: 10px; /* Space for scrollbar */
+  flex: 1;
   
-  /* Restaurant Registration Form Styles */
+  /* Scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Webkit scrollbar styling */
+.form-content-scroll::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+.form-content-scroll::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 10px;
+}
+
+.form-content-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 10px;
+}
+
+.glow-effect {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.restaurant-form-wrapper h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(255, 107, 0, 0.3);
+  /* Fixed position to stay at top while scrolling */
+  position: sticky;
+  top: 0;
+  background-color: var(--card-bg);
+  padding: 1rem 0;
+  z-index: 2;
+}
+
+.restaurant-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.restaurant-form label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--light-text);
+}
+
+.restaurant-form input, 
+.restaurant-form select, 
+.restaurant-form textarea {
+  padding: 12px 16px;
+  background-color: rgba(52, 73, 94, 0.5); /* Slightly darker than sidebar */
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.restaurant-form input:focus, 
+.restaurant-form select:focus, 
+.restaurant-form textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+}
+
+.restaurant-form input::placeholder, 
+.restaurant-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.input-error {
+  border-color: var(--error-color) !important;
+}
+
+.error-message {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
+}
+
+.location-button {
+  padding: 10px 16px;
+  background-color: rgba(255, 0, 0, 0.2);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 0.5rem;
+}
+
+.location-button:hover {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.submit-button {
+  padding: 14px;
+  background-color: var(--primary-color);
+  color: rgb(36, 32, 32);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1rem;
+  box-shadow: 0 4px 12px rgba(238, 216, 216, 0.3);
+  /* Make sure button stays at the bottom */
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+.submit-button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 0, 0, 0.4);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Toast notification customization */
+.Toastify__toast {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 8px;
+}
+
+.Toastify__toast--success {
+  border-left: 4px solid var(--success-color);
+}
+
+.Toastify__toast--error {
+  border-left: 4px solid var(--error-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
   .restaurant-register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 2rem;
-    background-color: var(--secondary-color);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                      url('/assets/images/restaurant-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    color: var(--text-color);
-    margin-left: 250px; 
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    padding: 1rem;
   }
   
   .restaurant-form-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    padding: 2.5rem;
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
-    overflow: hidden;
-    z-index: 1;
-  }
-  
-  .glow-effect {
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 100px;
-    height: 100px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.6;
-    z-index: -1;
-  }
-  
-  .restaurant-form-wrapper h2 {
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    color: var(--primary-color);
-    font-weight: 600;
-    text-shadow: 0 0 5px rgba(255, 107, 0, 0.3);
-  }
-  
-  .restaurant-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    padding: 1.5rem;
+    height: 85vh;
   }
   
   .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr;
   }
   
-  .restaurant-form label {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--light-text);
+  .restaurant-form-wrapper h2 {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
   }
-  
-  .restaurant-form input, 
-  .restaurant-form select, 
-  .restaurant-form textarea {
-    padding: 12px 16px;
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--text-color);
-    font-size: 1rem;
-    transition: var(--transition);
-  }
-  
-  .restaurant-form input:focus, 
-  .restaurant-form select:focus, 
-  .restaurant-form textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
-  }
-  
-  .restaurant-form input::placeholder, 
-  .restaurant-form textarea::placeholder {
-    color: rgba(255, 255, 255, 0.4);
-  }
-  
-  .input-error {
-    border-color: var(--error-color) !important;
-  }
-  
-  .error-message {
-    color: var(--error-color);
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-  }
-  
-  .checkbox-group {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .checkbox-group input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--primary-color);
-  }
-  
-  .location-button {
-    padding: 10px 16px;
-    background-color: rgba(255, 107, 0, 0.2);
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 8px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: var(--transition);
-    margin-bottom: 0.5rem;
-  }
-  
-  .location-button:hover {
-    background-color: rgba(94, 69, 236, 0.3);
-  }
-  
-  .submit-button {
-    padding: 14px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    margin-top: 1rem;
-    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
-  }
-  
-  .submit-button:hover {
-    background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(255, 107, 0, 0.4);
-  }
-  
-  button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-  
-  /* Toast notification customization */
-  .Toastify__toast {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border-radius: 8px;
-  }
-  
-  .Toastify__toast--success {
-    border-left: 4px solid var(--success-color);
-  }
-  
-  .Toastify__toast--error {
-    border-left: 4px solid var(--error-color);
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .restaurant-form-wrapper {
-      padding: 1.5rem;
-    }
-    
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-    
-    .restaurant-form-wrapper h2 {
-      font-size: 1.8rem;
-    }
-  }
+}

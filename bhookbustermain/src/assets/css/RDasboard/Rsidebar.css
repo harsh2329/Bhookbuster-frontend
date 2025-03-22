@@ -1,0 +1,136 @@
+/* Sidebar.css */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2c3e50;
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    transition: all 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .sidebar.closed {
+    width: 60px;
+  }
+  
+  .toggle-btn {
+    position: absolute;
+    right: -15px;
+    top: 20px;
+    background-color: #2c3e50;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+  }
+  
+  .sidebar-header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #34495e;
+  }
+  
+  .sidebar.closed .sidebar-header h3 {
+    display: none;
+  }
+  
+  .sidebar-items {
+    padding: 10px 0;
+  }
+  
+  .sidebar-item {
+    cursor: pointer;
+  }
+  
+  .item-header {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+  }
+  
+  .item-header:hover {
+    background-color: #34495e;
+  }
+  
+  .sidebar.closed .item-header span, 
+  .sidebar.closed .arrow {
+    display: none;
+  }
+  
+  .icon {
+    margin-right: 10px;
+    font-size: 18px;
+    min-width: 20px;
+  }
+  
+  .arrow {
+    margin-left: auto;
+    font-size: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .arrow.down {
+    transform: rotate(180deg);
+  }
+  
+  .item-content {
+    background-color: #34495e;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .sub-item {
+    padding: 10px 20px 10px 40px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+  }
+  
+  .sub-item:hover {
+    background-color: #2c3e50;
+  }
+  
+  .sidebar.closed .item-content {
+    display: none;
+  }
+  
+  .separator {
+    height: 1px;
+    background-color: #34495e;
+    margin: 10px 0;
+  }
+  
+  .logout {
+    margin-top: auto;
+    border-top: 1px solid #34495e;
+  }
+  
+  /* Navigation link styling */
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    display: block;
+  }
+  
+  .nav-link:hover {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .nav-link.active {
+    background-color: #3498db;
+  }
+  
+  .nav-link.active .item-header,
+  .nav-link.active .sub-item {
+    background-color: #3498db;
+  }

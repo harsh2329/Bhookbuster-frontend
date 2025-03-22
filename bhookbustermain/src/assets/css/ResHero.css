@@ -2,7 +2,7 @@
     display: flex;
     min-height: 100vh;
     overflow: hidden;
-    margin-left: 250px;
+  
   }
   
   .left-panel {
@@ -40,6 +40,7 @@
     font-size: 3rem;
     margin-bottom: 0.5rem;
     font-weight: 700;
+    
   }
   
   .left-content h2 {
@@ -199,17 +200,3 @@
     font-weight: 500;
   }
   
-  @media (max-width: 900px) {
-    .landing-container {
-      flex-direction: column;
-      margin-left: 0;
-    }
-    
-    .left-panel {
-      padding: 2rem;
-    }
-    
-    .left-content > p {
-      max-width: 100%;
-    }
-  }

@@ -16,6 +16,8 @@ import LandingPage from './components/Landing page/LandingPage';
 import PrivateRoutes from "./hooks/PrivateRoutes";
 import LocationForm from "./components/Restuarant/LocationForm";
 import ResHero from "./components/Restuarant/ResHero";
+import Offer from "./components/Restuarant/Offer";
+import Rdashboard from "./components/Restuarant/Rdasborad";
 
 function App() {
   useEffect(() => {
@@ -34,6 +36,8 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/locationform' element={<LocationForm />} />
         <Route path='/herores' element={<ResHero />} />
+        <Route path='/offer' element={<Offer />} />
+        <Route path ='/rdashboard' element={<Rdashboard />} />
         
         <Route path="" element={<PrivateRoutes />}>
     

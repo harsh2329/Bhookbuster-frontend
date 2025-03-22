@@ -31,11 +31,11 @@ const Hero = () => {
         {/* Quarter Circle Background */}
         
         <div id="quarter-circle-background"></div>
-        <img
+        {/* <img
         src="/assets/items/hand.png"
         alt="Hand Placement"
         className="hands-image"
-      />
+      /> */}
         
         {/* Udon SVG - animated with rotation */}
         <img
