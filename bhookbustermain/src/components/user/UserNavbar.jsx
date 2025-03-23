@@ -103,20 +103,26 @@ const UserNavbar = () => {
 
   return (
     <nav className="navbar">
-      {/* <div className="navbar-left">
+      
+      
+      <div className="navbar">
+  <div className="navbar-logo-container">
+    <Link to="/">
+      <img src={"/assets/items/logo.png"} alt="BHOOKBUSTER" className="navbar-logo" />
+    </Link>
+    <div className="navbar-left">
         <Link to="/">Home</Link>
         <Link to="/about">About Us</Link>
         <Link to="/menu">Menu</Link>
         <Link to="/offers">Special Offers</Link>
-      </div> */}
-      
-      <div className="navbar-center">
-        <Link to="/">
-          <img src={"/assets/items/logo.png"} alt="BHOOKBUSTER" className="navbar-logo" />
-        </Link>
       </div>
-      
+  </div>
+  {/* Other navbar items here */}
+</div>
+
+
       <div className="navbar-right">
+     
         <Link to="/rdashboard">Partner with us</Link>
         
         <button
