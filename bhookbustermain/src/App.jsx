@@ -19,6 +19,8 @@ import ResHero from "./components/Restuarant/ResHero";
 import Offer from "./components/Restuarant/Offer";
 import Rdashboard from "./components/Restuarant/Rdasborad";
 
+import ResetPassword  from "../../bhookbustermain/src/components/common/ResetPassword";
+
 function App() {
   useEffect(() => {
     // Apply saved theme on app load
@@ -38,6 +40,7 @@ function App() {
         <Route path='/herores' element={<ResHero />} />
         <Route path='/offer' element={<Offer />} />
         <Route path ='/rdashboard' element={<Rdashboard />} />
+        <Route path="/resetpassword/:token" element={<ResetPassword />} />
         
         <Route path="" element={<PrivateRoutes />}>
     

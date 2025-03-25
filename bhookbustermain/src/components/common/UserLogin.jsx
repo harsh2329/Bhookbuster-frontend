@@ -1,7 +1,9 @@
+
+
 // import React, { useState } from 'react';
 // import { useForm } from 'react-hook-form';
 // import { toast, ToastContainer } from 'react-toastify';
-// import axios from 'axios'; // Add this import
+// import axios from 'axios';
 // import 'react-toastify/dist/ReactToastify.css';
 // import '../../assets/css/Auth.css';
 // import { useNavigate } from 'react-router-dom';
@@ -23,8 +25,14 @@
 //       if (res.status === 200) {
 //         toast.success("Login Success");
   
+//         // Save user ID and role
 //         localStorage.setItem("id", res.data.data?._id || "");
 //         localStorage.setItem("role", res.data.data?.roleId?.name || "");
+        
+//         // Also save the profile picture path if available
+//         if (res.data.data?.profilePicPath) {
+//           localStorage.setItem("profilePicPath", res.data.data.profilePicPath);
+//         }
   
 //         if (res.data.data?.roleId?.name === "USER") {
 //           navigate("/restaurant");
@@ -33,7 +41,6 @@
 //         }
 //       }
 //       setTimeout(() => {
-       
 //         navigate('/');
 //         // handleLoginTransition();
 //       }, 1500);
@@ -48,10 +55,8 @@
 //     setTimeout(() => {
 //       navigate('/signup');
 //     }, 500);
-    
-//   }; // Fixed missing closing brace
+//   };
   
-//   // Moved return statement outside of handleSignupTransition
 //   return (
 //     <div className={`auth-container reversed ${animating ? 'slide-right' : ''}`}>
 //       <div className="auth-right">
@@ -108,8 +113,10 @@
 //                   {...register("remember")} 
 //                 />
 //                 <label htmlFor="remember">Remember me</label>
+//                 <div className="login-form-footer">
+//     <a href="/forgotpassword" className="forgot-password">Forgot Password?</a>
+// </div>
 //               </div>
-//               <a href="#" className="forgot-password">Forgot Password?</a>
 //             </div>
             
 //             <button type="submit" className="auth-button">Login</button>
@@ -153,11 +160,20 @@ const UserLogin = ({ toggleForm }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [animating, setAnimating] = useState(false);
   
+  // Add state for forgot password modal
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [isSubmittingReset, setIsSubmittingReset] = useState(false);
+  
   const { 
     register, 
     handleSubmit, 
-    formState: { errors } 
+    formState: { errors },
+    watch 
   } = useForm();
+  
+  // Get the current email value to pre-fill the forgot password form
+  const currentEmail = watch("email", "");
   
   const onSubmit = async (data) => {
     try {
@@ -182,11 +198,36 @@ const UserLogin = ({ toggleForm }) => {
       }
       setTimeout(() => {
         navigate('/');
-        // handleLoginTransition();
       }, 1500);
     } catch (error) {
       console.log(error);
       toast.error("Login Failed");
+    }
+  };
+  
+  // Add forgot password handler
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    
+    if (!forgotEmail) {
+      toast.error('Please enter your email');
+      return;
+    }
+    
+    try {
+      setIsSubmittingReset(true);
+      
+      const response = await axios.post('/user/forgotpassword', { 
+        email: forgotEmail 
+      });
+      
+      toast.success('Password reset link has been sent to your email');
+      setShowForgotPassword(false);
+    } catch (error) {
+      console.error('Forgot password error:', error);
+      toast.error(error.response?.data?.message || 'Failed to send reset link');
+    } finally {
+      setIsSubmittingReset(false);
     }
   };
   
@@ -253,8 +294,20 @@ const UserLogin = ({ toggleForm }) => {
                   {...register("remember")} 
                 />
                 <label htmlFor="remember">Remember me</label>
+                <div className="login-form-footer">
+                  <a 
+                    href="#" 
+                    className="forgot-password"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setForgotEmail(currentEmail); 
+                      setShowForgotPassword(true);
+                    }}
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
               </div>
-              <a href="#" className="forgot-password">Forgot Password?</a>
             </div>
             
             <button type="submit" className="auth-button">Login</button>
@@ -278,6 +331,49 @@ const UserLogin = ({ toggleForm }) => {
           </div>
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {showForgotPassword && (
+        <div className="forgot-password-modal">
+          <div className="forgot-password-content">
+            <h3>Forgot Password</h3>
+            <p>Enter your email to receive a password reset link</p>
+            
+            <form onSubmit={handleForgotPassword} className="forgot-password-form">
+              <div className="form-group">
+                <label htmlFor="forgotEmail">Email Address</label>
+                <input
+                  id="forgotEmail"
+                  type="email"
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              
+              <div className="form-buttons">
+                <button
+                  type="button"
+                  onClick={() => setShowForgotPassword(false)}
+                  className="cancel-button"
+                >
+                  Cancel
+                </button>
+                
+                <button
+                  type="submit"
+                  disabled={isSubmittingReset}
+                  className="submit-button"
+                >
+                  {isSubmittingReset ? "Sending..." : "Send Reset Link"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
