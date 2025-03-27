@@ -32,6 +32,7 @@ Hero Component CSS
     line-height: 1.2;
     margin-bottom: 0.5rem;
     color:rgb(255, 94, 0);
+    margin-left:0;
   }
   
   .hero-subtitle-text {

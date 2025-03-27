@@ -26,17 +26,18 @@ const Rsidebar = () => {
     
     <div className={`sidebar ${isOpen ? 'open' : 'closed'}`}>
       <div className="toggle-btn" onClick={toggleSidebar}>
-        {isOpen ? '◀' : '▶'}
+        {isOpen ? '☰' : '☰'}
       </div>
 
       <div className="sidebar-header">
-        <h3>Restaurant Dashboard</h3>
+        <h4>Restaurant Dashboard</h4>
       </div>
+      <div className="separator"></div>
 
       <div className="sidebar-items">
         <div className="sidebar-item">
           <div className="item-header" onClick={() => toggleItem('restaurant')}>
-            <i className="icon">🍽️</i>
+            <i className="icon">🍽</i>
             <span>Restaurant</span>
             <i className={`arrow ${expandedItem === 'restaurant' ? 'down' : 'right'}`}>▼</i>
           </div>
@@ -45,17 +46,18 @@ const Rsidebar = () => {
               <Link to="/locationform" className="nav-link">
                 <div className="sub-item">
                   <i className="icon">➕</i>
-                  <span>Add Restaurant</span>
+                  <span><h4>Add Restaurant</h4></span>
                 </div>
               </Link>
+              <div className="separator"></div>
               <Link to="/add-branches" className="nav-link">
                 <div className="sub-item">
                   <i className="icon">🏢</i>
-                  <span>Add Branches</span>
+                  <span><h4>Add Branches</h4></span>
                 </div>
               </Link>
             </div>
-          )}
+          )} 
         </div>
 
         <div className="separator"></div>
@@ -68,22 +70,23 @@ const Rsidebar = () => {
           </div>
           {expandedItem === 'offers' && (
             <div className="item-content">
-              <Link to="/add-offer" className="nav-link">
+              <Link to="/offer" className="nav-link">
                 <div className="sub-item">
                   <i className="icon">➕</i>
-                  <span>Add Offer</span>
+                  <span><h4>Add Offer</h4></span>
                 </div>
+                <div className="separator"></div>
               </Link>
               <Link to="/view-offers" className="nav-link">
                 <div className="sub-item">
                   <i className="icon">👁️</i>
-                  <span>View Offers</span>
+                  <span><h4>View Offers</h4></span>
                 </div>
               </Link>
             </div>
           )}
         </div>
-
+        <div className="separator"></div>
        
           <div className="sidebar-item">
             <div className="item-header">
@@ -103,6 +106,7 @@ const Rsidebar = () => {
             </div>
          
           </div>
+          <div className="separator"></div>
      
       </div>
     </div>

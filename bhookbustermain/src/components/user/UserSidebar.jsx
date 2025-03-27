@@ -60,10 +60,10 @@ const Usersidebar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="./index2.html" className="nav-link">
+                    <Link to="offer" className="nav-link">
                       <i className="nav-icon bi bi-circle" />
                       <p>ADD Offers</p>
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <a href="./index3.html" className="nav-link">

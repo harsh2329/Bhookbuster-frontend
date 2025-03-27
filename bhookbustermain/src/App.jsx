@@ -18,6 +18,8 @@ import LocationForm from "./components/Restuarant/LocationForm";
 import ResHero from "./components/Restuarant/ResHero";
 import Offer from "./components/Restuarant/Offer";
 import Rdashboard from "./components/Restuarant/Rdasborad";
+import Home from './components/Landing page/Navbar/Home';
+import Aboutus from './components/Landing page/Navbar/Aboutus';
 
 import ResetPassword  from "../../bhookbustermain/src/components/common/ResetPassword";
 
@@ -41,7 +43,8 @@ function App() {
         <Route path='/offer' element={<Offer />} />
         <Route path ='/rdashboard' element={<Rdashboard />} />
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
-        
+        <Route path="/home" element={<Home />} />
+        <Route path='/aboutus' element={<Aboutus />} />
         <Route path="" element={<PrivateRoutes />}>
     
           <Route path='/user' element={<Usersidebar />}>

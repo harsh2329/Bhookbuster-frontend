@@ -111,8 +111,8 @@ const UserNavbar = () => {
       <img src={"/assets/items/logo.png"} alt="BHOOKBUSTER" className="navbar-logo" />
     </Link>
     <div className="navbar-left">
-        <Link to="/">Home</Link>
-        <Link to="/about">About Us</Link>
+        <Link to="/home">Home</Link>
+        <Link to="/aboutus">About Us</Link>
         <Link to="/menu">Menu</Link>
         <Link to="/offers">Special Offers</Link>
       </div>

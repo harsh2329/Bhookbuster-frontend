@@ -197,7 +197,7 @@ const UserLogin = ({ toggleForm }) => {
         }
       }
       setTimeout(() => {
-        navigate('/');
+        navigate('/home');
       }, 1500);
     } catch (error) {
       console.log(error);

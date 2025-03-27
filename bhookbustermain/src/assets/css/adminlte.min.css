@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+#root{
+  --text-color-dark:black;
+  --link-color-dark:white;
+
+}
 /* Main navbar styling */
 .navbar {
   display: flex;
@@ -23,12 +28,20 @@
 [data-theme="dark"] .navbar {
   background-color: rgba(0, 0, 0, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-color-dark);
+  --text-color: var(--text-color-dark);
+  --link-color: var(--link-color-dark);
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Light mode adjustments */
 [data-theme="light"] .navbar {
   background-color: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-color-dark);
+  --text-color: var(--text-color-dark);
+  --link-color: var(--link-color-dark);
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 .navbar-logo-container {
   display: flex;
@@ -76,7 +89,7 @@
 
 /* Link styling */
 .navbar a {
-  color: var(--text-color, #fff);
+  color:#6f5a5a;
   text-decoration: none;
   font-weight: 500;
   /* padding: 8px 15px; */
@@ -96,7 +109,7 @@
 
 /* Button hover effect */
 .theme-toggle:hover, .logout-btn:hover, .navbar a:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(73, 67, 67, 0.2) !important;
 }
 
 /* Profile picture styling */
@@ -123,6 +136,7 @@
 [data-theme="light"] {
   --text-color: var(--text-color-light);
   --border-color: var(--border-color-light);
+  
 }
 
 [data-theme="dark"] {
