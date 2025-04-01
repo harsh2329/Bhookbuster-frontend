@@ -8,6 +8,7 @@ import Adminsidebar from './components/Admin/Adminsidebar';
 import './assets/css/adminlte.css';
 import './assets/css/adminlte.min.css';
 import Rlogin from './components/Restuarant/Rlogin';
+import Rsignup from './components/Restuarant/Rsignup';
 import Alogin from './components/Admin/Alogin';
 import axios from 'axios';
 import './app.css';
@@ -20,6 +21,7 @@ import Offer from "./components/Restuarant/Offer";
 import Rdashboard from "./components/Restuarant/Rdasborad";
 import Home from './components/Landing page/Navbar/Home';
 import Aboutus from './components/Landing page/Navbar/Aboutus';
+import Viewoffer from './components/Restuarant/Viewoffer';
 
 import ResetPassword  from "../../bhookbustermain/src/components/common/ResetPassword";
 
@@ -45,7 +47,12 @@ function App() {
         <Route path="/resetpassword/:token" element={<ResetPassword />} />
         <Route path="/home" element={<Home />} />
         <Route path='/aboutus' element={<Aboutus />} />
+        <Route path="/viewoffer" element={<Viewoffer />} />
+        <Route path='rlogin' element={<Rlogin />} />
+        <Route path='rsignup' element={<Rsignup />} />
+
         <Route path="" element={<PrivateRoutes />}>
+       
     
           <Route path='/user' element={<Usersidebar />}>
            

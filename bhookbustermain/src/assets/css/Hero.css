@@ -7,6 +7,8 @@ Hero Component CSS
     width: 100%;
     min-height: 100vh;
     background-color: #333333;
+    /* background-image: url("/bhookbustermain/src/assets/images/background.png"); */
+    background-color: #333333;
   }
   
   .padding-y {

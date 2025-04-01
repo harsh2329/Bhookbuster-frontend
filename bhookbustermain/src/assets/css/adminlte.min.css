@@ -20,13 +20,13 @@
   width: 90%;
   margin: 15px auto;
   border-radius: 50px;
-  backdrop-filter: blur(8px);
+  /* backdrop-filter: blur(4px); */
 }
 
 
 /* Dark mode adjustments */
 [data-theme="dark"] .navbar {
-  background-color: rgba(0, 0, 0, 0.7);
+  /* background-color: rgba(0, 0, 0, 0.7); */
   border: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--text-color-dark);
   --text-color: var(--text-color-dark);
@@ -52,6 +52,7 @@
 /* Logo styling */
 .navbar-logo {
   height: 40px;
+  margin-top:10px;
 }
 /* Logo container - explicitly moved to left */
 /* .navbar-center {
@@ -80,8 +81,9 @@
   display: flex;
   align-items: center; /* Ensures text stays in one line */
   gap: 20px;
-  /* margin-right: 20px; */
+  margin-right: 20px;
   margin-left:40px;
+
  
 
   white-space: nowrap;

@@ -161,6 +161,35 @@ const OfferForm = () => {
   //     }
   //   }
   // };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  
+  //   if (validateForm()) {
+  //     const formDataToSubmit = new FormData();
+      
+  //     // Append all form data to FormData object
+  //     Object.keys(formData).forEach(key => {
+  //       formDataToSubmit.append(key, formData[key]);
+  //     });
+  
+  //     try {
+  //       // Specify full URL
+  //       // const response = await axios.post('http://localhost:3000/offer/addOfferWithFile', formDataToSubmit, {
+  //       //   headers: {
+  //       //     'Content-Type': 'multipart/form-data'
+  //       //   }
+  //       // });
+  //        const response = await axios.post('/offer/addOfferWithFile', formData);
+  
+  //       // Handle response
+  //       alert('Offer created successfully!');
+  //       // Reset form...
+  //     } catch (error) {
+  //       console.log(error);
+  //       alert('An error occurred while submitting the form');
+  //     }
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -173,20 +202,17 @@ const OfferForm = () => {
       });
   
       try {
-        // Specify full URL
-        // const response = await axios.post('http://localhost:3000/offer/addOfferWithFile', formDataToSubmit, {
-        //   headers: {
-        //     'Content-Type': 'multipart/form-data'
-        //   }
-        // });
-         const response = await axios.post('/offer/addOfferWithFile', formData);
+        const response = await axios.post('/offer/addOfferWithFile', formDataToSubmit, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        });
   
-        // Handle response
         alert('Offer created successfully!');
-        // Reset form...
+        // Reset form and other logic
       } catch (error) {
-        console.log(error);
-        alert('An error occurred while submitting the form');
+        console.error('Submission error:', error.response?.data || error.message);
+        alert(`Error: ${error.response?.data?.message || 'Failed to submit offer'}`);
       }
     }
   };
@@ -333,6 +359,8 @@ const OfferForm = () => {
             </div>
           )}
         </div>
+       
+            
 
         {/* Submit Button */}
         <div className="form-group">

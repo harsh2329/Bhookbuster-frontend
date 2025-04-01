@@ -31,10 +31,10 @@ const Rnavbar = () => {
         
         {/* Right side navigation items */}
         <div className="navbar-buttons">
-          <Link to="/register" className="nav-button register-button">
+          <Link to="/rsignup" className="nav-button register-button">
             Register
           </Link>
-          <Link to="/login" className="nav-button login-button">
+          <Link to="/rlogin" className="nav-button login-button">
             Login
           </Link>
         </div>

@@ -105,8 +105,8 @@ const UserNavbar = () => {
     <nav className="navbar">
       
       
-      <div className="navbar">
-  <div className="navbar-logo-container">
+      
+  <div classname="">
     <Link to="/">
       <img src={"/assets/items/logo.png"} alt="BHOOKBUSTER" className="navbar-logo" />
     </Link>
@@ -118,10 +118,10 @@ const UserNavbar = () => {
       </div>
   </div>
   {/* Other navbar items here */}
-</div>
 
 
-      <div className="navbar-right">
+
+      <div className="navbar-right ">
      
         <Link to="/rdashboard">Partner with us</Link>
         

@@ -20,6 +20,9 @@ const Hero = () => {
           
           {/* <div className="border bg-neutralLineWhite" style={{width: '4.25rem', height: '0', marginTop: '2.5rem', transform: 'rotate(90deg)'}} /> */}
           <div className="text-center">
+          
+          
+        
             {/* <h2 className="hero-card-stat-text">120+</h2>
             <p className="hero-card-title-text">Stores in the world.</p> */}
           </div>
@@ -27,10 +30,10 @@ const Hero = () => {
       </div>
       
       {/* Quarter Circle with Images */}
-      <div className="quarter-circle-container">
+      {/* <div className="quarter-circle-container">
         {/* Quarter Circle Background */}
         
-        <div id="quarter-circle-background"></div>
+        {/* <div id="quarter-circle-background"></div> */} 
         {/* <img
         src="/assets/items/hand.png"
         alt="Hand Placement"
@@ -38,12 +41,12 @@ const Hero = () => {
       /> */}
         
         {/* Udon SVG - animated with rotation */}
-        <img
+        {/* <img
           src="../src/assets/items/pizza2.png"
           alt="udon"
           loading="eager"
           className="udon-image"
-        />
+        /> */}
          
         
         {/* Sugar SVG - positioned at top of quarter circle */}
@@ -59,9 +62,11 @@ const Hero = () => {
           alt="chopstick"
           className="chopstick-image"
         /> */}
-      </div>
+      {/* </div> */}
     </section>
   );
 };
 
 export default Hero;
+
+

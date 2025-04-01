@@ -77,7 +77,7 @@ const Rsidebar = () => {
                 </div>
                 <div className="separator"></div>
               </Link>
-              <Link to="/view-offers" className="nav-link">
+              <Link to="/viewoffer" className="nav-link">
                 <div className="sub-item">
                   <i className="icon">👁️</i>
                   <span><h4>View Offers</h4></span>
