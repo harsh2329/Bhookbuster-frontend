@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight } from 'lucide-react';
 import '../../assets/css/Offer.css';
 import Rsidebar from './Rsidebar';
@@ -14,11 +14,44 @@ const OfferForm = () => {
     discountPercentage: '',
     minOrderAmount: '',
     locationId: '',
+    Category: '',
     OfferImage: null
   });
 
   const [errors, setErrors] = useState({});
   const [imagePreview, setImagePreview] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch categories when component mounts
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/offer/categories');
+        setCategories(response.data.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+        // Fallback categories in case API fails
+        setCategories([
+          "Food & Beverages",
+          "Electronics",
+          "Clothing",
+          "Home & Kitchen",
+          "Beauty & Personal Care",
+          "Sports & Fitness",
+          "Books & Media",
+          "Travel",
+          "Entertainment",
+          "Others"
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -63,7 +96,7 @@ const OfferForm = () => {
     // Required field validations
     const requiredFields = [
       'title', 'description', 'startDate', 'endDate', 
-      'discountPercentage', 'minOrderAmount', 'locationId', 'OfferImage'
+      'discountPercentage', 'minOrderAmount', 'locationId', 'OfferImage', 'Category'
     ];
 
     requiredFields.forEach(field => {
@@ -91,6 +124,7 @@ const OfferForm = () => {
 
       // Optional: Ensure dates are not in the past
       const today = new Date();
+      today.setHours(0, 0, 0, 0); // Reset time to beginning of day for comparison
       if (startDate < today) {
         newErrors.startDate = 'Start date cannot be in the past';
       }
@@ -122,74 +156,6 @@ const OfferForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (validateForm()) {
-  //     const formDataToSubmit = new FormData();
-      
-  //     // Append all form data to FormData object
-  //     Object.keys(formData).forEach(key => {
-  //       formDataToSubmit.append(key, formData[key]);
-  //     });
-
-  //     try {
-  //       const response = await axios.post('/offer/addOfferWithFile',  formDataToSubmit);
-
-  //       if (response.ok) {
-  //         alert('Offer created successfully!');
-  //         // Reset form
-  //         setFormData({
-  //           title: '',
-  //           description: '',
-  //           active: true,
-  //           startDate: '',
-  //           endDate: '',
-  //           discountPercentage: '',
-  //           minOrderAmount: '',
-  //           locationId: '',
-  //           OfferImage: null
-  //         });
-  //         setImagePreview(null);
-  //       } else {
-  //         const errorData = await response.json();
-  //         alert(`Error: ${errorData.message}`);
-  //       }
-  //     } catch (error) {
-  //       console.error('Submission error:', error);
-  //       alert('An error occurred while submitting the form');
-  //     }
-  //   }
-  // };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  
-  //   if (validateForm()) {
-  //     const formDataToSubmit = new FormData();
-      
-  //     // Append all form data to FormData object
-  //     Object.keys(formData).forEach(key => {
-  //       formDataToSubmit.append(key, formData[key]);
-  //     });
-  
-  //     try {
-  //       // Specify full URL
-  //       // const response = await axios.post('http://localhost:3000/offer/addOfferWithFile', formDataToSubmit, {
-  //       //   headers: {
-  //       //     'Content-Type': 'multipart/form-data'
-  //       //   }
-  //       // });
-  //        const response = await axios.post('/offer/addOfferWithFile', formData);
-  
-  //       // Handle response
-  //       alert('Offer created successfully!');
-  //       // Reset form...
-  //     } catch (error) {
-  //       console.log(error);
-  //       alert('An error occurred while submitting the form');
-  //     }
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -208,14 +174,28 @@ const OfferForm = () => {
           }
         });
   
-        alert('Offer created successfully!');
-        // Reset form and other logic
+        toast.sucess('Offer created successfully!');
+        // Reset form
+        setFormData({
+          title: '',
+          description: '',
+          active: true,
+          startDate: '',
+          endDate: '',
+          discountPercentage: '',
+          minOrderAmount: '',
+          locationId: '',
+          Category: '',
+          OfferImage: null
+        });
+        setImagePreview(null);
       } catch (error) {
         console.error('Submission error:', error.response?.data || error.message);
         alert(`Error: ${error.response?.data?.message || 'Failed to submit offer'}`);
       }
     }
   };
+
   return (
     <>
     <Rsidebar></Rsidebar>
@@ -247,6 +227,27 @@ const OfferForm = () => {
             className={`form-input ${errors.description ? 'input-error' : ''}`}
           />
           {errors.description && <p className="error-message">{errors.description}</p>}
+        </div>
+
+        {/* Category Dropdown */}
+        <div className="form-group">
+          <label htmlFor="Category" className="form-label">Category</label>
+          <select
+            id="Category"
+            name="Category"
+            value={formData.Category}
+            onChange={handleChange}
+            className={`form-input ${errors.Category ? 'input-error' : ''}`}
+            disabled={loading}
+          >
+            <option value="">Select a category</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+          {errors.Category && <p className="error-message">{errors.Category}</p>}
         </div>
 
         {/* Start Date */}
@@ -359,8 +360,6 @@ const OfferForm = () => {
             </div>
           )}
         </div>
-       
-            
 
         {/* Submit Button */}
         <div className="form-group">

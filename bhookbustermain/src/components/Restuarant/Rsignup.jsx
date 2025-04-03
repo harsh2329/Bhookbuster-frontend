@@ -45,7 +45,7 @@ const Signup = () => {
     setError('');
     
     try {
-      const response = await axios.post('/api/auth/register', {
+      const response = await axios.post('/reslogsign/rregister', {
         ownerName: formData.ownerName,
         email: formData.email,
         phone: formData.phone,

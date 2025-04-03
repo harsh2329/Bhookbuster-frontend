@@ -1,102 +1,188 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Eye, Edit, Trash2, AlertCircle } from 'lucide-react';
 import axios from 'axios';
-import { format } from 'date-fns';
+import Rsidebar from './Rsidebar';
 import '../../assets/css/RDasboard/Viewoffer.css';
 
-const OfferDetailsView = ({ offerId }) => {
-  const [offer, setOffer] = useState(null);
+
+const OfferList = () => {
+  const [offers, setOffers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
-  useEffect(() => {
-    const fetchOfferDetails = async () => {
-      try {
-        // Changed from "_id" to "id" to match the working example
-        const userId = localStorage.getItem("id");
-        
-        if (!userId) {
-          throw new Error("User ID not found in localStorage");
-        }
-        
-        console.log("Fetching offers for user ID:", userId);
-        const response = await axios.get(`/offer/alloffer/${userId}`);
-        
-        setOffer(response.data.data);
-        setLoading(false);
-      } catch (err) {
-        console.log('Error details:', {
-          status: err.response?.status,
-          data: err.response?.data,
-          message: err.message
-        });
-        setError(err.response?.data?.message || err.message || 'Failed to fetch offer');
-        setLoading(false);
-      }
-    };
-    
-    fetchOfferDetails();
-  }, [offerId]);
+  const [confirmDelete, setConfirmDelete] = useState(null);
 
-  if (loading) return <div className="offer-details-loading">Loading...</div>;
-  if (error) return <div className="offer-details-error">Error: {error}</div>;
-  if (!offer) return <div className="offer-details-not-found">No offer found</div>;
+  useEffect(() => {
+    fetchOffers();
+  }, []);
+
+  const fetchOffers = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get('/offer/all');
+      setOffers(response.data.data);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching offers:', err);
+      setError('Failed to load offers. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteConfirm = (offerId) => {
+    setConfirmDelete(offerId);
+  };
+
+  const handleDeleteCancel = () => {
+    setConfirmDelete(null);
+  };
+
+  const handleDelete = async (offerId) => {
+    try {
+      await axios.delete(`/offer/${offerId}`);
+      // Remove deleted offer from state
+      setOffers(offers.filter(offer => offer._id !== offerId));
+      setConfirmDelete(null);
+      alert('Offer deleted successfully');
+    } catch (err) {
+      console.error('Error deleting offer:', err);
+      alert('Failed to delete offer. Please try again.');
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  };
+
+  if (loading) {
+    return (
+      <>
+        <Rsidebar />
+        <div className="offer-list-container">
+          <div className="loading-spinner">Loading offers...</div>
+        </div>
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <Rsidebar />
+        <div className="offer-list-container">
+          <div className="error-message">
+            <AlertCircle size={24} />
+            <p>{error}</p>
+            <button onClick={fetchOffers} className="retry-button">Retry</button>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
-    <div className="offer-details-container">
-      <h2 className="offer-details-title">Offer Details</h2>
-      <div className="offer-details-table-wrapper">
-        <table className="offer-details-table">
-          <thead>
-            <tr>
-              <th colSpan="2">Offer Information</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Title</td>
-              <td>{offer.title}</td>
-            </tr>
-            <tr>
-              <td>Description</td>
-              <td>{offer.description}</td>
-            </tr>
-            <tr>
-              <td>Active Status</td>
-              <td>{offer.active ? 'Active' : 'Inactive'}</td>
-            </tr>
-            <tr>
-              <td>Start Date</td>
-              <td>{format(new Date(offer.startDate), 'PP')}</td>
-            </tr>
-            <tr>
-              <td>End Date</td>
-              <td>{format(new Date(offer.endDate), 'PP')}</td>
-            </tr>
-            <tr>
-              <td>Discount Percentage</td>
-              <td>{offer.discountPercentage}%</td>
-            </tr>
-            <tr>
-              <td>Minimum Order Amount</td>
-              <td>${offer.minOrderAmount.toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td>Offer Image</td>
-              <td>
-                {offer.OfferImage && (
-                  <img
-                    src={offer.OfferImage}
-                    alt="Offer"
-                    className="offer-details-image"
-                  />
-                )}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <>
+      <Rsidebar />
+      <div className="offer-list-container">
+        <div className="offer-list-header">
+          <h2>All Offers</h2>
+          <Link to="/admin/offers/add" className="add-offer-button">
+            Add New Offer
+          </Link>
+        </div>
+
+        {offers.length === 0 ? (
+          <div className="no-offers">
+            <p>No offers found. Create your first offer to get started.</p>
+            <Link to="/admin/offers/add" className="add-offer-button">
+              Add New Offer
+            </Link>
+          </div>
+        ) : (
+          <div className="offers-table-container">
+            <table className="offers-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Discount</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {offers.map((offer) => (
+                  <tr key={offer._id} className={!offer.active ? 'inactive-offer' : ''}>
+                    <td className="offer-image-cell">
+                      <img 
+                        src={offer.OfferImage} 
+                        alt={offer.title} 
+                        className="offer-thumbnail" 
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = '/placeholder-image.png'; // Fallback image
+                        }}
+                      />
+                    </td>
+                    <td>{offer.title}</td>
+                    <td>{offer.Category}</td>
+                    <td>{offer.discountPercentage}%</td>
+                    <td>
+                      {formatDate(offer.startDate)} - {formatDate(offer.endDate)}
+                    </td>
+                    <td>
+                      <span className={`status-badge ${offer.active ? 'active' : 'inactive'}`}>
+                        {offer.active ? 'Active' : 'Inactive'}
+                      </span>
+                    </td>
+                    <td className="actions-cell">
+                      <Link to={`/admin/offers/view/${offer._id}`} className="action-button view">
+                        <Eye size={18} />
+                      </Link>
+                      <Link to={`/admin/offers/edit/${offer._id}`} className="action-button edit">
+                        <Edit size={18} />
+                      </Link>
+                      <button 
+                        onClick={() => handleDeleteConfirm(offer._id)} 
+                        className="action-button delete"
+                      >
+                        <Trash2 size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {confirmDelete && (
+          <div className="delete-confirmation-modal">
+            <div className="modal-content">
+              <h3>Confirm Delete</h3>
+              <p>Are you sure you want to delete this offer? This action cannot be undone.</p>
+              <div className="modal-actions">
+                <button onClick={handleDeleteCancel} className="cancel-button">
+                  Cancel
+                </button>
+                <button onClick={() => handleDelete(confirmDelete)} className="delete-button">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
-export default OfferDetailsView;
+export default OfferList;
