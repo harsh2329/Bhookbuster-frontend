@@ -22,6 +22,7 @@ import Rdashboard from "./components/Restuarant/Rdasborad";
 import Home from './components/Landing page/Navbar/Home';
 import Aboutus from './components/Landing page/Navbar/Aboutus';
 import Viewoffer from './components/Restuarant/Viewoffer';
+import ViewSingleOffer from './components/Restuarant/ViewSingleOffer';
 
 import ResetPassword  from "../../bhookbustermain/src/components/common/ResetPassword";
 
@@ -50,8 +51,9 @@ function App() {
         <Route path="/viewoffer" element={<Viewoffer />} />
         <Route path='rlogin' element={<Rlogin />} />
         <Route path='rsignup' element={<Rsignup />} />
+        <Route path='singleoffer' element={<ViewSingleOffer />} />
 
-        <Route path="" element={<PrivateRoutes />}>
+        <Route path="" element={<PrivateRoutes />}></Route>
        
     
           <Route path='/user' element={<Usersidebar />}>
@@ -65,7 +67,6 @@ function App() {
           <Route path='/admin' element={<Adminsidebar />}>
             <Route path='alogin' element={<Alogin />} />
             <Route path='asignup' element={<UserSignup />} />
-          </Route>
           </Route>
         </Routes>
       </div>

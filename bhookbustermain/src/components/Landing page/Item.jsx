@@ -70,20 +70,28 @@ const Item = () => {
 
   return (
     <section className="item-container">
-      <div className="item-grid">
-        {items.map((item, index) => (
-          <div 
-            className="item-card" 
-            key={index} 
+    <div className="item-grid">
+      {items && items.length > 0 ? (
+        items.map((item, index) => (
+          <div
+            className="item-card"
+            key={item.id || index}
             onClick={() => handleItemClick(item.category)}
             style={{ cursor: 'pointer' }}
-          > 
-            <img src={item.src} alt={item.alt} className="item-image" />
-            <h3>{item.alt}</h3>
+          >
+            <img 
+              src={item.src || item.image} 
+              alt={item.alt || item.name} 
+              className="item-image" 
+            />
+            <h3>{item.name || item.category || item.alt}</h3>
           </div>
-        ))}
-      </div>
-    </section>
+        ))
+      ) : (
+        <p>No items available</p>
+      )}
+    </div>
+  </section>
   );
 };
 

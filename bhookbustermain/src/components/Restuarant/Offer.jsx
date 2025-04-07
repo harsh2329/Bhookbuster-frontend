@@ -3,6 +3,12 @@ import { ChevronRight } from 'lucide-react';
 import '../../assets/css/Offer.css';
 import Rsidebar from './Rsidebar';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
+// Inside your OfferForm component
+
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const OfferForm = () => {
   const [formData, setFormData] = useState({
@@ -24,34 +30,34 @@ const OfferForm = () => {
   const [loading, setLoading] = useState(false);
 
   // Fetch categories when component mounts
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get('/offer/categories');
-        setCategories(response.data.data);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-        // Fallback categories in case API fails
-        setCategories([
-          "Food & Beverages",
-          "Electronics",
-          "Clothing",
-          "Home & Kitchen",
-          "Beauty & Personal Care",
-          "Sports & Fitness",
-          "Books & Media",
-          "Travel",
-          "Entertainment",
-          "Others"
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await axios.get('/offer/categories');
+  //       setCategories(response.data.data);
+  //     } catch (error) {
+  //       console.error('Error fetching categories:', error);
+  //       // Fallback categories in case API fails
+  //       setCategories([
+  //         "Food & Beverages",
+  //         "Electronics",
+  //         "Clothing",
+  //         "Home & Kitchen",
+  //         "Beauty & Personal Care",
+  //         "Sports & Fitness",
+  //         "Books & Media",
+  //         "Travel",
+  //         "Entertainment",
+  //         "Others"
+  //       ]);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchCategories();
-  }, []);
+  //   fetchCategories();
+  // }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -174,7 +180,7 @@ const OfferForm = () => {
           }
         });
   
-        toast.sucess('Offer created successfully!');
+        toast.success('Offer created successfully!');
         // Reset form
         setFormData({
           title: '',
@@ -230,24 +236,23 @@ const OfferForm = () => {
         </div>
 
         {/* Category Dropdown */}
-        <div className="form-group">
-          <label htmlFor="Category" className="form-label">Category</label>
-          <select
-            id="Category"
-            name="Category"
-            value={formData.Category}
-            onChange={handleChange}
-            className={`form-input ${errors.Category ? 'input-error' : ''}`}
-            disabled={loading}
-          >
-            <option value="">Select a category</option>
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-          {errors.Category && <p className="error-message">{errors.Category}</p>}
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="Category">Category</label>
+            <select
+              id="Category"
+              name="Category"
+              value={formData.Category}
+              onChange={handleChange}
+              className={`form-input ${errors.Category ? 'input-error' : ''}`}
+            >
+              <option value="">Select Category</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>{category.name}</option>
+              ))}
+            </select>
+            {errors.Category && <p className="error-message">{errors.Category}</p>}
+          </div>
         </div>
 
         {/* Start Date */}

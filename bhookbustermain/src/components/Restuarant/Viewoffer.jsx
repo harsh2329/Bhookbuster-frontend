@@ -92,7 +92,7 @@ const OfferList = () => {
       <div className="offer-list-container">
         <div className="offer-list-header">
           <h2>All Offers</h2>
-          <Link to="/admin/offers/add" className="add-offer-button">
+          <Link to="/offer" className="add-offer-button">
             Add New Offer
           </Link>
         </div>
@@ -144,7 +144,7 @@ const OfferList = () => {
                       </span>
                     </td>
                     <td className="actions-cell">
-                      <Link to={`/admin/offers/view/${offer._id}`} className="action-button view">
+                      <Link to={`/singleoffer`} className="action-button view">
                         <Eye size={18} />
                       </Link>
                       <Link to={`/admin/offers/edit/${offer._id}`} className="action-button edit">

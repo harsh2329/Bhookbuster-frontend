@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Calendar, Tag, DollarSign, MapPin, Edit, ArrowLeft, AlertTriangle } from 'lucide-react';
 import axios from 'axios';
 import Rsidebar from './Rsidebar';
-import '../../assets/css/OfferDetail.css';
+import '../../assets/css/RDasboard/Singleoffer.css';
 
 const OfferDetail = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ const OfferDetail = () => {
     const fetchOfferDetails = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/offer/${id}`);
+        const response = await axios.get(`/offer/${offer._id}`);
         setOffer(response.data.data);
         setError(null);
       } catch (err) {
@@ -61,7 +61,7 @@ const OfferDetail = () => {
             <h3>Error Loading Offer</h3>
             <p>{error}</p>
             <div className="error-actions">
-              <button onClick={() => navigate('/admin/offers')} className="back-button">
+              <button onClick={() => navigate('/viewoffer')} className="back-button">
                 <ArrowLeft size={16} />
                 Back to Offers
               </button>
