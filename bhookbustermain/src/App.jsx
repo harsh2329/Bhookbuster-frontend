@@ -4,7 +4,7 @@ import Usersidebar from './components/user/UserSidebar';
 import UserSignup from './components/common/UserSignup';
 import UserLogin from './components/common/UserLogin';
 import Rsidebar from './components/Restuarant/Rsidebar';
-import Adminsidebar from './components/Admin/Adminsidebar';
+// import Adminsidebar from './components/Admin/Adminsidebar';
 import './assets/css/adminlte.css';
 import './assets/css/adminlte.min.css';
 import Rlogin from './components/Restuarant/Rlogin';
@@ -23,6 +23,8 @@ import Home from './components/Landing page/Navbar/Home';
 import Aboutus from './components/Landing page/Navbar/Aboutus';
 import Viewoffer from './components/Restuarant/Viewoffer';
 import ViewSingleOffer from './components/Restuarant/ViewSingleOffer';
+import Adminsidebar from './components/Admin/Adminsidebar';
+import AdminDashboard from './components/Admin/AdminDashboard';
 
 import ResetPassword  from "../../bhookbustermain/src/components/common/ResetPassword";
 
@@ -52,6 +54,7 @@ function App() {
         <Route path='rlogin' element={<Rlogin />} />
         <Route path='rsignup' element={<Rsignup />} />
         <Route path='singleoffer' element={<ViewSingleOffer />} />
+        <Route path ='/admin' element={<AdminDashboard />} />
 
         <Route path="" element={<PrivateRoutes />}></Route>
        
