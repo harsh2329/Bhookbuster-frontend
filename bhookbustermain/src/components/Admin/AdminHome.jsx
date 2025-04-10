@@ -5,6 +5,8 @@ import
  import 
  { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } 
  from 'recharts';
+ import  { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Home() {
 
@@ -53,6 +55,29 @@ function Home() {
         },
       ];
      
+      const [restaurantCount, setRestaurantCount] = useState(0);
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+        fetchRestaurantCount();
+      }, []);
+    
+      const fetchRestaurantCount = async () => {
+        try {
+          setLoading(true);
+          // Use the same endpoint you're using in RestaurantView
+          const response = await axios.get('/location/all');
+          
+          // Set the count based on the length of the data array
+          if (response.data && response.data.data) {
+            setRestaurantCount(response.data.data.length);
+          }
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching restaurant count:", error);
+          setLoading(false);
+        }
+      };
 
   return (
     <main className='main-container'>
@@ -61,16 +86,16 @@ function Home() {
         </div>
 
         <div className='main-cards'>
+        <div className='card'>
+      <div className='card-inner'>
+        <h3>RESTAURANTS</h3>
+        <BsFillArchiveFill className='card_icon' />
+      </div>
+      <h1>{loading ? "Loading..." : restaurantCount}</h1>
+    </div>
             <div className='card'>
                 <div className='card-inner'>
-                    <h3>PRODUCTS</h3>
-                    <BsFillArchiveFill className='card_icon'/>
-                </div>
-                <h1>300</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h3>CATEGORIES</h3>
+                    <h3>OFFERS</h3>
                     <BsFillGrid3X3GapFill className='card_icon'/>
                 </div>
                 <h1>12</h1>

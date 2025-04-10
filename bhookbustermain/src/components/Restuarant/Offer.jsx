@@ -191,7 +191,7 @@ const OfferForm = () => {
           discountPercentage: '',
           minOrderAmount: '',
           locationId: '',
-          Category: '',
+          // Category: '',
           OfferImage: null
         });
         setImagePreview(null);
@@ -235,7 +235,7 @@ const OfferForm = () => {
           {errors.description && <p className="error-message">{errors.description}</p>}
         </div>
 
-        {/* Category Dropdown */}
+        {/* Category Dropdown
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="Category">Category</label>
@@ -253,7 +253,7 @@ const OfferForm = () => {
             </select>
             {errors.Category && <p className="error-message">{errors.Category}</p>}
           </div>
-        </div>
+        </div> */}
 
         {/* Start Date */}
         <div className="form-group">

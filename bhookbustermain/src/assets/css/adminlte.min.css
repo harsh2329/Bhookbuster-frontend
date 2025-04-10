@@ -1,159 +1,116 @@
-/* Reset default margins and paddings */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-#root{
-  --text-color-dark:black;
-  --link-color-dark:white;
-
-}
-/* Main navbar styling */
+/* Base navbar styling */
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: left;
-  padding: 1px;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 90%;
-  margin: 15px auto;
-  border-radius: 50px;
-  /* backdrop-filter: blur(4px); */
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #121212;
+  color: white;
+  width: 100%;
+  height: 70px;
+  box-sizing: border-box;
 }
 
-
-/* Dark mode adjustments */
-[data-theme="dark"] .navbar {
-  /* background-color: rgba(0, 0, 0, 0.7); */
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--text-color-dark);
-  --text-color: var(--text-color-dark);
-  --link-color: var(--link-color-dark);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Light mode adjustments */
-[data-theme="light"] .navbar {
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  color: var(--text-color-dark);
-  --text-color: var(--text-color-dark);
-  --link-color: var(--link-color-dark);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-.navbar-logo-container {
+/* Fix for first div that contains logo and left links */
+.navbar > div:first-child {
   display: flex;
   align-items: center;
-  
 }
 
 /* Logo styling */
 .navbar-logo {
-  height: 40px;
-  margin-top:10px;
-}
-/* Logo container - explicitly moved to left */
-/* .navbar-center {
- 
- 
-  display: flex;
-  justify-content: left;
+  height: 42px;
+  margin-right: 2rem;
 }
 
-/* Logo image */
-.navbar-logo {
-  height: 40px;
-  margin-left: 20px;
+/* Left navigation links container */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: 1rem;
 }
 
 /* Right side elements */
 .navbar-right {
   display: flex;
-  align-items: center; /* Ensures text stays in one line */
-  gap: 20px;
-  margin-left: auto;
-  margin-right: 20px;
-  white-space: nowrap; /* Prevents text from breaking into multiple lines */
-}
-.navbar-left{
-  display: flex;
-  align-items: center; /* Ensures text stays in one line */
-  gap: 20px;
-  margin-right: 20px;
-  margin-left:40px;
-
- 
-
-  white-space: nowrap;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-/* Link styling */
+/* Navigation link styles */
 .navbar a {
-  color:#6f5a5a;
+  color: white;
   text-decoration: none;
   font-weight: 500;
-  /* padding: 8px 15px; */
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  padding: 0.5rem 0;
 }
 
-/* Button styling */
-.theme-toggle, .logout-btn {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: none !important;
-  border-radius: 50px !important;
-  padding: 8px 15px !important;
-  color: var(--text-color, #fff) !important;
+/* Theme toggle button */
+.theme-toggle {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 0.4rem 0.75rem;
+  color: white;
   cursor: pointer;
-  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-/* Button hover effect */
-.theme-toggle:hover, .logout-btn:hover, .navbar a:hover {
-  background: rgba(73, 67, 67, 0.2) !important;
+/* Logout button */
+.logout-btn {
+  background-color: transparent;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 0.4rem 1rem;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Profile picture container */
+.profile-link {
+  display: flex;
+  align-items: center;
 }
 
 /* Profile picture styling */
 .profile-pic {
-  width: 35px !important;
-  height: 35px !important;
-  border-radius: 50% !important;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  border: 2px solid #333;
 }
 
-/* Add these CSS variables if not already defined */
-:root {
-  /* Light theme */
-  --text-color-light: #333;
-  --border-color-light: rgba(0, 0, 0, 0.1);
-  
-  /* Dark theme */
-  --text-color-dark: #f8f9fa;
-  --border-color-dark: rgba(255, 255, 255, 0.1);
-}
-
-/* Theme variables */
-[data-theme="light"] {
-  --text-color: var(--text-color-light);
-  --border-color: var(--border-color-light);
-  
-}
-
-[data-theme="dark"] {
-  --text-color: var(--text-color-dark);
-  --border-color: var(--border-color-dark);
-}
-
-/* Media queries for responsiveness */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .navbar {
-    width: 95%;
-    padding: 12px 20px;
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    height: auto;
   }
-  
+
+  .navbar > div:first-child {
+    margin-bottom: 0.75rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbar-left {
+    margin-left: 0;
+    justify-content: center;
+    margin-top: 0.5rem;
+    gap: 1rem;
+  }
+
   .navbar-right {
-    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.75rem;
   }
 }

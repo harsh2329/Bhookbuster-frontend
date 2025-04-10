@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../../assets/css/RDasboard/Rnav.css';
-const Rnavbar = () => {
+import { Menu, Bell, User } from 'lucide-react';
+const Rnavbar = ({ toggleSidebar, isOpen }) => {
   const [restaurantName, setRestaurantName] = useState('');
   
   useEffect(() => {
@@ -15,7 +16,14 @@ const Rnavbar = () => {
   return (
     <nav className="restaurant-navbar">
       <div className="navbar-container">
+      <div className="restaurant-navbar">
+      
+      
+      
+    </div>
         {/* Left side logo/brand */}
+        <h1>hello hrlloo</h1>
+        
         <div className="navbar-brand">
           <Link to="/">
             <img src="/assets/images/logo.png" alt="FoodApp" className="logo" />

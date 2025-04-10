@@ -1,11 +1,25 @@
 import { Link } from 'react-router-dom';
 // Import the CSS file
 import '../../assets/css/Hero.css';
+// At the top of your file
+import backgroundImage from '../../assets/images/background.png';
+
+// In your component
+
 
 const Hero = () => {
   return (
+
     <section className="hero-box padding-y">
       <div className="hero-text-wrapper">
+      {/* <div style={{
+backgroundImage: `url(${backgroundImage})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+  width: "100%",
+  height: "100%"
+  }}></div> */}
         <article className="hero-internal-text-wrapper">
           <h1 className="hero-heading-text">You've Got Questions.</h1>
           <h1 className="hero-heading-text">We've Got Offers.</h1>

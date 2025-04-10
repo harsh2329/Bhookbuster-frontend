@@ -109,4 +109,109 @@
     .navbar-center {
       display: none;
     }
+    /* Rnav.css */
+.restaurant-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 60px;
+  height: 64px;
+  background-color: #121212;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 99;
+  transition: left 0.3s ease;
+}
+
+.restaurant-navbar.sidebar-expanded {
+  left: 250px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e1e1e;
+  border: none;
+  color: #e0e0e0;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toggle-btn:hover {
+  background-color: #2d2d2d;
+}
+
+.navbar-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.navbar-item:hover {
+  background-color: #1e1e1e;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: #ff5722;
+  color: white;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile {
+  border-left: 1px solid #333;
+  padding-left: 16px;
+}
+
+.profile-name {
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .restaurant-navbar {
+    left: 0;
+  }
+  
+  .profile-name {
+    display: none;
+  }
+}
   }

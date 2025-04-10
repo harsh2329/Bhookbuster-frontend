@@ -3,6 +3,7 @@ import
 {BsCart3, BsGrid1X2Fill, BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, 
   BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
  from 'react-icons/bs'
+ import {Link} from 'react-router-dom'
 
 
 function Sidebar({openSidebarToggle, OpenSidebar}) {
@@ -22,14 +23,14 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                 </a>
             </li>
             <li className='sidebar-list-item'>
-                <a href="">
-                    <BsFillArchiveFill className='icon'/> Products
-                </a>
+                <Link to="/viewrestaurant">
+                    <BsFillArchiveFill className='icon'/> Restaurants
+                </Link>
             </li>
             <li className='sidebar-list-item'>
-                <a href="">
-                    <BsFillGrid3X3GapFill className='icon'/> Categories
-                </a>
+                <Link to="/viewoffer">
+                    <BsFillGrid3X3GapFill className='icon'/> Offers
+                </Link>
             </li>
             <li className='sidebar-list-item'>
                 <a href="">

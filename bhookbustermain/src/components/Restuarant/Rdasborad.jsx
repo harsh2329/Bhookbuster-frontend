@@ -1,11 +1,12 @@
 import React from 'react'
-// import Rnav from './Rnav'
+import Rnav from './Rnav'
 // import ResHero from './ResHero'
 import Rsidebar from './Rsidebar'
 
 const Rdasborad = () => {
   return (
     <>
+    <Rnav></Rnav>
     <Rsidebar></Rsidebar>
     {/* <Rnav></Rnav>
     

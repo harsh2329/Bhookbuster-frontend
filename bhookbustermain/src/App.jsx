@@ -23,10 +23,14 @@ import Home from './components/Landing page/Navbar/Home';
 import Aboutus from './components/Landing page/Navbar/Aboutus';
 import Viewoffer from './components/Restuarant/Viewoffer';
 import ViewSingleOffer from './components/Restuarant/ViewSingleOffer';
-import Adminsidebar from './components/Admin/Adminsidebar';
+import AdminSidebar from './components/Admin/AdminSidebar';
 import AdminDashboard from './components/Admin/AdminDashboard';
 
+import OffersPage from './components/Landing page/OffersPage';
+import FoodPage from './components/Landing page/FoodPage';
 import ResetPassword  from "../../bhookbustermain/src/components/common/ResetPassword";
+
+import ViewRestaurant from "../../bhookbustermain/src/components/Restuarant/ViewRestaurant";
 
 function App() {
   useEffect(() => {
@@ -55,9 +59,12 @@ function App() {
         <Route path='rsignup' element={<Rsignup />} />
         <Route path='singleoffer' element={<ViewSingleOffer />} />
         <Route path ='/admin' element={<AdminDashboard />} />
+        <Route path ='/viewrestaurant' element={<ViewRestaurant />} />
 
         <Route path="" element={<PrivateRoutes />}></Route>
        
+        <Route path="/food/:category" element={<FoodPage />} /> 
+        <Route path="/offers" element={<OffersPage />} /> 
     
           <Route path='/user' element={<Usersidebar />}>
            
@@ -67,9 +74,11 @@ function App() {
             <Route path='rsignup' element={<UserSignup />} />
            
           </Route>
-          <Route path='/admin' element={<Adminsidebar />}>
+          <Route path='/admin' element={<AdminDashboard />} >
+          <Route path='admins' element={<AdminSidebar />} />
             <Route path='alogin' element={<Alogin />} />
             <Route path='asignup' element={<UserSignup />} />
+              <Route path ='viewrestaurant' element={<ViewRestaurant />} />
           </Route>
         </Routes>
       </div>

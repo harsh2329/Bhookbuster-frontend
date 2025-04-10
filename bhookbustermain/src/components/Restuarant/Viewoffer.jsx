@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Eye, Edit, Trash2, AlertCircle } from 'lucide-react';
 import axios from 'axios';
-import Rsidebar from './Rsidebar';
+// import Rsidebar from './Rsidebar';
 import '../../assets/css/RDasboard/Viewoffer.css';
 
 
@@ -63,7 +63,7 @@ const OfferList = () => {
   if (loading) {
     return (
       <>
-        <Rsidebar />
+        {/* <Rsidebar /> */}
         <div className="offer-list-container">
           <div className="loading-spinner">Loading offers...</div>
         </div>
@@ -74,7 +74,7 @@ const OfferList = () => {
   if (error) {
     return (
       <>
-        <Rsidebar />
+        {/* <Rsidebar /> */}
         <div className="offer-list-container">
           <div className="error-message">
             <AlertCircle size={24} />
@@ -88,13 +88,13 @@ const OfferList = () => {
 
   return (
     <>
-      <Rsidebar />
+      {/* <Rsidebar /> */}
       <div className="offer-list-container">
         <div className="offer-list-header">
           <h2>All Offers</h2>
-          <Link to="/offer" className="add-offer-button">
+          {/* <Link to="/offer" className="add-offer-button">
             Add New Offer
-          </Link>
+          </Link> */}
         </div>
 
         {offers.length === 0 ? (
