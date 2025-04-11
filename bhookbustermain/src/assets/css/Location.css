@@ -33,7 +33,7 @@
   background-position: center;
   color: var(--text-color);
   transition: var(--transition);
-  margin-left: 0px; /* Match sidebar width */
+  margin-left: 300px; /* Match sidebar width */
   width: 100%;
 }
 

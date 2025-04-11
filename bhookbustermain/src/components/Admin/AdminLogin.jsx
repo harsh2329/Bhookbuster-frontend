@@ -1,231 +1,130 @@
-// import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import '../../assets/css/ADashboard/AdminLogin.css'; // Adjust the path as needed
-
-// const AdminLoginForm = () => {
-//   const [username, setUsername] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [error, setError] = useState('');
-//   const [isLoading, setIsLoading] = useState(false);
-//   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError('');
-//     setIsLoading(true);
-
-//     try {
-//       const post = async (url, data) => {
-//       const response = await fetch(url, {
-//         method: 'POST',
-//         headers: {
-//         'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(data),
-//       });
-//       return response.json();
-//       };
-
-//       const response = await post('/admin/alogin', {
-//       username,
-//       password,
-//       });
-
-//       if (response.status === 200) {
-//       // Store auth token or admin info in localStorage if needed
-//       localStorage.setItem('adminLoggedIn', 'true');
-//       navigate('/admin/dashboard'); // Redirect to dashboard
-//       } else {
-//       setError(response.message || 'Login failed. Please try again.');
-//       }
-//     } catch (err) {
-//       setError('Server error. Please try again later.');
-//       console.error('Login error:', err);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="admin-login-container">
-//       <div className="light-effect"></div>
-      
-//       <div className="login-header">
-//         <h1>Admin Panel</h1>
-//         <p>Enter your credentials to access the dashboard</p>
-//       </div>
-      
-//       {error && (
-//         <div className="error-message">
-//           {error}
-//         </div>
-//       )}
-      
-//       <form onSubmit={handleSubmit} className="admin-login-form">
-//         <div className="form-group">
-//           <label htmlFor="username">Username</label>
-//           <input
-//             type="text"
-//             id="username"
-//             value={username}
-//             onChange={(e) => setUsername(e.target.value)}
-//             placeholder="Enter your username"
-//             required
-//           />
-//           <span className="input-icon">👤</span>
-//         </div>
-        
-//         <div className="form-group">
-//           <label htmlFor="password">Password</label>
-//           <input
-//             type="password"
-//             id="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             placeholder="Enter your password"
-//             required
-//           />
-//           <span className="input-icon">🔒</span>
-//         </div>
-        
-//         <div className="remember-me">
-//           <label className="fancy-checkbox">
-//             Remember me
-//             <input type="checkbox" />
-//             <span className="checkmark"></span>
-//           </label>
-//         </div>
-        
-//         <button 
-//           type="submit" 
-//           className="login-button"
-//           disabled={isLoading}
-//         >
-//           {isLoading ? 'Logging in...' : 'Login'}
-//         </button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default AdminLoginForm;
-
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import '../../assets/css/ADashboard/AdminLogin.css'; // Adjust the path as needed
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../../assets/css/ADashboard/AdminLogin.css';
 
-const AdminLoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+const Alogin = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  // Static admin credentials
+  const adminCredentials = {
+    email: 'admin@bhook.com',
+    password: 'admin123'
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
+    if (!validateForm()) return;
 
+    setLoading(true);
     try {
-      // Changed from /admin/alogin to /admin/login to match your backend route
-      const response = await axios.post('/admin/login', {
-        username,
-        password,
-      });
-
-      if (response.data.success) {
-        // Store auth token or admin info in localStorage
-        localStorage.setItem('adminLoggedIn', 'true');
-        localStorage.setItem('adminId', response.data.admin?.id || '');
-        localStorage.setItem('role', 'ADMIN');
-
-        // Navigate to admin page
+      // Check against static credentials
+      if (formData.email === adminCredentials.email && formData.password === adminCredentials.password) {
+        // Store admin info in localStorage
+        localStorage.setItem('adminToken', 'static-admin-token');
+        localStorage.setItem('adminId', '1');
+        localStorage.setItem('adminName', 'Admin');
+        localStorage.setItem('adminEmail', adminCredentials.email);
+        
+        toast.success('Login successful!');
         navigate('/admin');
       } else {
-        setError(response.data.message || 'Login failed. Please try again.');
+        toast.error('Invalid email or password');
       }
-    } catch (err) {
-      console.error('Login error:', err);
-      
-      // Improved error handling
-      if (err.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        setError(err.response.data?.message || `Error: ${err.response.status}`);
-      } else if (err.request) {
-        // The request was made but no response was received
-        setError('No response from server. Please check your connection.');
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        setError('Error setting up request. Please try again.');
-      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error('An error occurred during login');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
   return (
     <div className="admin-login-container">
-      <div className="light-effect"></div>
-      
-      <div className="login-header">
-        <h1>Admin Panel</h1>
-        <p>Enter your credentials to access the dashboard</p>
+      <div className="admin-login-card">
+        <div className="admin-login-header">
+          <h2>Admin Login</h2>
+          <p>Welcome back! Please enter your credentials</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="admin-login-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={errors.email ? 'error' : ''}
+              placeholder="Enter your email"
+            />
+            {errors.email && <span className="error-message">{errors.email}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className={errors.password ? 'error' : ''}
+              placeholder="Enter your password"
+            />
+            {errors.password && <span className="error-message">{errors.password}</span>}
+          </div>
+
+          <button 
+            type="submit" 
+            className="login-button"
+            disabled={loading}
+          >
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+        </form>
       </div>
-      
-      {error && (
-        <div className="error-message">
-          {error}
-        </div>
-      )}
-      
-      <form onSubmit={handleSubmit} className="admin-login-form">
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your username"
-            required
-          />
-          <span className="input-icon">👤</span>
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
-            required
-          />
-          <span className="input-icon">🔒</span>
-        </div>
-        
-        <div className="remember-me">
-          <label className="fancy-checkbox">
-            Remember me
-            <input type="checkbox" />
-            <span className="checkmark"></span>
-          </label>
-        </div>
-        
-        <button
-          type="submit"
-          className="login-button"
-          disabled={isLoading}
-        >
-          {isLoading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
     </div>
   );
 };
 
-export default AdminLoginForm;
+export default Alogin;
