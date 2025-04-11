@@ -79,6 +79,48 @@ function Home() {
         }
       };
 
+      const [offerCount, setOfferCount] = useState(0);
+
+      useEffect(() => {
+        fetchOfferCount();
+      }, []);
+
+      const fetchOfferCount = async () => {
+        try {
+          // Use the same endpoint you're using in OfferList
+          const response = await axios.get('/offer/all');
+          
+          // Set the count based on the length of the data array
+          if (response.data && response.data.data) {
+            setOfferCount(response.data.data.length);
+          }
+        } catch (error) {
+          console.error("Error fetching offer count:", error);
+        }
+      };
+
+      const [userCount, setUserCount] = useState(0);
+      const [isLoading, setIsLoading] = useState(true);
+      const [error, setError] = useState(null);
+
+      useEffect(() => {
+        const fetchUserCount = async () => {
+          try {
+            setIsLoading(true);
+            const response = await axios.get('/usr/users');
+            // Assuming your API returns data in the format {message: string, data: array}
+            const users = response.data.data;
+            setUserCount(users.length);
+            setIsLoading(false);
+          } catch (err) {
+            setError('Failed to fetch users');
+            setIsLoading(false);
+            console.error('Error fetching users:', err);
+          }
+        };
+
+        fetchUserCount();
+      }, []);
   return (
     <main className='main-container'>
         <div className='main-title'>
@@ -93,20 +135,20 @@ function Home() {
       </div>
       <h1>{loading ? "Loading..." : restaurantCount}</h1>
     </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h3>OFFERS</h3>
-                    <BsFillGrid3X3GapFill className='card_icon'/>
-                </div>
-                <h1>12</h1>
-            </div>
-            <div className='card'>
-                <div className='card-inner'>
-                    <h3>CUSTOMERS</h3>
-                    <BsPeopleFill className='card_icon'/>
-                </div>
-                <h1>33</h1>
-            </div>
+    <div className='card'>
+      <div className='card-inner'>
+        <h3>OFFERS</h3>
+        <BsFillGrid3X3GapFill className='card_icon' />
+      </div>
+      <h1>{loading ? "..." : offerCount}</h1>
+    </div>
+    <div className='card'>
+      <div className='card-inner'>
+        <h3>CUSTOMERS</h3>
+        <BsPeopleFill className='card_icon'/>
+      </div>
+      <h1>{isLoading ? 'Loading...' : error ? 'Error' : userCount}</h1>
+    </div>
             <div className='card'>
                 <div className='card-inner'>
                     <h3>ALERTS</h3>

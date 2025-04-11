@@ -192,12 +192,15 @@
 }
 
 .offer-card {
-  background-color: #1a1a1a;
+  background-color: #0f0e0e !important;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+/* offer-card{
+  background-color: black;
+} */
 
 .offer-card:hover {
   transform: translateY(-4px);
