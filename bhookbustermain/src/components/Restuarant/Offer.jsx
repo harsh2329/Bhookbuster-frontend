@@ -96,6 +96,25 @@ const OfferForm = () => {
     }
   };
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/category/getallcategories');
+        if (response.data && response.data.data) {
+          setCategories(response.data.data);
+        }
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load categories');
+        setLoading(false);
+        console.error('Error fetching categories:', err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -174,7 +193,7 @@ const OfferForm = () => {
       });
   
       try {
-        const response = await axios.post('/offer/addOfferWithFile', formDataToSubmit, {
+        const response = await axios.post('/offer/addwithfile', formDataToSubmit, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -191,7 +210,7 @@ const OfferForm = () => {
           discountPercentage: '',
           minOrderAmount: '',
           locationId: '',
-          // Category: '',
+          Category: '',
           OfferImage: null
         });
         setImagePreview(null);
@@ -235,25 +254,32 @@ const OfferForm = () => {
           {errors.description && <p className="error-message">{errors.description}</p>}
         </div>
 
-        {/* Category Dropdown
         <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="Category">Category</label>
-            <select
-              id="Category"
-              name="Category"
-              value={formData.Category}
-              onChange={handleChange}
-              className={`form-input ${errors.Category ? 'input-error' : ''}`}
-            >
-              <option value="">Select Category</option>
-              {categories.map((category) => (
-                <option key={category._id} value={category._id}>{category.name}</option>
-              ))}
-            </select>
-            {errors.Category && <p className="error-message">{errors.Category}</p>}
-          </div>
-        </div> */}
+      <div className="form-group">
+        <label htmlFor="Category">Category</label>
+        <select
+          id="Category"
+          name="Category"
+          value={formData.Category}
+          onChange={handleChange}
+          className={`form-input ${errors.Category ? 'input-error' : ''}`}
+        >
+          <option value="">Select Category</option>
+          {loading ? (
+            <option disabled>Loading categories...</option>
+          ) : categories.length === 0 ? (
+            <option disabled>No categories available</option>
+          ) : (
+            categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
+            ))
+          )}
+        </select>
+        {errors.Category && <p className="error-message">{errors.Category}</p>}
+      </div>
+    </div>
 
         {/* Start Date */}
         <div className="form-group">
