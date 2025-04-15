@@ -15,7 +15,7 @@ const Alogin = () => {
 
   // Static admin credentials
   const adminCredentials = {
-    email: 'admin@bhook.com',
+    email: 'admin@gmail.com',
     password: 'admin123'
   };
 

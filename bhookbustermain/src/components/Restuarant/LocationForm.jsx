@@ -18,6 +18,8 @@ const RestaurantRegistration = () => {
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   // Get restaurant name from navigation state if it exists
   const restaurantName = location.state?.restaurantName || '';
@@ -89,13 +91,32 @@ const RestaurantRegistration = () => {
     }
   };
   
+  useEffect(() => {
+      const fetchCategories = async () => {
+        try {
+          setLoading(true);
+          const response = await axios.get('/category/getallcategories');
+          if (response.data && response.data.data) {
+            setCategories(response.data.data);
+          }
+          setLoading(false);
+        } catch (err) {
+          setError('Failed to load categories');
+          setLoading(false);
+          console.error('Error fetching categories:', err);
+        }
+      };
+  
+      fetchCategories();
+    }, []);  
+
   const onSubmit = async (data) => {
     try {
       // Add user ID from localStorage
       data.userId = localStorage.getItem('id');
       
       setIsLoading(true);
-      const response = await axios.post('/location/add', data);
+      const response = await axios.post('/location/locationwithfile', data);
       //data.roleId=
       if (response.status === 201) {
         toast.success('Restaurant registered successfully!');
@@ -136,7 +157,7 @@ const RestaurantRegistration = () => {
               {errors.title && <p className="error-message">{errors.title.message}</p>}
             </div>
             
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="category">Category</label>
               <select
                 id="category"
@@ -154,7 +175,34 @@ const RestaurantRegistration = () => {
                 <option value="Bakery">Bakery</option>
               </select>
               {errors.category && <p className="error-message">{errors.category.message}</p>}
-            </div>
+            </div> */}
+
+<div className="form-row">
+  <div className="form-group">
+    <label htmlFor="category">Category</label>
+    <select
+      id="category"
+      name="category"
+      value={watch('category')}
+      onChange={(e) => setValue('category', e.target.value)}
+      className={`form-input ${errors.category ? 'input-error' : ''}`}
+    >
+      <option value="">Select Category</option>
+      {loading ? (
+        <option disabled>Loading categories...</option>
+      ) : categories.length === 0 ? (
+        <option disabled>No categories available</option>
+      ) : (
+        categories.map((category) => (
+          <option key={category._id} value={category._id}>
+            {category.name}
+          </option>
+        ))
+      )}
+    </select>
+    {errors.category && <p className="error-message">{errors.category}</p>}
+  </div>
+</div>
             
             <div className="form-group">
               <label htmlFor="description">Description</label>
@@ -316,8 +364,24 @@ const RestaurantRegistration = () => {
               />
               <label htmlFor="active">List as Active Restaurant</label>
             </div>
+
+            <div className="form-group">
+  <label htmlFor="restaurantImage">Restaurant Image</label>
+  <input
+    type="file"
+    id="restaurantImage"
+    accept="image/*"
+    {...register("restaurantImage", { 
+      required: "Restaurant image is required" 
+    })}
+    className={errors.restaurantImage ? "input-error" : ""}
+  />
+  {errors.restaurantImage && <p className="error-message">{errors.restaurantImage.message}</p>}
+</div>
           </form>
         </div>
+
+        
         
         {/* Button positioned outside the scrollable area */}
         <button 

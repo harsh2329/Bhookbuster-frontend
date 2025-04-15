@@ -254,6 +254,30 @@ Complete Redesign of Restaurant Navbar */
   to { opacity: 1; }
 }
 
+/* Welcome message styling */
+.welcome-message {
+  margin-right: 15px;
+  font-weight: 500;
+  color: #faf4f4;
+}
+
+/* Logout button styling */
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
 /* Additional JS to add search functionality */
 /* 
   // Add this to your React component:

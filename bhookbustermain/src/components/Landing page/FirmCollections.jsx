@@ -1,134 +1,45 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-
-// const FirmCollections = () => {
-//   const [selectedRegion, setSelectedRegion] = useState("All");
-//   const [activeCategory, setActiveCategory] = useState("all");
-
-//   const firmData = [
-//     {
-//       firm: [
-//         {
-//           _id: "1",
-//           firmName: "Spice Delight",
-//           image: "src/assets/images/Shake.png",
-//           offer: "20% Off",
-//           region: ["south-indian"],
-//           area: "Banjara Hills",
-//         },
-//         {
-//           _id: "2",
-//           firmName: "Tandoori Flames",
-//           image: "src/assets/images/Biriyani.png",
-//           offer: "15% Off",
-//           region: ["north-indian"],
-//           area: "Kukatpally",
-//         },
-//         {
-//           _id: "3",
-//           firmName: "Chinese Wok",
-//           image: "src/assets/images/Burger.png",
-//           offer: "10% Off",
-//           region: ["chinese"],
-//           area: "Madhapur",
-//         },
-//         {
-//           _id: "4",
-//           firmName: "Chinese Wok",
-//           image: "src/assets/images/pizza.png",
-//           offer: "10% Off",
-//           region: ["chinese"],
-//           area: "Madhapur",
-//         },
-//         {
-//           _id: "5",
-//           firmName: "Tandoori Flames",
-//           image: "/assets/tandoori-flames.jpg",
-//           offer: "15% Off",
-//           region: ["north-indian"],
-//           area: "Banjara Hills",
-//         },
-//       ],
-//     },
-//   ];
-
-//   const filterHandler = (region, category) => {
-//     setSelectedRegion(region);
-//     setActiveCategory(category);
-//   };
-
-//   return (
-//     <>
-//     <div className="hero-box-padding-y">
-//       <h3>Why Pay More? Get the Best Food Offers Now!</h3>
-//     </div>
-//       <div className="filterButtons">
-//         {[
-//           { label: "All", region: "All", category: "all" },
-//           { label: "South-Indian", region: "South-Indian", category: "south-indian" },
-//           { label: "North-Indian", region: "North-Indian", category: "north-indian" },
-//           { label: "Chinese", region: "Chinese", category: "chinese" },
-//           { label: "Bakery", region: "Bakery", category: "bakery" },
-//         ].map(({ label, region, category }) => (
-//           <button
-//             key={category}
-//             onClick={() => filterHandler(region, category)}
-//             className={activeCategory === category ? "activeButton" : ""}
-//           >
-//             {label}
-//           </button>
-//         ))}
-//       </div>
-//       <section className="firmSection">
-//         {firmData.map((vendor) =>
-//           vendor.firm.map((item) =>
-//             selectedRegion === "All" || item.region.includes(selectedRegion.toLowerCase()) ? (
-//               <Link to={`/products/${item._id}/${item.firmName}`} className="link" key={item._id}>
-//                 <div className="zoomEffect">
-//                   <div className="firmGroupBox">
-//                     <div className="firmGroup">
-//                       <img src={item.image} alt={item.firmName} />
-//                       <div className="firmOffer">{item.offer}</div>
-//                     </div>
-//                     <div className="firmDetails">
-//                       <strong>{item.firmName}</strong>
-//                       <br />
-//                       <div className="firmArea">{item.region.join(", ")}</div>
-//                       <div className="firmArea">{item.area}</div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </Link>
-//             ) : null
-//           )
-//         )}
-//       </section>
-//     </>
-//   );
-// };
-
-// export default FirmCollections;
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import "../../assets/css/FirmCollections.css"; 
 
-const FirmCollections = () => {
-  const [selectedRegion, setSelectedRegion] = useState("All");
+const FlipCard = ({ frontContent, backContent }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div
+      className={`flip-card ${isFlipped ? "flipped" : ""}`}
+      onClick={() => setIsFlipped((prev) => !prev)}
+    >
+      <div className="flip-card-inner">
+        <div className="flip-card-front">
+          {frontContent}
+        </div>
+        <div className="flip-card-back">
+          {backContent}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RestaurantCollection = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [activeCategory, setActiveCategory] = useState("all");
-  const [firmData, setFirmData] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const filterHandler = (region, category) => {
-    setSelectedRegion(region);
-    setActiveCategory(category);
+  const filterHandler = (category, categoryId) => {
+    setSelectedCategory(category);
+    setActiveCategory(categoryId);
   };
 
   useEffect(() => {
-    const fetchFirmData = async () => {
+    const fetchRestaurantsData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/locations"); 
-        const data = await response.json();
-        setFirmData(data); // make sure your API returns an array of firm objects
+        const response = await axios.get("/location/locations");
+        setRestaurants(response.data.data || []);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching restaurant data:", error);
@@ -136,71 +47,109 @@ const FirmCollections = () => {
       }
     };
 
-    fetchFirmData();
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/category/categories");
+        setCategories(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchRestaurantsData();
+    fetchCategories();
   }, []);
 
   return (
     <>
-      <div className="hero-box-padding-y">
-        <h3>Why Pay More? Get the Best Food Offers Now!</h3>
+      <div className="hero-box-main-container">
+        <h3 className="text-main">
+          Discover the Best Restaurants Near You
+        </h3>
       </div>
 
       <div className="filterButtons">
-        {[
-          { label: "All", region: "All", category: "all" },
-          { label: "South-Indian", region: "South-Indian", category: "south-indian" },
-          { label: "North-Indian", region: "North-Indian", category: "north-indian" },
-          { label: "Chinese", region: "Chinese", category: "chinese" },
-          { label: "Bakery", region: "Bakery", category: "bakery" },
-        ].map(({ label, region, category }) => (
+        <button
+          key="all"
+          onClick={() => filterHandler("All", "all")}
+          className={`border ${
+            activeCategory === "all"
+              ? "bg-blue-600 text-white"
+              : "bg-white text-blue-600 border-blue-600"
+          } transition duration-300 px-4 py-2 rounded-md mx-1`}
+        >
+          All
+        </button>
+        
+        {categories.map((category) => (
           <button
-            key={category}
-            onClick={() => filterHandler(region, category)}
-            className={activeCategory === category ? "activeButton" : ""}
+            key={category._id}
+            onClick={() => filterHandler(category.name, category._id)}
+            className={`border ${
+              activeCategory === category._id
+                ? "bg-blue-600 text-white"
+                : "bg-white text-blue-600 border-blue-600"
+            } transition duration-300 px-4 py-2 rounded-md mx-1`}
           >
-            {label}
+            {category.name}
           </button>
         ))}
       </div>
 
-      <section className="firmSection">
+      <section className="restaurantSection grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {loading ? (
-          <p>Loading offers...</p>
+          <p>Loading restaurants...</p>
         ) : (
-          firmData
+          restaurants
             .filter(
-              (item) =>
-                selectedRegion === "All" ||
-                item.region.includes(selectedRegion.toLowerCase())
+              (restaurant) =>
+                selectedCategory === "All" ||
+                restaurant.category === activeCategory
             )
-            .map((item) => {
-              const firmName = item.firmName || item.title; // Fallback if firmName not available
-              const image = item.image; // Default image fallback
-              const offer = item.offer || "10% Off"; // Default if not set
-              const region = item.region || [item.category?.toLowerCase()] || ["others"];
-              const area = item.area || item.address || "Unknown";
-            
+            .map((restaurant) => {
+              const restaurantName = restaurant.title;
+              const image = restaurant.imagePath || "/assets/images/default-restaurant.png";
+              const foodType = restaurant.foodtype;
+              const address = restaurant.address;
+
               return (
-                <Link
-                  to={`/products/${item._id}/${firmName}`}
-                  className="link"
-                  key={item._id}
-                >
-                  <div className="zoomEffect">
-                    <div className="firmGroupBox">
-                      <div className="firmGroup">
-                        <img src={image} alt={firmName} />
-                        <div className="firmOffer">{offer}</div>
-                      </div>
-                      <div className="firmDetails">
-                        <strong>{firmName}</strong>
-                        <br />
-                        <div className="firmArea">{region.join(", ")}</div>
-                        <div className="firmArea">{area}</div>
+                <FlipCard
+                  key={restaurant._id}
+                  frontContent={
+                    <div className="flex flex-col items-center p-4 h-full">
+                      <img
+                        src={image}
+                        alt={restaurantName}
+                        className="w-full h-40 object-cover rounded-lg mb-3"
+                      />
+                      <strong className="text-lg text-center">{restaurantName}</strong>
+                      <div className="text-sm text-gray-600 text-center">{address}</div>
+                      <div className="mt-2 px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                        {foodType}
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  }
+                  backContent={
+                    <div className="flex flex-col items-center justify-center p-4 h-full">
+                      <h4 className="text-lg font-bold mb-2">{restaurantName}</h4>
+                      <p className="text-gray-700 text-center mb-4 text-sm">
+                        {restaurant.description || "Enjoy delicious food at this amazing restaurant!"}
+                      </p>
+                      <p className="text-sm text-gray-600 mb-2">
+                        <strong>Timings:</strong> {restaurant.timmings}
+                      </p>
+                      <p className="text-sm text-gray-600 mb-4">
+                        <strong>Contact:</strong> {restaurant.contactNumber}
+                      </p>
+                      <Link 
+                        to={`/restaurant/${restaurant._id}`}
+                        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  }
+                />
               );
             })
         )}
@@ -209,4 +158,4 @@ const FirmCollections = () => {
   );
 };
 
-export default FirmCollections;
+export default RestaurantCollection;

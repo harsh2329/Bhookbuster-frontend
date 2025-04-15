@@ -35,6 +35,9 @@ import ViewUser from "../../bhookbustermain/src/components/user/ViewUser";
 import AdminLogin from './components/Admin/AdminLogin';
 import AdminLogout from './components/Admin/AdminLogout';
 import ResHome from '../../bhookbustermain/src/components/Restuarant/ResHome';
+import ViewResParti from '../../bhookbustermain/src/components/Restuarant/ViewResParti';
+import FirmCollections from '../src/components/Landing page/FirmCollections';
+
 
 function App() {
   useEffect(() => {
@@ -75,7 +78,9 @@ function App() {
         <Route path ='/admin' element={<AdminDashboard />} />
         <Route path ='/viewrestaurant' element={<ViewRestaurant />} />
         <Route path='/viewuser' element={<ViewUser />} />
-
+        <Route path='/viewpartires' element={<ViewResParti />} />
+        <Route path='/rescarddisplay' element={<FirmCollections />} />
+ 
         <Route path="admin/alogin" element={<AdminLogin />} />
         <Route 
           path="/admin/logout" 

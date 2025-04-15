@@ -21,29 +21,78 @@ const Rlogin = () => {
     formState: { errors } 
   } = useForm();
 
+  // const onSubmit = async (data) => {
+  //   setIsLoading(true);
+  //   try {
+  //     const res = await axios.post("/reslogsign/rlogin", data, {
+  //       headers: { 'Content-Type': 'application/json' }
+  //     });
+
+  //     if (res.status === 200) {
+  //       toast.success('Logged in successfully!');
+        
+  //       // Store user data in localStorage
+  //       localStorage.setItem("id", res.data.restaurant.id);
+  //       localStorage.setItem("role", "RESTAURANT");
+  //       localStorage.setItem("isLoggedIn", "true");
+  //       localStorage.setItem("userName", res.data.restaurant.name);
+  //       localStorage.setItem("token", res.data.token);
+  //       localStorage.setItem("email", res.data.restaurant.email);
+  //       localStorage.setItem("isVerified", res.data.restaurant.is_verified);
+
+  //       // Redirect to restaurant dashboard
+  //       setTimeout(() => {
+  //         navigate('/rdashboard');
+  //       }, 1500);
+  //     }
+  //   } catch (error) {
+  //     console.error('Login error:', error);
+  //     if (error.response) {
+  //       if (error.response.status === 422) {
+  //         toast.error('Invalid email or password');
+  //       } else if (error.response.status === 401) {
+  //         toast.error('Invalid credentials');
+  //       } else {
+  //         toast.error(error.response.data?.message || 'Login failed. Please try again.');
+  //       }
+  //     } else {
+  //       toast.error('Network error. Please check your connection.');
+  //     }
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
       const res = await axios.post("/reslogsign/rlogin", data, {
         headers: { 'Content-Type': 'application/json' }
       });
-
+      
+      console.log("Login response:", res.data); // Add this to debug
+      
       if (res.status === 200) {
-        toast.success('Logged in successfully!');
+        // Check if response has owner data
+        if (res.data.owner) {
+          // Store user data in localStorage
+          localStorage.setItem("id", res.data.owner.id);
+          localStorage.setItem("role", "RESTAURANT"); // You might want to adjust this based on your needs
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("userName", res.data.owner.ownerName);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("email", res.data.owner.email);
+          // If is_verified isn't in the response, you might want to handle it differently
+          localStorage.setItem("isVerified", res.data.owner.is_verified || "false");
         
-        // Store user data in localStorage
-        localStorage.setItem("id", res.data.restaurant.id);
-        localStorage.setItem("role", "RESTAURANT");
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userName", res.data.restaurant.name);
-        localStorage.setItem("token", res.data.token);
-        localStorage.setItem("email", res.data.restaurant.email);
-        localStorage.setItem("isVerified", res.data.restaurant.is_verified);
-
-        // Redirect to restaurant dashboard
-        setTimeout(() => {
+          // Show success toast
+          toast.success('Logged in successfully!');
+        
+          // Navigate to restaurant dashboard immediately
           navigate('/rdashboard');
-        }, 1500);
+        } else {
+          toast.error('Incomplete login response. Please try again.');
+          console.error('Incomplete login response:', res.data);
+        }
       }
     } catch (error) {
       console.error('Login error:', error);

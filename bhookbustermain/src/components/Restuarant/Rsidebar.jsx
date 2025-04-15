@@ -193,7 +193,7 @@ const Rsidebar = () => {
           </div>
 
           <div className="sidebar-section">
-            <Link to="" className="section-link">
+            <Link to="viewresturant" className="section-link">
               <Eye size={20} />
               <span className={`section-text ${!isOpen && 'hidden'}`}>View Restaurant</span>
             </Link>

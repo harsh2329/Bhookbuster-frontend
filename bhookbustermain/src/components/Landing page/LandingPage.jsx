@@ -24,9 +24,10 @@ import Item from "../../components/Landing page/Item";// Import the background i
 // import Hero from './Hero'
 import Services from '../../components/Landing page/Services'
 // import Item from '../../components/Landing page/Item'
-import FirmCollections from '../../components/Landing page/FirmCollections'
+// import FirmCollections from '../../components/Landing page/FirmCollections'
 import WhyChooseUs from '../../components/Landing page/WhyChooseUs'
 import { Footer } from '../../components/Landing page/Footer'
+import FirmCollections from '../../components/Landing page/FirmCollections';
 
 const LandingPage = () => {
   return (
@@ -43,6 +44,7 @@ const LandingPage = () => {
     >
       <UserNavbar />
       <Hero />
+      <FirmCollections />
       {/* <Services />   */}
      
       {/* <WhyChooseUs /> */}
