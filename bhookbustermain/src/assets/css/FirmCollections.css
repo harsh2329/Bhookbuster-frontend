@@ -1,10 +1,73 @@
-/* FlipCard.css */
-.flip-card {
-    background-color: transparent;
-    width: 100%;
-    height: 300px;
+/* FirmCollections.css */
+
+/* Hero Section */
+.hero-box-main-container {
+    background: linear-gradient(to right, #f59e0b, #dc2626);
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-box-main-container .text-main {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  /* Filter Buttons */
+  .filterButtons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    border: 1px solid #e5e7eb;
+    background-color: white;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .filter-btn.active {
+    background-color: #dc2626;
+    color: white;
+    border-color: #dc2626;
+  }
+  
+  .filter-btn:hover:not(.active) {
+    border-color: #dc2626;
+    color: #dc2626;
+  }
+  
+  /* Container for grid */
+  .carousel-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* Grid layout */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 15px;
+    margin-bottom: 2rem;
+  }
+  
+  /* FlipCard Component */
+  .flip-card {
     perspective: 1000px;
-    margin-bottom: 20px;
+    height: 240px;
     cursor: pointer;
   }
   
@@ -15,10 +78,9 @@
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
   }
-  
   .flip-card.flipped .flip-card-inner {
     transform: rotateY(180deg);
   }
@@ -29,56 +91,283 @@
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Front of card */
+  .restaurant-front {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #111;
+  }
+  
+  .restaurant-image-container {
+    position: relative;
+    height: 290px;
+    overflow: hidden;
+  }
+  
+  .restaurant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .discount-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #dc2626;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .restaurant-name-container {
+    padding: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-radius: 10px;
-    padding: 1rem;
+    background-color: #111;
+    color: white;
+    flex-grow: 1;
   }
   
-  .flip-card-front {
-    background-color: #ffffff;
-    color: black;
+  .restaurant-name-container h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
+  .restaurant-type {
+    font-size: 12px;
+    color: #f59e0b;
+    margin: 4px 0 0;
+  }
+  
+  /* Back of card */
   .flip-card-back {
-    background-color: #f8f9fa;
-    color: #333;
     transform: rotateY(180deg);
+    background-color: #111;
+    color: white;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
   }
   
-  .restaurantSection {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    padding: 1.5rem;
+  .restaurant-back h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #f59e0b;
   }
   
-  .filterButtons {
+  .restaurant-description {
+    font-size: 12px;
+    line-height: 1.4;
+    flex-grow: 1;
+    margin-bottom: 8px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .restaurant-details {
+    margin-bottom: 12px;
+  }
+  
+  .detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  
+  .detail-icon {
+    color: #f59e0b;
+    margin-right: 6px;
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+  
+  .status-tag {
+    margin-bottom: 12px;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1.5rem 0;
-    padding: 0 1rem;
   }
   
-  .filterButtons button {
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+  .status-tag span {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
   }
   
-  .hero-box-main-container {
-    background-color: #f0f4f8;
-    padding: 2rem;
+  .status-tag .active {
+    background-color: #10b981;
+    color: white;
+  }
+  
+  .status-tag .inactive {
+    background-color: #6b7280;
+    color: white;
+  }
+  
+  .action-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .view-btn {
+    background-color: #f59e0b;
+    color: white;
+    text-decoration: none;
+    padding: 6px 0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
     text-align: center;
-    margin-bottom: 1rem;
   }
   
-  .text-main {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: #2b6cb0;
+  .admin-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .admin-buttons button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #ef4444;
+    color: white;
+  }
+  
+  /* Loading state */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+  
+  .loader {
+    border: 3px solid rgba(255, 128, 0, 0.3);
+    border-radius: 50%;
+    border-top: 3px solid #f59e0b;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 3rem 0;
+    color: #6b7280;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+    gap: 1rem;
+  }
+  
+  .pagination-btn {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background-color: white;
+    color: #4b5563;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  
+  .pagination-btn:hover:not(:disabled) {
+    border-color: #dc2626;
+    color: #dc2626;
+  }
+  
+  .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pagination-btn.prev svg {
+    margin-right: 4px;
+  }
+  
+  .pagination-btn.next svg {
+    margin-left: 4px;
+  }
+  
+  .page-indicator {
+    font-size: 14px;
+    color: #4b5563;
+  }
+  
+  /* Responsive layout */
+  @media (max-width: 1200px) {
+    .grid-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .flip-card {
+      height: 220px;
+      max-width: 280px;
+      margin: 0 auto;
+    }
   }
