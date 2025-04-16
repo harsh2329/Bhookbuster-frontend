@@ -40,7 +40,8 @@ const RestaurantView = () => {
     if (window.confirm("Are you sure you want to delete this restaurant?")) {
       try {
         // Implement your API call for deletion
-        await axios.delete(`/api/locations/delete/${id}`);
+        // await axios.delete(`/location/locations/:id`);
+       await axios.delete(`/location/locations/${id}`)
         fetchLocations(); // Refresh the list
       } catch (error) {
         console.error("Error deleting location:", error);

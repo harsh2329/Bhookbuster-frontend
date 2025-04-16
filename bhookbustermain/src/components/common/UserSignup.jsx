@@ -86,7 +86,7 @@ function UserSignup() {
         
        
         // Default role assignment
-        const res = await axios.post("/addwithfile", formData);
+        const res = await axios.post("/usr/addwithfile", formData);
         console.log(res.data);
         
         if (res.status === 201) {

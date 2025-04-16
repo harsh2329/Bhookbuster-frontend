@@ -44,12 +44,13 @@ const LandingPage = () => {
     >
       <UserNavbar />
       <Hero />
+      
       <FirmCollections />
-      {/* <Services />   */}
+      <Services />  
      
       {/* <WhyChooseUs /> */}
       {/* <FirmCollections /> */}
-      {/* <Footer /> */}
+      <Footer />
 
         </div>
         <div>

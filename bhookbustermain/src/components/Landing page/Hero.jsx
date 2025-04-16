@@ -1,86 +1,128 @@
+// import { Link } from 'react-router-dom';
+// // Import the CSS file
+// import '../../assets/css/Hero.css';
+// // At the top of your file
+// import backgroundImage from '../../assets/images/background.png';
+
+// // In your component
+
+
+// const Hero = () => {
+//   return (
+
+//     <section className="hero-box padding-y">
+//       <div className="hero-text-wrapper">
+//       {/* <div style={{
+// backgroundImage: `url(${backgroundImage})`,
+//   backgroundSize: "cover",
+//   backgroundPosition: "center",
+//   backgroundRepeat: "no-repeat",
+//   width: "100%",
+//   height: "100%"
+//   }}></div> */}
+//         <article className="hero-internal-text-wrapper">
+//           <h1 className="hero-heading-text">You've Got Questions.</h1>
+//           <h1 className="hero-heading-text">We've Got Offers.</h1>
+//           <p className="hero-subtitle-text">
+//             Explore your taste with special food offers<br /> in a your place. 
+//           </p>
+//           <div className="hero-button-section">
+//             <Link to="/menu" className="hero-text-link">View Offers</Link>
+//           </div>
+//         </article>
+//         <article className="hero-stats-wrapper">
+          
+//           {/* <div className="border bg-neutralLineWhite" style={{width: '4.25rem', height: '0', marginTop: '2.5rem', transform: 'rotate(90deg)'}} /> */}
+//           <div className="text-center">
+          
+          
+        
+//             {/* <h2 className="hero-card-stat-text">120+</h2>
+//             <p className="hero-card-title-text">Stores in the world.</p> */}
+//           </div>
+//         </article>
+//       </div>
+      
+//       Quarter Circle with Images
+//        <div className="quarter-circle-container">
+//         {/* Quarter Circle Background */}
+        
+//          <div id="quarter-circle-background"></div> 
+//          {/* <img
+//         src="/assets/items/hand.png"
+//         alt="Hand Placement"
+//         className="hands-image"
+//       />  */}
+        
+//          <img
+//           src="./../assets/images/pizza2.png"
+//           alt="udon"
+//           loading="eager"
+//           className="udon-image"
+//         /> 
+         
+        
+//         {/* Sugar SVG - positioned at top of quarter circle */}
+//        {/* <img
+//           src="../src/assets/items/burger2.png"
+//           alt="sugar"
+//           className="sugar-image"
+//         /> 
+//          */}
+//         {/* Chopstick SVG - positioned at left of quarter circle */}
+//         {/* <img
+//           src="../src/assets/items/freshf2.png"
+//           alt="chopstick"
+//           className="chopstick-image"
+//         /> */}
+//       </div> 
+//     </section>
+//   );
+// };
+
+// export default Hero;
+
 import { Link } from 'react-router-dom';
-// Import the CSS file
-import '../../assets/css/Hero.css';
-// At the top of your file
-import backgroundImage from '../../assets/images/background.png';
-
-// In your component
-
+import '../../assets/css/Hero.css'; // Make sure this path is correct for your CSS
+import pizzaImage from '../../assets/images/pizza2.png';
 
 const Hero = () => {
   return (
-
     <section className="hero-box padding-y">
       <div className="hero-text-wrapper">
-      {/* <div style={{
-backgroundImage: `url(${backgroundImage})`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  width: "100%",
-  height: "100%"
-  }}></div> */}
         <article className="hero-internal-text-wrapper">
           <h1 className="hero-heading-text">You've Got Questions.</h1>
           <h1 className="hero-heading-text">We've Got Offers.</h1>
           <p className="hero-subtitle-text">
-            Explore your taste with special food offers<br /> in a your place. 
+            Explore your taste with special food offers<br /> in a your place.
           </p>
           <div className="hero-button-section">
             <Link to="/menu" className="hero-text-link">View Offers</Link>
           </div>
         </article>
         <article className="hero-stats-wrapper">
-          
-          {/* <div className="border bg-neutralLineWhite" style={{width: '4.25rem', height: '0', marginTop: '2.5rem', transform: 'rotate(90deg)'}} /> */}
           <div className="text-center">
-          
-          
-        
-            {/* <h2 className="hero-card-stat-text">120+</h2>
-            <p className="hero-card-title-text">Stores in the world.</p> */}
+            {/* Stats content if needed */}
           </div>
         </article>
       </div>
       
       {/* Quarter Circle with Images */}
-      {/* <div className="quarter-circle-container">
+      <div className="quarter-circle-container">
         {/* Quarter Circle Background */}
+        <div id="quarter-circle-background"></div>
         
-        {/* <div id="quarter-circle-background"></div> */} 
-        {/* <img
-        src="/assets/items/hand.png"
-        alt="Hand Placement"
-        className="hands-image"
-      /> */}
-        
-        {/* Udon SVG - animated with rotation */}
-        {/* <img
-          src="../src/assets/items/pizza2.png"
-          alt="udon"
+        {/* Pizza Image - centered and rotating */}
+        <img
+          src={pizzaImage}
+          alt="Pizza"
           loading="eager"
           className="udon-image"
-        /> */}
-         
-        
-        {/* Sugar SVG - positioned at top of quarter circle */}
-        {/* <img
-          src="../src/assets/items/burger2.png"
-          alt="sugar"
-          className="sugar-image"
-        /> */}
-        
-        {/* Chopstick SVG - positioned at left of quarter circle */}
-        {/* <img
-          src="../src/assets/items/freshf2.png"
-          alt="chopstick"
-          className="chopstick-image"
-        /> */}
-      {/* </div> */}
+        />
+      </div>
     </section>
   );
 };
 
 export default Hero;
-
 

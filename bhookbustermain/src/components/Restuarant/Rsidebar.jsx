@@ -193,10 +193,10 @@ const Rsidebar = () => {
           </div>
 
           <div className="sidebar-section">
-            <Link to="viewresturant" className="section-link">
+            {/* <Link to="viewresturant" className="section-link">
               <Eye size={20} />
               <span className={`section-text ${!isOpen && 'hidden'}`}>View Restaurant</span>
-            </Link>
+            </Link> */}
           </div>
 
           <div className="sidebar-divider"></div>
@@ -213,10 +213,10 @@ const Rsidebar = () => {
           </div>
 
           <div className="sidebar-section">
-            <Link to="" className="section-link">
+            {/* <Link to="" className="section-link">
               <Eye size={20} />
               <span className={`section-text ${!isOpen && 'hidden'}`}>View Offers</span>
-            </Link>
+            </Link> */}
           </div>
 
           <div className="sidebar-divider"></div>

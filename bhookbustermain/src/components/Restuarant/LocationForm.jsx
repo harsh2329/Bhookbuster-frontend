@@ -501,7 +501,7 @@ const RestaurantRegistration = () => {
           }
           setLoading(false);
         } catch (err) {
-          setError('Failed to load categories');
+          alert('Failed to load categories');
           setLoading(false);
           console.error('Error fetching categories:', err);
         }
@@ -512,7 +512,7 @@ const RestaurantRegistration = () => {
 
   // UPDATED: Modified onSubmit function to handle file uploads correctly
   const onSubmit = async (data) => {
-    try {
+    try { 
       // Create FormData object for file upload
       const formData = new FormData();
       

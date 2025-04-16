@@ -177,7 +177,7 @@ const UserLogin = ({ toggleForm }) => {
   
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post("/user/login", data);
+      const res = await axios.post("/usr/user/login", data);
       if (res.status === 200) {
         toast.success("Login Success");
   
@@ -197,7 +197,7 @@ const UserLogin = ({ toggleForm }) => {
         }
       }
       setTimeout(() => {
-        navigate('/home');
+        navigate('/');
       }, 1500);
     } catch (error) {
       console.log(error);
@@ -217,7 +217,7 @@ const UserLogin = ({ toggleForm }) => {
     try {
       setIsSubmittingReset(true);
       
-      const response = await axios.post('/user/forgotpassword', { 
+      const response = await axios.post('/usr/user/forgotpassword', { 
         email: forgotEmail 
       });
       

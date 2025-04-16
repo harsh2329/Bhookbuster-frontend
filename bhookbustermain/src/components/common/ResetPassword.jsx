@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom'
             token:token,
             password:data.password
         }
-        const res = await axios.post("/user/resetpassword",obj)
+        const res = await axios.post("/usr/user/resetpassword",obj)
         console.log(res.data)
             
 

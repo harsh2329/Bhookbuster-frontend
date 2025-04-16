@@ -113,8 +113,8 @@ const UserNavbar = () => {
     <div className="navbar-left">
         <Link to="/home">Home</Link>
         <Link to="/aboutus">About Us</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/offers">Special Offers</Link>
+        {/* <Link to="/menu">Menu</Link>
+        <Link to="/offers">Special Offers</Link> */}
       </div>
   </div>
   {/* Other navbar items here */}
