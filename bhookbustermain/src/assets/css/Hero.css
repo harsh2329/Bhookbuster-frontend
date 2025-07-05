@@ -1,0 +1,205 @@
+.hero-box {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #333333;
+  background-image: url("/src/assets/images/background.png");
+  background-color: #333333;
+}
+
+.padding-y {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.hero-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-internal-text-wrapper {
+  margin-bottom: 2rem;
+}
+.hero-heading-text {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0; /* Changed from 0.5rem to remove space between headings */
+  color: rgb(3, 3, 2);
+  margin-left: 0;
+  margin-top: 3rem; /* Keeps the top heading pushed down */
+  padding-top: 2rem;
+}
+
+/* Add this to specifically target the second heading */
+.hero-heading-text + .hero-heading-text {
+  margin-top: 0; /* Removes space between the two headings */
+  padding-top: 0; /* Ensures no padding between headings */
+  margin-bottom: 0.5rem; /* Adds space after the second heading */
+}
+
+.hero-subtitle-text {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  max-width: 36rem;
+  color: rgb(12, 10, 9);
+  padding-top: 1rem; /* Keeps spacing after the headings */
+}
+
+.hero-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  position: relative;
+  margin-top: 5rem; /* Keeps the overall text section pushed down */
+}
+
+.hero-button-section {
+  margin-top: 1.5rem;
+}
+
+.hero-text-link {
+  display: inline-block;
+  background-color: #050505;
+  color: rgb(255, 248, 240);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-weight: 500;
+  border: #f56f02;
+  border-radius: 10px;
+}
+
+.hero-text-link:hover {
+  background-color: #ff7300;
+  color: rgb(255, 255, 255);
+}
+
+.hero-stats-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hero-card-stat-text {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.hero-card-title-text {
+  font-size: 1rem;
+}
+
+.border {
+  border: 1px solid;
+}
+
+.bg-neutralLineWhite {
+  background-color: #e5e5e5;
+}
+
+.quarter-circle-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#quarter-circle-background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px; /* Reduced size from 500px */
+  height: 400px; /* Reduced size from 500px */
+  background-color: #f55b02; /* Orange color */
+  border-radius: 50%;
+  transform: translate(50%, 50%); /* This creates the quarter circle effect */
+  z-index: -1;
+}
+
+.udon-image {
+  position: absolute;
+  bottom: 50%;
+  right: 31%;
+  width: 400px;
+  height: 400px;
+  transform: translate(50%, 50%); /* Center the image */
+  z-index: 0;
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(50%, 50%) rotate(0deg);
+  }
+  to {
+    transform: translate(50%, 50%) rotate(360deg);
+  }
+}
+
+/* Media Queries to handle responsive design */
+@media (min-width: 768px) {
+  .hero-box {
+    flex-direction: row;
+    align-items: flex-start;
+    padding-left: 4rem;
+  }
+  
+  .hero-text-wrapper {
+    flex: 1;
+    max-width: 50%;
+  }
+  
+  #quarter-circle-background {
+    width: 600px; /* Reduced from 800px */
+    height: 600px; /* Reduced from 800px */
+  }
+  
+  .udon-image {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #quarter-circle-background {
+    width: 800px; /* Reduced from 1000px */
+    height: 800px; /* Reduced from 1000px */
+  }
+  
+  .udon-image {
+    width: 350px;
+    height: 350px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-box {
+    padding: 1rem;
+  }
+  
+  #quarter-circle-background {
+    width: 300px; /* Reduced from 400px */
+    height: 300px; /* Reduced from 400px */
+  }
+  
+  .udon-image {
+    width: 200px;
+    height: 200px;
+  }
+}
