@@ -23,7 +23,7 @@ import Home from './components/Landing page/Navbar/Home';
 import Aboutus from './components/Landing page/Navbar/Aboutus';
 import Viewoffer from './components/Restuarant/Viewoffer';
 import ViewSingleOffer from './components/Restuarant/ViewSingleOffer';
-import AdminSidebar from './components/Admin/AdminSidebar';
+import AdminSidebar from './components/Admin/Adminsidebar';
 import AdminDashboard from './components/Admin/AdminDashboard';
 
 import OffersPage from './components/Landing page/OffersPage';
