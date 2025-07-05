@@ -28,6 +28,7 @@ import Services from '../../components/Landing page/Services'
 import WhyChooseUs from '../../components/Landing page/WhyChooseUs'
 import { Footer } from '../../components/Landing page/Footer'
 import FirmCollections from '../../components/Landing page/FirmCollections';
+import OfferFlipCard from '../../components/Restuarant/OfferFlipCard';
 
 const LandingPage = () => {
   return (
@@ -46,6 +47,7 @@ const LandingPage = () => {
       <Hero />
       
       <FirmCollections />
+      <OfferFlipCard />
       <Services />  
      
       {/* <WhyChooseUs /> */}
