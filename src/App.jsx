@@ -11,7 +11,7 @@ import Rlogin from './components/Restuarant/Rlogin';
 import Rsignup from './components/Restuarant/Rsignup';
 // import Alogin from './components/Admin/Alogin';
 import axios from 'axios';
-import './app.css';
+// import './App.css';
 import { useEffect } from 'react';
 import LandingPage from './components/Landing page/LandingPage';
 import PrivateRoutes from "./hooks/PrivateRoutes";
