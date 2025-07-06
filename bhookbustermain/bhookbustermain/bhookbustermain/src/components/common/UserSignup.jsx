@@ -276,7 +276,7 @@ StateSchema
                 name="profilePic"
                 onChange={handleChange}
                 className={errors.profilePic ? "input-error" : ""}
-              />
+              /> updatedddddddd
               {profilePic && (
                 <div className="profile-preview">
                   <img 
