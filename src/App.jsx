@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import UserSidebar from './components/user/UserSidebar';
 import UserSignup from './components/common/UserSignup';
 import UserLogin from './components/common/UserLogin';
-import RSidebar from './components/restaurant/RSidebar';
+import RSidebar from '../bhookbustermain/src/components/Restuarant/Rsidebar';
 // import AdminSidebar from './components/Admin/AdminSidebar';
 import './assets/css/adminlte.css';
 import './assets/css/adminlte.min.css';
