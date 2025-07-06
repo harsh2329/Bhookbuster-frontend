@@ -100,26 +100,23 @@ function App() {
   <Route path="/offers" element={<OffersPage />} /> 
 
    
-     
-    </Route>
     <Route path='/restaurant' element={<RSidebar />}>
       <Route path='rlogin' element={<RLogin />} />
       <Route path='rsignup' element={<UserSignup />} />
-     
     </Route>
     {/* <Route path='/admin' element={<AdminDashboard />} > */}
     <Route 
-    path="/admin" 
-    element={
-      <ProtectedRoute>
-        <AdminDashboard />
-      </ProtectedRoute>
-    } 
-  />
+      path="/admin" 
+      element={
+        <ProtectedRoute>
+          <AdminDashboard />
+        </ProtectedRoute>
+      } 
+    />
     <Route path='admins' element={<AdminSidebar />} />
-      {/* <Route path='alogin' element={<ALogin />} /> */}
-      <Route path='asignup' element={<UserSignup />} />
-        <Route path ='viewrestaurant' element={<ViewRestaurant />} />
+    {/* <Route path='alogin' element={<ALogin />} /> */}
+    <Route path='asignup' element={<UserSignup />} />
+    <Route path ='viewrestaurant' element={<ViewRestaurant />} />
     {/* </Route> */}
         </Routes>
       </div>
@@ -129,4 +126,5 @@ function App() {
 
 export default App;
 
-// all changes made 
+// all changes made in gere
+
