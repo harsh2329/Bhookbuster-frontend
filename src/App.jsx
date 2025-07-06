@@ -116,7 +116,7 @@ function App() {
     <Route path='admins' element={<AdminSidebar />} />
     {/* <Route path='alogin' element={<ALogin />} /> */}
     <Route path='asignup' element={<UserSignup />} />
-    <Route path ='viewrestaurant' element={<ViewRestaurant />} />
+    <Route path ='viewrestaurant' element={<ViewRestaurant />} /> // added 
     {/* </Route> */}
         </Routes>
       </div>
