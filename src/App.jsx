@@ -1,43 +1,43 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import UserSidebar from './components/user/UserSidebar';
-import UserSignup from './components/common/UserSignup';
-import UserLogin from './components/common/UserLogin';
+import UserSidebar from '../../bhookbustermain/src/components/user/UserSidebar';
+import UserSignup from '../../bhookbustermain/src/components/common/UserSignup';
+import UserLogin from '../bhookbustermain/src/components/common/UserLogin';
 import RSidebar from '../bhookbustermain/src/components/Restuarant/Rsidebar';
 // import AdminSidebar from './components/Admin/AdminSidebar';
 import './assets/css/adminlte.css';
 import './assets/css/adminlte.min.css';
-import RLogin from './components/restaurant/RLogin';
+import RLogin from '../../bhookbustermain/src/components/Restuarant/Rlogin';
 import RSignup from './components/restaurant/RSignup';
 // import ALogin from './components/Admin/ALogin';
 import axios from 'axios';
 // import './App.css';
 // import './App.css';
 import { useEffect } from 'react';
-import LandingPage from './components/landingPage/LandingPage';
-import PrivateRoutes from "./hooks/PrivateRoutes";
-import LocationForm from "./components/restaurant/LocationForm";
-import ResHero from "./components/restaurant/ResHero";
-import Offer from "./components/restaurant/Offer";
-import RDashboard from "./components/restaurant/RDashboard";
-import Home from './components/landingPage/navbar/Home';
-import AboutUs from './components/landingPage/Navbar/AboutUs';
-import ViewOffer from './components/Restaurant/ViewOffer';
-import ViewSingleOffer from './components/Restaurant/ViewSingleOffer';
-import AdminSidebar from './components/Admin/AdminSidebar';
-import AdminDashboard from './components/Admin/AdminDashboard';
+import LandingPage from '../bhookbustermain/src/components/Landing page/LandingPage';
+import PrivateRoutes from "../../bhookbustermain/src/hooks/PrivateRoutes";
+import LocationForm from "../bhookbustermain/src/components/Restuarant/LocationForm";
+import ResHero from "../../bhookbustermain/src/components/Restuarant/ResHero";
+import Offer from "../../bhookbustermain/src/components/Restuarant/Offer";
+import RDashboard from "../../bhookbustermain/src/components/Restuarant/Rdasborad";
+import Home from '../../bhookbustermain/src/components/Landing page/Navbar/Home';
+import AboutUs from '../../bhookbustermain/src/components/Landing page/Navbar/Aboutus';
+import ViewOffer from '../bhookbustermain/src/components/Restuarant/Viewoffer';
+import ViewSingleOffer from '../../bhookbustermain/src/components/Restuarant/ViewSingleOffer';
+import AdminSidebar from '../../bhookbustermain/src/components/Admin/Adminsidebar';
+import AdminDashboard from '../../bhookbustermain/src/components/Admin/AdminDashboard';
 
-import OffersPage from './components/landingPage/OffersPage';
-import FoodPage from './components/landingPage/FoodPage';
+import OffersPage from '../../bhookbustermain/src/components/Landing page/OffersPage';
+import FoodPage from '../../bhookbustermain/src/components/Landing page/FoodPage';
 import ResetPassword  from "../../bhookbustermain/src/components/common/ResetPassword";
 
-import ViewRestaurant from "./components/restaurant/ViewRestaurant";
-import ViewUser from "./components/user/ViewUser";
-import AdminLogin from './components/Admin/AdminLogin';
-import AdminLogout from './components/Admin/AdminLogout';
-import ResHome from './components/restaurant/ResHome';
-import ViewResParti from './components/restaurant/ViewResParti';
-import FirmCollections from './components/landingPage/FirmCollections';
+import ViewRestaurant from "../../bhookbustermain/src/components/Restuarant/ViewRestaurant";
+import ViewUser from "../../bhookbustermain/src/components/Admin/ViewUser";
+import AdminLogin from '../../bhookbustermain/src/components/Admin/AdminLogin';
+import AdminLogout from '../../bhookbustermain/src/components/Admin/AdminLogout';
+import ResHome from '../../bhookbustermain/src/components/Restuarant/ResHome';
+import ViewResParti from '../../bhookbustermain/src/components/Admin/ViewResParti';
+import FirmCollections from '../../bhookbustermain/src/components/Restuarant/FirmCollections';
 
 
 function App() {
