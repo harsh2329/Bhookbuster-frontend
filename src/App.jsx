@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import UserSidebar from '../../bhookbustermain/src/components/common/UserSidebar';
+import UserSidebar from '../../bhookbustermain/src/components/user/UserSidebar';
 import UserSignup from '../../bhookbustermain/src/components/common/UserSignup';
 import UserLogin from '../bhookbustermain/src/components/common/UserLogin';
 import RSidebar from '../bhookbustermain/src/components/Restuarant/Rsidebar';
