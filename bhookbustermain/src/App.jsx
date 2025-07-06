@@ -30,11 +30,10 @@ import OffersPage from './components/Landing page/OffersPage';
 import FoodPage from './components/Landing page/FoodPage';
 import ResetPassword  from "./components/common/ResetPassword";
 import ViewRestaurant from "./components/Restuarant/ViewRestaurant";
-import ViewUser from "./components/Admin/ViewUser";
 import AdminLogin from './components/Admin/AdminLogin';
 import AdminLogout from './components/Admin/AdminLogout';
 import ResHome from './components/Restuarant/ResHome';
-import ViewResParti from './components/Admin/ViewResParti';
+import ViewResParti from './components/Restaurant/ViewResParti';
 import FirmCollections from './components/Restuarant/FirmCollections';
 
 

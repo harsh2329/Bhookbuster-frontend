@@ -33,7 +33,7 @@ import ViewRestaurant from "./components/Restuarant/ViewRestaurant";
 import AdminLogin from './components/Admin/AdminLogin';
 import AdminLogout from './components/Admin/AdminLogout';
 import ResHome from './components/Restuarant/ResHome';
-import ViewResParti from './components/Restaurant/ViewResParti';
+// import ViewResParti from './components/Restuarant/ViewResParti';
 import FirmCollections from './components/Restuarant/FirmCollections';
 
 
@@ -76,7 +76,7 @@ function App() {
   <Route path ='/admin' element={<AdminDashboard />} />
   <Route path ='/viewrestaurant' element={<ViewRestaurant />} />
   <Route path='/viewuser' element={<ViewUser />} />
-  <Route path='/viewpartires' element={<ViewResParti />} />
+  {/* <Route path='/viewpartires' element={<ViewResParti />} /> */}
   <Route path='/rescarddisplay' element={<FirmCollections />} />
 
   <Route path="admin/alogin" element={<AdminLogin />} />
