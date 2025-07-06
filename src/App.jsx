@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import UserSidebar from '../../bhookbustermain/src/components/user/UserSidebar';
+// import UserSidebar from '../../bhookbustermain/src/components/user/UserSidebar';
 import UserSignup from '../../bhookbustermain/src/components/common/UserSignup';
 import UserLogin from '../bhookbustermain/src/components/common/UserLogin';
 import RSidebar from '../bhookbustermain/src/components/Restuarant/Rsidebar';
@@ -99,7 +99,7 @@ function App() {
   <Route path="/food/:category" element={<FoodPage />} /> 
   <Route path="/offers" element={<OffersPage />} /> 
 
-    <Route path='/user' element={<UserSidebar />}>
+   
      
     </Route>
     <Route path='/restaurant' element={<RSidebar />}>
