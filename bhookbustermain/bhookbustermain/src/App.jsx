@@ -45,7 +45,7 @@ function App() {
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.body.classList.add(savedTheme === 'dark' ? 'dark-theme' : 'light-theme');
   }, []);
-  axios.defaults.baseURL = "http://localhost:3000";
+  axios.defaults.baseURL = "https://bhookbuster-backend-3.onrender.com";
 
   const ProtectedRoute = ({ children }) => {
     const isAuthenticated = localStorage.getItem('adminLoggedIn') === 'true';
