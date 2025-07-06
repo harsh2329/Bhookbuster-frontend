@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
@@ -86,7 +84,7 @@ function UserSignup() {
         
        
         // Default role assignment
-        const res = await axios.post("/usr/addwithfile", formData);
+        const res = await axios.post("https://bhookbuster-backend-3.onrender.com/usr/addwithfile", formData);
         console.log(res.data);
         
         if (res.status === 201) {
