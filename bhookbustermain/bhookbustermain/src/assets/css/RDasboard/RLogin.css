@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #f54421;
+  --primary-hover: rgb(249, 81, 72);
+  --secondary-color: #ffffff;
+  --text-color: #070707;
+  --border-color: #dddddd;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --glow: 0 0 10px rgba(255, 107, 107, 0.5);
+  --transition: all 0.3s ease;
+  --background-color: #f5f5f5;
+  --card-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+  --primary-color: #f35f5f;
+  --primary-hover: #f65321;
+  --secondary-color: #1a1a1a;
+  --text-color: #f5f5f5;
+  --border-color: #444444;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --glow: 0 0 10px rgba(255, 107, 107, 0.7);
+  --background-color: #121212;
+  --card-bg: #1e1e1e;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Generic Card */
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing header inside cards */
+.card h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+  position: relative;
+}
+
+/* Input Styles */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group label {
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+.input-group input,
+.input-group textarea,
+.input-group select {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+}
+
+/* Button */
+.button-primary {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.button-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+}
+
+.button-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.button-primary:hover::before {
+  left: 100%;
+}
+
+/* Page Wrapper */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Glowing border line on top */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary-hover), transparent);
+  animation: glowLine 2s linear infinite;
+}
+
+@keyframes glowLine {
+  0% { background-position: -200px; }
+  100% { background-position: 200px; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 1rem;
+  }
+  .card {
+    padding: 1.5rem;
+  }
+  .card h2 {
+    font-size: 1.25rem;
+  }
+}
