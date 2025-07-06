@@ -8,7 +8,7 @@ import RSidebar from '../bhookbustermain/src/components/Restuarant/Rsidebar';
 import './assets/css/adminlte.css';
 import './assets/css/adminlte.min.css';
 import RLogin from '../../bhookbustermain/src/components/Restuarant/Rlogin';
-import RSignup from './components/restaurant/RSignup';
+import RSignup from '../../bhookbustermain/src/components/Restuarant/Rsignup';
 // import ALogin from './components/Admin/ALogin';
 import axios from 'axios';
 // import './App.css';
