@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  margin-left:30px;
   min-height: 100vh;
   background-color: #333333;
   background-image: url("/src/assets/images/background.png");
