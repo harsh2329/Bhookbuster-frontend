@@ -38,6 +38,7 @@ import ResHome from '../../bhookbustermain/src/components/Restuarant/ResHome';
 import ViewResParti from '../../bhookbustermain/src/components/Restuarant/ViewResParti';
 import FirmCollections from '../src/components/Landing page/FirmCollections';
 
+ axios.defaults.baseURL = "https://bhookbuster-backend-3.onrender.com";
 
 function App() {
   useEffect(() => {
@@ -46,7 +47,7 @@ function App() {
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.body.classList.add(savedTheme === 'dark' ? 'dark-theme' : 'light-theme');
   }, []);
-  axios.defaults.baseURL = "https://bhookbuster-backend-3.onrender.com/";
+  // axios.defaults.baseURL = "https://bhookbuster-backend-3.onrender.com";
 
   const ProtectedRoute = ({ children }) => {
     const isAuthenticated = localStorage.getItem('adminLoggedIn') === 'true';

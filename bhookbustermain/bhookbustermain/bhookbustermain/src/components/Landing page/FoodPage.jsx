@@ -14,7 +14,7 @@ const FoodPage = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get(`http://localhost:8000/:id`); // ✅ Update API endpoint
+        const response = await axios.get(`https://bhookbuster-backend-3.onrender.com/:id`); // ✅ Update API endpoint
         
         if (!response.ok) {
           throw new Error("Failed to fetch food offers");

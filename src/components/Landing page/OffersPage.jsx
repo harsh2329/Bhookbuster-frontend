@@ -9,7 +9,7 @@ const OffersPage = () => {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const response = await fetch("http://localhost:8000/offers");
+        const response = await fetch("https://bhookbuster-backend-3.onrender.com/offers");
         if (!response.ok) {
           throw new Error("Failed to fetch offers");
         }
