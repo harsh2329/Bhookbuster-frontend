@@ -1,6 +1,6 @@
 // ...existing code...
 try {
-  const response = await axios.get('http://localhost:3000/api/v1/user');
+  const response = await axios.get('https://bhookbuster-backend-3.onrender.com//api/v1/user');
   // ...existing code...
 } catch (error) {
   console.error('Error fetching user data:', error);
@@ -8,7 +8,7 @@ try {
 }
 // ...existing code...
 try {
-  const response = await axios.get('http://localhost:3000/api/v1/me');
+  const response = await axios.get('https://bhookbuster-backend-3.onrender.com//api/v1/me');
   // ...existing code...
 } catch (error) {
   console.error('Error fetching user data:', error);
