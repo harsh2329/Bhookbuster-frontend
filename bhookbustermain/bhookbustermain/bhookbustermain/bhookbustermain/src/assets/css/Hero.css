@@ -135,7 +135,7 @@
 .udon-image {
   position: absolute;
   bottom: 50%;
-  right: 41%;
+  right: 51%;
   width: 400px;
   height: 400px;
   transform: translate(50%, 50%); /* Center the image */
