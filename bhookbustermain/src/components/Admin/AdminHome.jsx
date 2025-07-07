@@ -66,7 +66,7 @@ function Home() {
         try {
           setLoading(true);
           // Use the same endpoint you're using in RestaurantView
-          const response = await axios.get('https://bhookbuster.netlify.app/location/all');
+          const response = await axios.get('https://bhookbuster-backend-3.onrender.com/location/all');
           
           // Set the count based on the length of the data array
           if (response.data && response.data.data) {
@@ -88,7 +88,7 @@ function Home() {
       const fetchOfferCount = async () => {
         try {
           // Use the same endpoint you're using in OfferList
-          const response = await axios.get('https://bhookbuster.netlify.app/offer/all');
+          const response = await axios.get('https://bhookbuster-backend-3.onrender.com/offer/all');
           
           // Set the count based on the length of the data array
           if (response.data && response.data.data) {

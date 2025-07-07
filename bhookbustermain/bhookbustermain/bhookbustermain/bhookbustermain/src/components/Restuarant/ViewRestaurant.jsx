@@ -17,7 +17,7 @@ const RestaurantView = () => {
   const fetchLocations = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://bhookbuster.netlify.app/location/all');
+      const response = await axios.get('https://bhookbuster-backend-3.onrender.com/location/all');
       setLocations(response.data.data);
       setLoading(false);
     } catch (error) {

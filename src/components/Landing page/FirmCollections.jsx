@@ -40,7 +40,7 @@
 //   useEffect(() => {
 //     const fetchRestaurantsData = async () => {
 //       try {
-//         const response = await axios.get("https://bhookbuster.netlify.app/location/all");
+//         const response = await axios.get("https://bhookbuster-backend-3.onrender.com/location/all");
 //         setRestaurants(response.data.data || []);
 //         setLoading(false);
 //       } catch (error) {
@@ -289,7 +289,7 @@ const RestaurantCollection = () => {
   useEffect(() => {
     const fetchRestaurantsData = async () => {
       try {
-        const response = await axios.get("https://bhookbuster.netlify.app/location/all");
+        const response = await axios.get("https://bhookbuster-backend-3.onrender.com/location/all");
         setRestaurants(response.data.data || []);
         setLoading(false);
       } catch (error) {
