@@ -40,7 +40,7 @@
 //   useEffect(() => {
 //     const fetchRestaurantsData = async () => {
 //       try {
-//         const response = await axios.get("/location/all");
+//         const response = await axios.get("https://686ac057b7da9600089cff07--bhookbuster.netlify.app/location/all");
 //         setRestaurants(response.data.data || []);
 //         setLoading(false);
 //       } catch (error) {
@@ -289,7 +289,7 @@ const RestaurantCollection = () => {
   useEffect(() => {
     const fetchRestaurantsData = async () => {
       try {
-        const response = await axios.get("/location/all");
+        const response = await axios.get("https://686ac057b7da9600089cff07--bhookbuster.netlify.app/location/all");
         setRestaurants(response.data.data || []);
         setLoading(false);
       } catch (error) {

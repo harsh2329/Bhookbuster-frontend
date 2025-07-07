@@ -19,7 +19,7 @@
 //   const fetchOffers = async () => {
 //     try {
 //       setLoading(true);
-//       const response = await axios.get('/offer/all');
+//       const response = await axios.get('https://686ac057b7da9600089cff07--bhookbuster.netlify.app/offer/all');
 //       setOffers(response.data.data);
 //       setError(null);
 //     } catch (err) {
@@ -208,7 +208,7 @@ const OfferList = () => {
   const fetchOffers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/offer/all');
+      const response = await axios.get('https://686ac057b7da9600089cff07--bhookbuster.netlify.app/offer/all');
       setOffers(response.data.data);
       setError(null);
     } catch (err) {
