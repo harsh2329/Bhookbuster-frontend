@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
@@ -278,7 +276,7 @@ StateSchema
                 name="profilePic"
                 onChange={handleChange}
                 className={errors.profilePic ? "input-error" : ""}
-              />
+              /> updatedddddddd
               {profilePic && (
                 <div className="profile-preview">
                   <img 

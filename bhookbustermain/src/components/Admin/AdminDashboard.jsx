@@ -2,7 +2,7 @@ import { useState } from 'react'
 import '../../assets/css/ADashboard/Amain.css';
 import AdminHome from '../../components/Admin/AdminHome';
 import Adminnav from '../../components/Admin/Adminnav'
-import Adminsidebar from '../../components/Admin/AdminSidebar';
+import Adminsidebar from '../../components/Admin/Adminsidebar';
 
 function App() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false)

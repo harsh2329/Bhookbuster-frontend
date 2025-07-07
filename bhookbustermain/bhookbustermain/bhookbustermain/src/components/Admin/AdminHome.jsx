@@ -88,7 +88,11 @@ function Home() {
       const fetchOfferCount = async () => {
         try {
           // Use the same endpoint you're using in OfferList
+<<<<<<< HEAD
           const response = await axios.get('https://bhookbuster-backend-3.onrender.com/offer/all');
+=======
+          const response = await axios.get('https://bhookbuster-backend-3.onrender.com/offer/alll');
+>>>>>>> 1d24839e3da21de7b74504993d9dcc2b993ecb3d
           
           // Set the count based on the length of the data array
           if (response.data && response.data.data) {

@@ -1,0 +1,514 @@
+/* RDashboard.css */
+
+:root {
+    --primary-color: #6366f1;
+    --primary-light: #818cf8;
+    --success-color: #4ade80;
+    --warning-color: #facc15;
+    --danger-color: #f87171;
+    --dark-color: #1e293b;
+    --light-color: #f8fafc;
+    --text-primary: #334155;
+    --text-secondary: #64748b;
+    --border-color: #303031;
+    --card-bg: #3f3a3a;
+    --hover-bg: #595a5c;
+    /* margin-left:250px; */
+}
+  
+  /* Layout */
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-left:250px;
+  }
+  
+  .dashboard-content {
+    display: flex;
+    flex: 1;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: #060607;
+    overflow-y: auto;
+  }
+  
+  /* Dashboard Header */
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  
+  .date-filter select {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  /* Metrics Cards */
+  .metrics-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .metric-card {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  .metric-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin-right: 1rem;
+  }
+  
+  .metric-icon.positive {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+  }
+  
+  .metric-details {
+    flex: 1;
+  }
+  
+  .metric-details h3 {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .metric-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0.25rem 0 0.5rem;
+    color: var(--text-primary);
+  }
+  
+  .metric-growth {
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .metric-growth.positive {
+    color: var(--success-color);
+  }
+  
+  .metric-growth.negative {
+    color: var(--danger-color);
+  }
+  
+  .metric-growth svg {
+    margin-right: 0.25rem;
+  }
+  
+  /* Charts */
+  .chart-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .chart-container {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .chart-container h2 {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  
+  /* Restaurants Section */
+  .restaurants-section {
+    margin-bottom: 2rem;
+  }
+  
+  .restaurants-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  
+  .restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .restaurant-card {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+  
+  .restaurant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+  
+  .restaurant-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+  
+  .rating {
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+  
+  .star {
+    color: var(--warning-color);
+    margin-right: 0.25rem;
+  }
+  
+  .location {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  
+  .restaurant-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  
+  .stat {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+  
+  .stat svg {
+    margin-right: 0.25rem;
+  }
+  
+  .view-details {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .view-details:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  /* Popular Items */
+  .popular-items {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .popular-items h2 {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .popular-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .item-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .item-rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--hover-bg);
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  
+  .item-info h4 {
+    margin: 0 0 0.25rem;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+  }
+  
+  .item-info span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+  
+  .item-percentage {
+    display: flex;
+    align-items: center;
+    width: 40%;
+  }
+  
+  .percentage-bar {
+    flex: 1;
+    height: 0.5rem;
+    background-color: var(--hover-bg);
+    border-radius: 0.25rem;
+    margin-right: 0.75rem;
+    overflow: hidden;
+  }
+  
+  .percentage-fill {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 0.25rem;
+    transition: width 1s ease-out;
+  }
+  
+  .item-percentage span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    min-width: 2.5rem;
+    text-align: right;
+  }
+  
+  /* Recent Orders */
+  .recent-orders {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .orders-header h2 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+  
+  .view-all {
+    background-color: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .order-item {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--hover-bg);
+    transition: transform 0.3s ease;
+  }
+  
+  .order-item:hover {
+    transform: translateX(5px);
+  }
+  
+  .order-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .order-info h4 {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+  }
+  
+  .status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+  }
+  
+  .status.completed {
+    background-color: rgba(74, 222, 128, 0.2);
+    color: var(--success-color);
+  }
+  
+  .status.pending {
+    background-color: rgba(250, 204, 21, 0.2);
+    color: var(--warning-color);
+  }
+  
+  .status.cancelled {
+    background-color: rgba(248, 113, 113, 0.2);
+    color: var(--danger-color);
+  }
+  
+  .order-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+  
+  .order-details p {
+    margin: 0.25rem 0;
+  }
+  
+  .time {
+    display: flex;
+    align-items: center;
+  }
+  
+  .time svg {
+    margin-right: 0.25rem;
+  }
+  
+  /* Loading Animation */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(99, 102, 241, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .metrics-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .chart-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .metrics-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .restaurants-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Animation Classes */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  .slide-in {
+    animation: slideIn 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
