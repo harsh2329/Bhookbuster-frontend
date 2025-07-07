@@ -495,7 +495,7 @@ const RestaurantRegistration = () => {
       const fetchCategories = async () => {
         try {
           setLoading(true);
-          const response = await axios.get('/category/getallcategories');
+          const response = await axios.get('https://bhookbuster.netlify.app/category/getallcategories');
           if (response.data && response.data.data) {
             setCategories(response.data.data);
           }

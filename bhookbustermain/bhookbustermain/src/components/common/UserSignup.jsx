@@ -86,7 +86,7 @@ function UserSignup() {
         
        
         // Default role assignment
-        const res = await axios.post("/usr/addwithfile", formData);
+        const res = await axios.post("https://bhookbuster.netlify.app/usr/addwithfile", formData);
         console.log(res.data);
         
         if (res.status === 201) {

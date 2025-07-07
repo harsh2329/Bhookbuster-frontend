@@ -52,7 +52,7 @@ const OfferCollection = () => {
   const fetchOffers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://686ac057b7da9600089cff07--bhookbuster.netlify.app/offer/all');
+      const response = await axios.get('https://bhookbuster.netlify.app/offer/all');
       setOffers(response.data.data);
       setError(null);
     } catch (err) {
