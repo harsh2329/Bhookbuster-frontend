@@ -431,18 +431,30 @@ const RestaurantRegistration = () => {
   }, []);
 
   const getAllStates = async () => {
-    const res = await axios.get("https://bhookbuster.netlify.app//state/getallstates");
+    const res = await axios.get("https://bhookbuster.netlify.app/state/getallstates");
     setStates(res.data.data);
   };
+  // const getCityByStateId = async (id) => {
+  //   const res = await axios.get("https://bhookbuster.netlify.app/city/getcitybystateid/" + id);
+  //   setCities(res.data.data);
+  // };
   const getCityByStateId = async (id) => {
-    const res = await axios.get("https://bhookbuster.netlify.app//city/getcitybystateid/" + id);
+  try {
+    if (!id) {
+      console.error("State ID is required");
+      return;
+    }
+    const res = await axios.get(`https://bhookbuster.netlify.app/city/getcitybystateid/${id}`);
     setCities(res.data.data);
-  };
+  } catch (error) {
+    console.error("Error fetching cities:", error);
+  }
+};
 
   const getAreaByCityId = async (id) => {
     console.log("city function");
     
-    const res = await axios.get("https://bhookbuster.netlify.app//area/getareabycity/" + id);
+    const res = await axios.get("https://bhookbuster.netlify.app/area/getareabycity/" + id);
     console.log(res.data);
     setAreas(res.data.data);
   };
