@@ -438,21 +438,32 @@ const RestaurantRegistration = () => {
   //   const res = await axios.get("https://bhookbuster.netlify.app/city/getcitybystateid/" + id);
   //   setCities(res.data.data);
   // };
- const getCityByStateId = async (id) => {
-  // Check if ID is provided and valid
-  if (!id || id === '' || id === null || id === undefined) {
-    console.error("State ID is required");
-    setCities([]); // Clear cities if no valid state ID
-    return;
-  }
-  
-  try {
-    const res = await axios.get(`https://bhookbuster.netlify.app/city/getcitybystateid/${id}`);
-    setCities(res.data.data);
-  } catch (error) {
-    console.error("Error fetching cities:", error);
-    setCities([]); // Clear cities on error
-  }
+const getCityByStateId = async (id) => {
+ console.log("getCityByStateId called with:", id);
+ console.log("State ID type:", typeof id);
+ 
+ // Check if ID is provided and valid
+ if (!id || id === '' || id === null || id === undefined) {
+   console.log("No valid state ID, clearing cities");
+   setCities([]); // Clear cities if no valid state ID
+   return;
+ }
+ 
+ try {
+   const url = `https://bhookbuster-backend-3.onrender.com/city/getcitybystateid/${id}`;
+   console.log("Making request to:", url);
+   
+   const res = await axios.get(url);
+   console.log("Cities API response:", res.data);
+   
+   // Handle different response formats
+   const citiesData = res.data.data || res.data;
+   setCities(citiesData);
+ } catch (error) {
+   console.error("Error fetching cities:", error);
+   console.error("Error details:", error.response?.data);
+   setCities([]); // Clear cities on error
+ }
 };
 
   const getAreaByCityId = async (id) => {
