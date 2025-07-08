@@ -138,10 +138,10 @@
   right: 31%;
   width: 400px;
   height: 400px;
-  transform: translate(50%, 50%); /* Center the image */
+  /* Center the image */
   /* z-index: 0;
   animation: rotate 20s linear infinite;
-} */ 
+} */
 
 @keyframes rotate {
   from {
