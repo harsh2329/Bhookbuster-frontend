@@ -150,7 +150,6 @@
 // };
 
 // export default HomePage;
-
 import React, { useState, useEffect } from 'react';
 import UserNavbar from '../../user/UserNavbar';
 import { Link } from 'react-router-dom';
@@ -159,7 +158,6 @@ import '../../../assets/css/Home.css';
 
 const HomePage = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({
     quickLinks: false,
     contact: false
@@ -168,11 +166,10 @@ const HomePage = () => {
   // Handle window resize for responsive behavior
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth < 768;
+      const mobile = window.innerWidth < 675;
       setIsMobile(mobile);
       
       if (!mobile) {
-        setIsMenuOpen(false);
         setExpandedSections({
           quickLinks: false,
           contact: false
@@ -229,7 +226,10 @@ const HomePage = () => {
           <h1>Discover the Best Food Deals Around You</h1>
           <p>Bhookh Buster helps you find amazing restaurant offers and promotions in your area.</p>
           <div className="search-container">
-            <input type="text" placeholder="Search by location, cuisine, or restaurant name" />
+            <input 
+              type="text" 
+              placeholder={isMobile ? "Search restaurants..." : "Search by location, cuisine, or restaurant name"} 
+            />
             <button className="search-btn">Search</button>
           </div>
           <div className="hero-buttons">
@@ -309,7 +309,10 @@ const HomePage = () => {
           </div>
           
           <div className="footer-links">
-            <div className="footer-section-header" onClick={() => toggleSection('quickLinks')}>
+            <div 
+              className={`footer-section-header ${isMobile ? 'clickable' : ''}`}
+              onClick={isMobile ? () => toggleSection('quickLinks') : undefined}
+            >
               <h3>Quick Links</h3>
               {isMobile && (
                 <span className="toggle-icon">
@@ -327,7 +330,10 @@ const HomePage = () => {
           </div>
           
           <div className="footer-contact">
-            <div className="footer-section-header" onClick={() => toggleSection('contact')}>
+            <div 
+              className={`footer-section-header ${isMobile ? 'clickable' : ''}`}
+              onClick={isMobile ? () => toggleSection('contact') : undefined}
+            >
               <h3>Contact Us</h3>
               {isMobile && (
                 <span className="toggle-icon">

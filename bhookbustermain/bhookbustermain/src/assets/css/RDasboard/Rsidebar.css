@@ -172,13 +172,14 @@
   left: 0;
   top: 0;
   height: 100vh;
-  background: #fff;
+  background: #ffffff;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   z-index: 1000;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  border-right: 1px solid #e0e0e0;
 }
 
 .restaurant-sidebar.expanded {
@@ -192,21 +193,28 @@
 /* Mobile menu button */
 .mobile-menu-btn {
   position: fixed;
-  top: 70px; /* Adjust based on your navbar height */
+  top: 20px;
   left: 20px;
   z-index: 1001;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border: 2px solid #ff6b35;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: all 0.3s ease;
   display: none;
+  color: #ff6b35;
 }
 
 .mobile-menu-btn:hover {
-  background: #f5f5f5;
+  background: #ff6b35;
+  color: white;
+  transform: scale(1.05);
+}
+
+.mobile-menu-btn:active {
+  transform: scale(0.95);
 }
 
 /* Overlay for mobile */
@@ -219,15 +227,18 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
   display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* Sidebar brand */
 .sidebar-brand {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 24px 20px;
   border-bottom: 1px solid #e0e0e0;
-  min-height: 70px;
+  min-height: 80px;
+  background: #f8f9fa;
 }
 
 .sidebar-brand svg {
@@ -236,10 +247,10 @@
 }
 
 .brand-text {
-  margin-left: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+  margin-left: 16px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2c3e50;
   white-space: nowrap;
   transition: all 0.3s ease;
 }
@@ -252,37 +263,71 @@
 /* Sidebar content */
 .sidebar-content {
   flex: 1;
-  padding: 20px 0;
+  padding: 24px 0;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ddd transparent;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 2px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
 }
 
 .sidebar-section {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .section-link {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
-  color: #666;
+  padding: 16px 20px;
+  color: #5a6c7d;
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
+  border-radius: 0 25px 25px 0;
+  margin-right: 12px;
 }
 
 .section-link:hover {
-  background: #f8f9fa;
-  color: #ff6b35;
+  background: linear-gradient(135deg, #ff6b35, #ff8e53);
+  color: white;
+  transform: translateX(8px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+.section-link:active {
+  transform: translateX(4px);
 }
 
 .section-link svg {
   flex-shrink: 0;
-  margin-right: 12px;
+  margin-right: 16px;
+  transition: transform 0.3s ease;
+}
+
+.section-link:hover svg {
+  transform: scale(1.1);
 }
 
 .section-text {
   white-space: nowrap;
   transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 15px;
 }
 
 .section-text.hidden {
@@ -292,16 +337,17 @@
 
 /* Categories */
 .section-category {
-  padding: 8px 20px;
+  padding: 12px 20px;
   margin-bottom: 8px;
+  margin-top: 16px;
 }
 
 .category-text {
   font-size: 12px;
-  font-weight: 600;
-  color: #999;
+  font-weight: 700;
+  color: #95a5a6;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
 }
 
@@ -313,14 +359,15 @@
 /* Dividers */
 .sidebar-divider {
   height: 1px;
-  background: #e0e0e0;
-  margin: 16px 20px;
+  background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+  margin: 20px 20px;
 }
 
 /* Footer */
 .sidebar-footer {
   border-top: 1px solid #e0e0e0;
   padding: 20px 0;
+  background: #f8f9fa;
 }
 
 .toggle-container {
@@ -330,28 +377,38 @@
 .toggle-sidebar-btn {
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 16px 20px;
   background: none;
   border: none;
-  color: #666;
+  color: #5a6c7d;
   cursor: pointer;
   transition: all 0.3s ease;
   width: 100%;
   text-align: left;
+  border-radius: 0 25px 25px 0;
+  margin-right: 12px;
 }
 
 .toggle-sidebar-btn:hover {
-  background: #f8f9fa;
-  color: #ff6b35;
+  background: #e8f4f8;
+  color: #2c3e50;
+  transform: translateX(8px);
 }
 
 .toggle-sidebar-btn svg {
-  margin-right: 12px;
+  margin-right: 16px;
+  transition: transform 0.3s ease;
+}
+
+.toggle-sidebar-btn:hover svg {
+  transform: scale(1.1);
 }
 
 .toggle-text {
   white-space: nowrap;
   transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 15px;
 }
 
 .toggle-text.hidden {
@@ -360,16 +417,18 @@
 }
 
 .logout .section-link {
-  color: #dc3545;
+  color: #e74c3c;
+  margin-top: 8px;
 }
 
 .logout .section-link:hover {
-  background: #fdf2f2;
-  color: #dc3545;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
 }
 
 /* Mobile styles */
-@media (max-width: 767px) {
+@media (max-width: 675px) {
   .mobile-menu-btn {
     display: block;
   }
@@ -379,10 +438,11 @@
   }
   
   .restaurant-sidebar {
-    top: 60px; /* Adjust based on your navbar height */
-    height: calc(100vh - 60px);
+    top: 0;
+    height: 100vh;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
   }
   
   .restaurant-sidebar.mobile.expanded {
@@ -392,6 +452,10 @@
   
   .restaurant-sidebar.mobile.collapsed {
     transform: translateX(-100%);
+  }
+  
+  .sidebar-overlay {
+    opacity: 1;
   }
   
   /* Always show text on mobile when sidebar is open */
@@ -407,12 +471,50 @@
   .restaurant-sidebar.mobile .toggle-container {
     display: none;
   }
+  
+  /* Enhanced mobile interactions */
+  .restaurant-sidebar.mobile .section-link:hover {
+    transform: translateX(0);
+  }
+  
+  .restaurant-sidebar.mobile .toggle-sidebar-btn:hover {
+    transform: translateX(0);
+  }
+}
+
+/* Very small screens */
+@media (max-width: 400px) {
+  .restaurant-sidebar.mobile.expanded {
+    width: 100vw;
+  }
+  
+  .mobile-menu-btn {
+    left: 16px;
+    top: 16px;
+    padding: 10px;
+  }
+  
+  .sidebar-brand {
+    padding: 20px 16px;
+  }
+  
+  .section-link {
+    padding: 14px 16px;
+  }
+  
+  .section-category {
+    padding: 10px 16px;
+  }
+  
+  .toggle-sidebar-btn {
+    padding: 14px 16px;
+  }
 }
 
 /* Tablet styles */
-@media (max-width: 1024px) and (min-width: 768px) {
+@media (max-width: 1024px) and (min-width: 676px) {
   .restaurant-sidebar.expanded {
-    width: 220px;
+    width: 240px;
   }
   
   .restaurant-sidebar.collapsed {
@@ -420,65 +522,69 @@
   }
 }
 
-/* Additional responsive adjustments */
-@media (max-width: 480px) {
-  .restaurant-sidebar.mobile.expanded {
-    width: 100vw;
-  }
-  
-  .mobile-menu-btn {
-    left: 16px;
-    top: 65px;
-  }
-}
-
-/* Smooth scrolling for content */
-.sidebar-content {
-  scrollbar-width: thin;
-  scrollbar-color: #ccc transparent;
-}
-
-.sidebar-content::-webkit-scrollbar {
-  width: 4px;
-}
-
-.sidebar-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 2px;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb:hover {
-  background: #999;
-}
-
 /* Focus styles for accessibility */
 .section-link:focus,
 .toggle-sidebar-btn:focus,
 .mobile-menu-btn:focus {
-  outline: 2px solid #ff6b35;
+  outline: 3px solid #ff6b35;
   outline-offset: 2px;
 }
 
-/* Animation for smooth state changes */
+/* Animation keyframes */
 @keyframes slideIn {
   from {
     transform: translateX(-100%);
+    opacity: 0;
   }
   to {
     transform: translateX(0);
+    opacity: 1;
   }
 }
 
 @keyframes slideOut {
   from {
     transform: translateX(0);
+    opacity: 1;
   }
   to {
     transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Smooth entrance animation */
+.restaurant-sidebar.mobile.expanded {
+  animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading state for better UX */
+.restaurant-sidebar.loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Active link styles */
+.section-link.active {
+  background: linear-gradient(135deg, #ff6b35, #ff8e53);
+  color: white;
+  transform: translateX(8px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* Responsive text scaling */
+@media (max-width: 320px) {
+  .brand-text {
+    font-size: 18px;
+  }
+  
+  .section-text,
+  .toggle-text {
+    font-size: 14px;
+  }
+  
+  .category-text {
+    font-size: 11px;
   }
 }
 }

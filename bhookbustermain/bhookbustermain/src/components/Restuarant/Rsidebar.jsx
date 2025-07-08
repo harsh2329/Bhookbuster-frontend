@@ -1,17 +1,15 @@
-// // SidebarComponent.jsx
+
 // import React, { useState, useEffect } from 'react';
 // import { Link } from 'react-router-dom';
 // import { 
-//   Menu, X, ChevronRight, ChevronDown, 
-//   Home, Store, ShoppingBag, PlusCircle, 
-//   Eye, Building, LogOut, Coffee
+//   Menu, X, Home, Store, ShoppingBag, 
+//   PlusCircle, Eye, LogOut, Coffee, ChevronLeft, ChevronRight
 // } from 'lucide-react';
-// import '../../assets/css/RDasboard/Rsidebar.css'; // Adjust the path as necessary
+// import '../../assets/css/RDasboard/Rsidebar.css';
 // import Rnav from './Rnav';
 
 // const Rsidebar = () => {
 //   const [isOpen, setIsOpen] = useState(true);
-//   const [activeItem, setActiveItem] = useState(null);
 
 //   // Handle window resize for responsive behavior
 //   useEffect(() => {
@@ -31,91 +29,78 @@
 //     setIsOpen(!isOpen);
 //   };
 
-//   const handleItemClick = (item) => {
-//     setActiveItem(activeItem === item ? null : item);
-//   };
-
 //   return (
 //     <>
 //       <Rnav />
       
 //       <div className={`restaurant-sidebar ${isOpen ? 'expanded' : 'collapsed'}`}>
-//         <div className="sidebar-toggle" onClick={toggleSidebar}>
-//           {isOpen ? <X size={20} /> : <Menu size={20} />}
-//         </div>
-
 //         <div className="sidebar-brand">
 //           <Coffee size={24} />
-//           <h3 className={`brand-text ${!isOpen && 'hidden'}`}>Resto Admin</h3>
+//           <h3 className={`brand-text ${!isOpen && 'hidden'}`}>Resturant Dash</h3>
 //         </div>
 
 //         <div className="sidebar-content">
-//           <div className={`sidebar-section ${activeItem === 'dashboard' ? 'active' : ''}`}>
-//             <Link to="/dashboard" className="section-link">
+//           <div className="sidebar-section">
+//             <Link to="/rdashboard" className="section-link">
 //               <Home size={20} />
 //               <span className={`section-text ${!isOpen && 'hidden'}`}>Dashboard</span>
 //             </Link>
 //           </div>
 
 //           <div className="sidebar-divider"></div>
-
-//           <div className={`sidebar-section ${activeItem === 'restaurant' ? 'active' : ''}`} onClick={() => handleItemClick('restaurant')}>
-//             <div className="section-header">
-//               <Store size={20} />
-//               <span className={`section-text ${!isOpen && 'hidden'}`}>Restaurant</span>
-//               {isOpen && (activeItem === 'restaurant' ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
-//             </div>
-            
-//             {isOpen && activeItem === 'restaurant' && (
-//               <div className="section-menu">
-//                 <Link to="/locationform" className="menu-item">
-//                   <PlusCircle size={16} />
-//                   <span>Add Restaurant</span>
-//                 </Link>
-//                 <Link to="/add-branches" className="menu-item">
-//                   <Building size={16} />
-//                   <span>Add Branches</span>
-//                 </Link>
-//               </div>
-//             )}
+          
+//           <div className="section-category">
+//             <span className={`category-text ${!isOpen && 'hidden'}`}>Restaurant</span>
 //           </div>
-
-//           <div className="sidebar-divider"></div>
-
-//           <div className={`sidebar-section ${activeItem === 'offers' ? 'active' : ''}`} onClick={() => handleItemClick('offers')}>
-//             <div className="section-header">
-//               <ShoppingBag size={20} />
-//               <span className={`section-text ${!isOpen && 'hidden'}`}>Offers</span>
-//               {isOpen && (activeItem === 'offers' ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
-//             </div>
-            
-//             {isOpen && activeItem === 'offers' && (
-//               <div className="section-menu">
-//                 <Link to="/offer" className="menu-item">
-//                   <PlusCircle size={16} />
-//                   <span>Add Offer</span>
-//                 </Link>
-//                 <Link to="/viewoffer" className="menu-item">
-//                   <Eye size={16} />
-//                   <span>View Offers</span>
-//                 </Link>
-//               </div>
-//             )}
-//           </div>
-
-//           <div className="sidebar-divider"></div>
 
 //           <div className="sidebar-section">
-//             <Link to="/branches" className="section-link">
-//               <Building size={20} />
-//               <span className={`section-text ${!isOpen && 'hidden'}`}>View Branches</span>
+//             <Link to="/locationform" className="section-link">
+//               <Store size={20} />
+//               <span className={`section-text ${!isOpen && 'hidden'}`}>Add Restaurant</span>
 //             </Link>
+//           </div>
+
+//           <div className="sidebar-section">
+//             {/* <Link to="viewresturant" className="section-link">
+//               <Eye size={20} />
+//               <span className={`section-text ${!isOpen && 'hidden'}`}>View Restaurant</span>
+//             </Link> */}
+//           </div>
+
+//           <div className="sidebar-divider"></div>
+          
+//           <div className="section-category">
+//             <span className={`category-text ${!isOpen && 'hidden'}`}>Offers</span>
+//           </div>
+
+//           <div className="sidebar-section">
+//             <Link to="/offer" className="section-link">
+//               <PlusCircle size={20} />
+//               <span className={`section-text ${!isOpen && 'hidden'}`}>Add Offer</span>
+//             </Link>
+//           </div>
+
+//           <div className="sidebar-section">
+//             {/* <Link to="" className="section-link">
+//               <Eye size={20} />
+//               <span className={`section-text ${!isOpen && 'hidden'}`}>View Offers</span>
+//             </Link> */}
 //           </div>
 
 //           <div className="sidebar-divider"></div>
 //         </div>
 
 //         <div className="sidebar-footer">
+//           {/* Toggle button placed at the bottom of the sidebar */}
+//           <div className="toggle-container">
+//             <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
+//               {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+//               <span className={`toggle-text ${!isOpen && 'hidden'}`}>
+//                 {isOpen ? "Collapse" : "Expand"}
+//               </span>
+//             </button>
+//           </div>
+          
 //           <div className="sidebar-section logout">
 //             <Link to="/logout" className="section-link">
 //               <LogOut size={20} />
@@ -129,12 +114,10 @@
 // };
 
 // export default Rsidebar;
-
-// SidebarComponent.jsx
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Menu, X, Home, Store, ShoppingBag, 
+import {
+  Menu, X, Home, Store, ShoppingBag,
   PlusCircle, Eye, LogOut, Coffee, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import '../../assets/css/RDasboard/Rsidebar.css';
@@ -142,17 +125,24 @@ import Rnav from './Rnav';
 
 const Rsidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Handle window resize for responsive behavior
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
+      const mobile = window.innerWidth < 675;
+      setIsMobile(mobile);
+      
+      if (mobile) {
         setIsOpen(false);
       } else {
         setIsOpen(true);
       }
     };
 
+    // Initial check
+    handleResize();
+    
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -161,61 +151,106 @@ const Rsidebar = () => {
     setIsOpen(!isOpen);
   };
 
+  // Close sidebar when clicking outside on mobile
+  const handleOverlayClick = () => {
+    if (isMobile) {
+      setIsOpen(false);
+    }
+  };
+
+  // Close sidebar when clicking a link on mobile
+  const handleLinkClick = () => {
+    if (isMobile) {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <>
       <Rnav />
       
-      <div className={`restaurant-sidebar ${isOpen ? 'expanded' : 'collapsed'}`}>
+      {/* Mobile menu button */}
+      {isMobile && (
+        <button 
+          className="mobile-menu-btn" 
+          onClick={toggleSidebar}
+          aria-label="Toggle sidebar"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      )}
+
+      {/* Overlay for mobile */}
+      {isMobile && isOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={handleOverlayClick}
+        />
+      )}
+
+      <div className={`restaurant-sidebar ${isOpen ? 'expanded' : 'collapsed'} ${isMobile ? 'mobile' : ''}`}>
         <div className="sidebar-brand">
           <Coffee size={24} />
-          <h3 className={`brand-text ${!isOpen && 'hidden'}`}>Resturant Dash</h3>
+          <h3 className={`brand-text ${!isOpen && !isMobile && 'hidden'}`}>Restaurant Dash</h3>
         </div>
 
         <div className="sidebar-content">
           <div className="sidebar-section">
-            <Link to="/rdashboard" className="section-link">
+            <Link 
+              to="/rdashboard" 
+              className="section-link"
+              onClick={handleLinkClick}
+            >
               <Home size={20} />
-              <span className={`section-text ${!isOpen && 'hidden'}`}>Dashboard</span>
+              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}>Dashboard</span>
             </Link>
           </div>
 
           <div className="sidebar-divider"></div>
           
           <div className="section-category">
-            <span className={`category-text ${!isOpen && 'hidden'}`}>Restaurant</span>
+            <span className={`category-text ${!isOpen && !isMobile && 'hidden'}`}>Restaurant</span>
           </div>
 
           <div className="sidebar-section">
-            <Link to="/locationform" className="section-link">
+            <Link 
+              to="/locationform" 
+              className="section-link"
+              onClick={handleLinkClick}
+            >
               <Store size={20} />
-              <span className={`section-text ${!isOpen && 'hidden'}`}>Add Restaurant</span>
+              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}>Add Restaurant</span>
             </Link>
           </div>
 
           <div className="sidebar-section">
-            {/* <Link to="viewresturant" className="section-link">
+            {/* <Link to="viewresturant" className="section-link" onClick={handleLinkClick}>
               <Eye size={20} />
-              <span className={`section-text ${!isOpen && 'hidden'}`}>View Restaurant</span>
+              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}>View Restaurant</span>
             </Link> */}
           </div>
 
           <div className="sidebar-divider"></div>
           
           <div className="section-category">
-            <span className={`category-text ${!isOpen && 'hidden'}`}>Offers</span>
+            <span className={`category-text ${!isOpen && !isMobile && 'hidden'}`}>Offers</span>
           </div>
 
           <div className="sidebar-section">
-            <Link to="/offer" className="section-link">
+            <Link 
+              to="/offer" 
+              className="section-link"
+              onClick={handleLinkClick}
+            >
               <PlusCircle size={20} />
-              <span className={`section-text ${!isOpen && 'hidden'}`}>Add Offer</span>
+              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}>Add Offer</span>
             </Link>
           </div>
 
           <div className="sidebar-section">
-            {/* <Link to="" className="section-link">
+            {/* <Link to="" className="section-link" onClick={handleLinkClick}>
               <Eye size={20} />
-              <span className={`section-text ${!isOpen && 'hidden'}`}>View Offers</span>
+              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}>View Offers</span>
             </Link> */}
           </div>
 
@@ -223,20 +258,26 @@ const Rsidebar = () => {
         </div>
 
         <div className="sidebar-footer">
-          {/* Toggle button placed at the bottom of the sidebar */}
-          <div className="toggle-container">
-            <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
-              {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
-              <span className={`toggle-text ${!isOpen && 'hidden'}`}>
-                {isOpen ? "Collapse" : "Expand"}
-              </span>
-            </button>
-          </div>
+          {/* Toggle button - hidden on mobile */}
+          {!isMobile && (
+            <div className="toggle-container">
+              <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
+                {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+                <span className={`toggle-text ${!isOpen && 'hidden'}`}>
+                  {isOpen ? "Collapse" : "Expand"}
+                </span>
+              </button>
+            </div>
+          )}
           
           <div className="sidebar-section logout">
-            <Link to="/logout" className="section-link">
+            <Link 
+              to="/logout" 
+              className="section-link"
+              onClick={handleLinkClick}
+            >
               <LogOut size={20} />
-              <span className={`section-text ${!isOpen && 'hidden'}`}>Logout</span>
+              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}>Logout</span>
             </Link>
           </div>
         </div>
