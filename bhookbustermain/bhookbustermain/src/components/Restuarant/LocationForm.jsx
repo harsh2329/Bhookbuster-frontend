@@ -898,6 +898,32 @@ const RestaurantRegistration = () => {
   const watchState = watch('stateId');
   const watchCity = watch('cityId');
   
+  // Handle state change
+  useEffect(() => {
+    if (watchState) {
+      console.log('State changed to:', watchState);
+      getCityByStateId(watchState);
+      // Reset city and area when state changes
+      setValue('cityId', '');
+      setValue('areaId', '');
+    } else {
+      setCities([]);
+      setAreas([]);
+    }
+  }, [watchState, setValue]);
+  
+  // Handle city change
+  useEffect(() => {
+    if (watchCity) {
+      console.log('City changed to:', watchCity);
+      getAreaByCityId(watchCity);
+      // Reset area when city changes
+      setValue('areaId', '');
+    } else {
+      setAreas([]);
+    }
+  }, [watchCity, setValue]);
+  
   // Get current location
   const getCurrentLocation = () => {
     if (navigator.geolocation) {
@@ -1095,13 +1121,6 @@ const RestaurantRegistration = () => {
                     id="stateId"
                     {...register("stateId", { required: "State is required" })}
                     className={errors.stateId ? "input-error" : ""}
-                    onChange={(e) => {
-                      setSelectedState(e.target.value);
-                      getCityByStateId(e.target.value);
-                      // Reset city and area when state changes
-                      setValue('cityId', '');
-                      setValue('areaId', '');
-                    }}
                   >
                     <option value="">Select State</option>
                     {states.map((state) => (
@@ -1117,12 +1136,6 @@ const RestaurantRegistration = () => {
                     id="cityId"
                     {...register("cityId", { required: "City is required" })}
                     className={errors.cityId ? "input-error" : ""}
-                    onChange={(e) => {
-                      setSelectedCity(e.target.value);
-                      getAreaByCityId(e.target.value);
-                      // Reset area when city changes
-                      setValue('areaId', '');
-                    }}
                   >
                     <option value="">Select City</option>     
                     {cities && cities.map((city) => (
