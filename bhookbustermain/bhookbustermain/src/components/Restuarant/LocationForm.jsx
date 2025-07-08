@@ -410,15 +410,11 @@ import '../../assets/css/Location.css';
 import Rsidebar from './Rsidebar';
 import { Link } from 'react-router-dom';
 
-
 const RestaurantRegistration = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [states, setStates] = useState([]);
-  // const [cities, setCities] = useState([]);
-  // const [areas, setAreas] = useState([]);
   const [selectedState, setSelectedState] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -432,24 +428,9 @@ const RestaurantRegistration = () => {
 
   const getAllStates = async () => {
     const res = await axios.get("https://bhookbuster-backend-3.onrender.com//state/getallstates");
-    setStates(res.data.data);}
-  // };
-  // const getCityByStateId = async (id) => {
-  //   const res = await axios.get("https://bhookbuster-backend-3.onrender.com//city/getcitybystateid/" + id);
-  //   setCities(res.data.data);
-  // };
+    setStates(res.data.data);
+  };
 
-
-  // const getAreaByCityId = async (id) => {
-  //   console.log("city function");
-    
-  //   const res = await axios.get("https://bhookbuster-backend-3.onrender.com//area/getareabycity/" + id);
-  //   console.log(res.data);
-  //   setAreas(res.data.data);
-  // };
-
-
-  
   const { 
     register, 
     handleSubmit, 
@@ -464,11 +445,8 @@ const RestaurantRegistration = () => {
     }
   });
   
-  // Watch for changes in state and city selections
+  // Watch for changes in state selection only
   const watchState = watch('stateId');
-  // const watchCity = watch('cityId');
-  
- 
   
   // Get current location
   const getCurrentLocation = () => {
@@ -493,23 +471,23 @@ const RestaurantRegistration = () => {
   };
   
   useEffect(() => {
-      const fetchCategories = async () => {
-        try {
-          setLoading(true);
-          const response = await axios.get('/category/getallcategories');
-          if (response.data && response.data.data) {
-            setCategories(response.data.data);
-          }
-          setLoading(false);
-        } catch (err) {
-          alert('Failed to load categories');
-          setLoading(false);
-          console.error('Error fetching categories:', err);
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/category/getallcategories');
+        if (response.data && response.data.data) {
+          setCategories(response.data.data);
         }
-      };
-  
-      fetchCategories();
-    }, []);  
+        setLoading(false);
+      } catch (err) {
+        alert('Failed to load categories');
+        setLoading(false);
+        console.error('Error fetching categories:', err);
+      }
+    };
+
+    fetchCategories();
+  }, []);  
 
   // UPDATED: Modified onSubmit function to handle file uploads correctly
   const onSubmit = async (data) => {
@@ -667,7 +645,7 @@ const RestaurantRegistration = () => {
                   id="stateId"
                   {...register("stateId", { required: "State is required" })}
                   className={errors.stateId ? "input-error" : ""}
-                  onChange={(e) => getCityByStateId(e.target.value)}
+                  onChange={(e) => setSelectedState(e.target.value)}
                 >
                   <option value="">Select State</option>
                   {states.map((state) => (
@@ -676,11 +654,7 @@ const RestaurantRegistration = () => {
                 </select>
                 {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
               </div>
-              
-             
             </div>
-            
-            
             
             <div className="form-group">
               <label htmlFor="foodtype">Food Type</label>
@@ -758,8 +732,6 @@ const RestaurantRegistration = () => {
           </form>
         </div>
 
-        
-        
         {/* Button positioned outside the scrollable area */}
         <button 
           onClick={handleSubmit(onSubmit)} 
@@ -776,4 +748,3 @@ const RestaurantRegistration = () => {
 };
 
 export default RestaurantRegistration;
-
