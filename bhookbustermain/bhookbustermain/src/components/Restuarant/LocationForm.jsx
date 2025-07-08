@@ -438,16 +438,20 @@ const RestaurantRegistration = () => {
   //   const res = await axios.get("https://bhookbuster.netlify.app/city/getcitybystateid/" + id);
   //   setCities(res.data.data);
   // };
-  const getCityByStateId = async (id) => {
+ const getCityByStateId = async (id) => {
+  // Check if ID is provided and valid
+  if (!id || id === '' || id === null || id === undefined) {
+    console.error("State ID is required");
+    setCities([]); // Clear cities if no valid state ID
+    return;
+  }
+  
   try {
-    if (!id) {
-      console.error("State ID is required");
-      return;
-    }
     const res = await axios.get(`https://bhookbuster.netlify.app/city/getcitybystateid/${id}`);
     setCities(res.data.data);
   } catch (error) {
     console.error("Error fetching cities:", error);
+    setCities([]); // Clear cities on error
   }
 };
 
