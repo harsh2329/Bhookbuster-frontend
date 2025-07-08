@@ -277,7 +277,7 @@ const Rsidebar = () => {
               onClick={handleLinkClick}
             >
               <LogOut size={20} />
-              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}>Logout</span>
+              <span className={`section-text ${!isOpen && !isMobile && 'hidden'}`}> Logout </span>
             </Link>
           </div>
         </div>
