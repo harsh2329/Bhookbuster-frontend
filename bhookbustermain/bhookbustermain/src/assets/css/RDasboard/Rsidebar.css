@@ -166,4 +166,319 @@
     padding: 0;
     border-right: none;
   }
+  /* Base sidebar styles */
+.restaurant-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.restaurant-sidebar.expanded {
+  width: 260px;
+}
+
+.restaurant-sidebar.collapsed {
+  width: 80px;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  position: fixed;
+  top: 70px; /* Adjust based on your navbar height */
+  left: 20px;
+  z-index: 1001;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: none;
+}
+
+.mobile-menu-btn:hover {
+  background: #f5f5f5;
+}
+
+/* Overlay for mobile */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: none;
+}
+
+/* Sidebar brand */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  min-height: 70px;
+}
+
+.sidebar-brand svg {
+  color: #ff6b35;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  margin-left: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.brand-text.hidden {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Sidebar content */
+.sidebar-content {
+  flex: 1;
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
+.sidebar-section {
+  margin-bottom: 8px;
+}
+
+.section-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.section-link:hover {
+  background: #f8f9fa;
+  color: #ff6b35;
+}
+
+.section-link svg {
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.section-text {
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.section-text.hidden {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Categories */
+.section-category {
+  padding: 8px 20px;
+  margin-bottom: 8px;
+}
+
+.category-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.category-text.hidden {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+/* Dividers */
+.sidebar-divider {
+  height: 1px;
+  background: #e0e0e0;
+  margin: 16px 20px;
+}
+
+/* Footer */
+.sidebar-footer {
+  border-top: 1px solid #e0e0e0;
+  padding: 20px 0;
+}
+
+.toggle-container {
+  margin-bottom: 16px;
+}
+
+.toggle-sidebar-btn {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.toggle-sidebar-btn:hover {
+  background: #f8f9fa;
+  color: #ff6b35;
+}
+
+.toggle-sidebar-btn svg {
+  margin-right: 12px;
+}
+
+.toggle-text {
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.toggle-text.hidden {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.logout .section-link {
+  color: #dc3545;
+}
+
+.logout .section-link:hover {
+  background: #fdf2f2;
+  color: #dc3545;
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .sidebar-overlay {
+    display: block;
+  }
+  
+  .restaurant-sidebar {
+    top: 60px; /* Adjust based on your navbar height */
+    height: calc(100vh - 60px);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .restaurant-sidebar.mobile.expanded {
+    transform: translateX(0);
+    width: 280px;
+  }
+  
+  .restaurant-sidebar.mobile.collapsed {
+    transform: translateX(-100%);
+  }
+  
+  /* Always show text on mobile when sidebar is open */
+  .restaurant-sidebar.mobile .brand-text,
+  .restaurant-sidebar.mobile .section-text,
+  .restaurant-sidebar.mobile .category-text,
+  .restaurant-sidebar.mobile .toggle-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Hide toggle button on mobile */
+  .restaurant-sidebar.mobile .toggle-container {
+    display: none;
+  }
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .restaurant-sidebar.expanded {
+    width: 220px;
+  }
+  
+  .restaurant-sidebar.collapsed {
+    width: 70px;
+  }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 480px) {
+  .restaurant-sidebar.mobile.expanded {
+    width: 100vw;
+  }
+  
+  .mobile-menu-btn {
+    left: 16px;
+    top: 65px;
+  }
+}
+
+/* Smooth scrolling for content */
+.sidebar-content {
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Focus styles for accessibility */
+.section-link:focus,
+.toggle-sidebar-btn:focus,
+.mobile-menu-btn:focus {
+  outline: 2px solid #ff6b35;
+  outline-offset: 2px;
+}
+
+/* Animation for smooth state changes */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
 }

@@ -126,7 +126,6 @@ export default App;
 
 
 
-ok
 // all changes made in general way
 // all changes made in gereral way
 

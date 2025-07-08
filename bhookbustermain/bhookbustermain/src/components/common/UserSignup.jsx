@@ -86,11 +86,7 @@ function UserSignup() {
         
        
         // Default role assignment
-<<<<<<< HEAD
-        const res = await axios.post("https://bhookbuster-backend-3.onrender.com//usr/addwithfile", formData);
-=======
-        const res = await axios.post("https://bhookbuster-backend-3.onrender.comhttps://bhookbuster-backend-3.onrender.com/usr/addwithfile", formData);
->>>>>>> 1d24839e3da21de7b74504993d9dcc2b993ecb3d
+        const res = await axios.post("https://bhookbuster-backend-3.onrender.com/usr/addwithfile", formData);
         console.log(res.data);
         
         if (res.status === 201) {
