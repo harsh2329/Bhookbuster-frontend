@@ -1130,34 +1130,10 @@ const RestaurantRegistration = () => {
                   {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
                 </div>
                 
-                {/* <div className="form-group">
-                  <label htmlFor="cityId">City</label>
-                  <select
-                    id="cityId"
-                    {...register("cityId", { required: "City is required" })}
-                    className={errors.cityId ? "input-error" : ""}
-                  >
-                    <option value="">Select City</option>     
-                    {cities && cities.map((city) => (
-                      <option key={city._id} value={city._id}>{city.name || city._id}</option>
-                    ))}
-                  </select>
-                  {errors.cityId && <p className="error-message">{errors.cityId.message}</p>}
-                </div> */}
+        
               </div>
               
-              {/* <div className="form-group">
-                <label htmlFor="areaId">Area</label>
-                <select
-                  id="areaId"
-                  {...register("areaId")}
-                >
-                  <option value="">Select Area (Optional)</option>
-                  {areas?.map((area) => (
-                    <option key={area._id} value={area._id}>{area.name}</option>
-                  ))}
-                </select>
-              </div> */}
+          
               
               <div className="form-group">
                 <label htmlFor="foodtype">Food Type</label>
