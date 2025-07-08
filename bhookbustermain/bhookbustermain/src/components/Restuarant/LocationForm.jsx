@@ -816,9 +816,9 @@ const RestaurantRegistration = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [areas, setAreas] = useState([]);
-  const [selectedState, setSelectedState] = useState('');
+  // const [cities, setCities] = useState([]);
+  // const [areas, setAreas] = useState([]);
+  // const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -842,43 +842,43 @@ const RestaurantRegistration = () => {
   };
 
   // FIXED: Added proper error handling and state ID validation
-  const getCityByStateId = async (stateId) => {
-    if (!stateId) {
-      setCities([]);
-      setAreas([]);
-      return;
-    }
+  // const getCityByStateId = async (stateId) => {
+  //   if (!stateId) {
+  //     setCities([]);
+  //     setAreas([]);
+  //     return;
+  //   }
     
-    try {
-      const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/city/getcitybystateid/${stateId}`);
-      setCities(res.data.data || []);
-      setAreas([]); // Clear areas when state changes
-    } catch (error) {
-      console.error('Error fetching cities:', error);
-      toast.error('Failed to load cities');
-      setCities([]);
-      setAreas([]);
-    }
-  };
+  //   try {
+  //     const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/city/getcitybystateid/${stateId}`);
+  //     setCities(res.data.data || []);
+  //     setAreas([]); // Clear areas when state changes
+  //   } catch (error) {
+  //     console.error('Error fetching cities:', error);
+  //     toast.error('Failed to load cities');
+  //     setCities([]);
+  //     setAreas([]);
+  //   }
+  // };
 
   // FIXED: Added proper error handling and city ID validation
-  const getAreaByCityId = async (cityId) => {
-    if (!cityId) {
-      setAreas([]);
-      return;
-    }
+  // const getAreaByCityId = async (cityId) => {
+  //   if (!cityId) {
+  //     setAreas([]);
+  //     return;
+  //   }
     
-    try {
-      console.log("Fetching areas for city:", cityId);
-      const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/area/getareabycity/${cityId}`);
-      console.log("Areas response:", res.data);
-      setAreas(res.data.data || []);
-    } catch (error) {
-      console.error('Error fetching areas:', error);
-      toast.error('Failed to load areas');
-      setAreas([]);
-    }
-  };
+  //   try {
+  //     console.log("Fetching areas for city:", cityId);
+  //     const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/area/getareabycity/${cityId}`);
+  //     console.log("Areas response:", res.data);
+  //     setAreas(res.data.data || []);
+  //   } catch (error) {
+  //     console.error('Error fetching areas:', error);
+  //     toast.error('Failed to load areas');
+  //     setAreas([]);
+  //   }
+  // };
 
   const { 
     register, 
@@ -912,17 +912,17 @@ const RestaurantRegistration = () => {
     }
   }, [watchState, setValue]);
   
-  // Handle city change
-  useEffect(() => {
-    if (watchCity) {
-      console.log('City changed to:', watchCity);
-      getAreaByCityId(watchCity);
-      // Reset area when city changes
-      setValue('areaId', '');
-    } else {
-      setAreas([]);
-    }
-  }, [watchCity, setValue]);
+  // // Handle city change
+  // useEffect(() => {
+  //   if (watchCity) {
+  //     console.log('City changed to:', watchCity);
+  //     getAreaByCityId(watchCity);
+  //     // Reset area when city changes
+  //     setValue('areaId', '');
+  //   } else {
+  //     setAreas([]);
+  //   }
+  // }, [watchCity, setValue]);
   
   // Get current location
   const getCurrentLocation = () => {
@@ -1130,7 +1130,7 @@ const RestaurantRegistration = () => {
                   {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
                 </div>
                 
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label htmlFor="cityId">City</label>
                   <select
                     id="cityId"
@@ -1143,10 +1143,10 @@ const RestaurantRegistration = () => {
                     ))}
                   </select>
                   {errors.cityId && <p className="error-message">{errors.cityId.message}</p>}
-                </div>
+                </div> */}
               </div>
               
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label htmlFor="areaId">Area</label>
                 <select
                   id="areaId"
@@ -1157,7 +1157,7 @@ const RestaurantRegistration = () => {
                     <option key={area._id} value={area._id}>{area.name}</option>
                   ))}
                 </select>
-              </div>
+              </div> */}
               
               <div className="form-group">
                 <label htmlFor="foodtype">Food Type</label>
