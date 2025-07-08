@@ -283,7 +283,7 @@
   }
   
   .restaurant-sidebar.mobile.collapsed {
-    transform: translateX(-100%);
+    transform: translateX(-80%);
   }
   
   .sidebar-overlay {
@@ -301,7 +301,7 @@
   
   /* Hide toggle button on mobile */
   .restaurant-sidebar.mobile .toggle-container {
-    display: none;
+    display:block;
   }
   
   /* Enhanced mobile interactions */
@@ -331,15 +331,18 @@
   }
   
   .section-link {
-    padding: 14px 16px;
+    padding: 24px 16px;
   }
   
   .section-category {
-    padding: 10px 16px;
+    padding: 20px 16px;
   }
   
   .toggle-sidebar-btn {
-    padding: 14px 16px;
+    padding: 24px 16px;
+  }
+   .restaurant-sidebar.mobile.collapsed {
+    width: 90px;
   }
 }
 
@@ -350,7 +353,7 @@
   }
   
   .restaurant-sidebar.collapsed {
-    width: 70px;
+    width: 120px;
   }
 }
 
