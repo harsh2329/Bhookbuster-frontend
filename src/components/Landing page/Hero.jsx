@@ -83,12 +83,11 @@ const Hero = () => {
         <div id="quarter-circle-background"></div>
         
 {/*         Pizza Image - centered and rotating } */}
-        { <img
+         <img
           src={pizzaImage}
           alt="Pizza"
           loading="eager"
-          className="udon-image"
-        />
+          className="udon-image"/>
       </div>
     </section>
   );
