@@ -638,7 +638,7 @@ const RestaurantRegistration = () => {
               {errors.address && <p className="error-message">{errors.address.message}</p>}
             </div>
             
-            <div className="form-row">
+             {/* <div className="form-row"> */}
               <div className="form-group">
                 <label htmlFor="stateId">State</label>
                 <select
@@ -654,7 +654,7 @@ const RestaurantRegistration = () => {
                 </select>
                 {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
               </div>
-            </div>
+            {/* </div>  */}
             
             <div className="form-group">
               <label htmlFor="foodtype">Food Type</label>
