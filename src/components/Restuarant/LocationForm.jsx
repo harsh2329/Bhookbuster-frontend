@@ -399,7 +399,6 @@
 // };
 
 // export default RestaurantRegistration;
-
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
@@ -414,7 +413,10 @@ const RestaurantRegistration = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [areas, setAreas] = useState([]);
   const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -427,8 +429,20 @@ const RestaurantRegistration = () => {
   }, []);
 
   const getAllStates = async () => {
-    const res = await axios.get("https://bhookbuster-backend-3.onrender.com//state/getallstates");
+    const res = await axios.get("https://bhookbuster-backend-3.onrender.com/state/getallstates");
     setStates(res.data.data);
+  };
+
+  const getCityByStateId = async (id) => {
+    const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/city/getcitybystateid/${id}`);
+    setCities(res.data.data);
+  };
+
+  const getAreaByCityId = async (id) => {
+    console.log("city function");
+    const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/area/getareabycity/${id}`);
+    console.log(res.data);
+    setAreas(res.data.data);
   };
 
   const { 
@@ -445,8 +459,9 @@ const RestaurantRegistration = () => {
     }
   });
   
-  // Watch for changes in state selection only
+  // Watch for changes in state and city selections
   const watchState = watch('stateId');
+  const watchCity = watch('cityId');
   
   // Get current location
   const getCurrentLocation = () => {
@@ -489,7 +504,7 @@ const RestaurantRegistration = () => {
     fetchCategories();
   }, []);  
 
-  // UPDATED: Modified onSubmit function to handle file uploads correctly
+  // Modified onSubmit function to handle file uploads correctly
   const onSubmit = async (data) => {
     try { 
       // Create FormData object for file upload
@@ -542,7 +557,7 @@ const RestaurantRegistration = () => {
         
         {/* Added form-content-scroll div to enable scrolling */}
         <div className="form-content-scroll">
-          {/* UPDATED: Added encType attribute for file upload */}
+          {/* Added encType attribute for file upload */}
           <form onSubmit={handleSubmit(onSubmit)} className="restaurant-form" encType="multipart/form-data">
             <div className="form-group">
               <label htmlFor="title">Restaurant Name</label>
@@ -638,14 +653,23 @@ const RestaurantRegistration = () => {
               {errors.address && <p className="error-message">{errors.address.message}</p>}
             </div>
             
-             {/* <div className="form-row"> */}
-{/*               <div className="form-group">
+            {/* RE-ENABLED STATE, CITY, AND AREA SELECTION */}
+            <div className="form-row">
+              <div className="form-group">
                 <label htmlFor="stateId">State</label>
                 <select
                   id="stateId"
                   {...register("stateId", { required: "State is required" })}
                   className={errors.stateId ? "input-error" : ""}
-                  onChange={(e) => setSelectedState(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedState(e.target.value);
+                    getCityByStateId(e.target.value);
+                    // Clear city and area when state changes
+                    setValue('cityId', '');
+                    setValue('areaId', '');
+                    setCities([]);
+                    setAreas([]);
+                  }}
                 >
                   <option value="">Select State</option>
                   {states.map((state) => (
@@ -653,8 +677,43 @@ const RestaurantRegistration = () => {
                   ))}
                 </select>
                 {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
-              </div> */}
-            {/* </div>  */}
+              </div>
+              
+              <div className="form-group">
+                <label htmlFor="cityId">City</label>
+                <select
+                  id="cityId"
+                  {...register("cityId", { required: "City is required" })}
+                  className={errors.cityId ? "input-error" : ""}
+                  onChange={(e) => {
+                    setSelectedCity(e.target.value);
+                    getAreaByCityId(e.target.value);
+                    // Clear area when city changes
+                    setValue('areaId', '');
+                    setAreas([]);
+                  }}
+                >
+                  <option value="">Select City</option>     
+                  {cities && cities.map((city) => (
+                    <option key={city._id} value={city._id}>{city.name || city._id}</option>
+                  ))}
+                </select>
+                {errors.cityId && <p className="error-message">{errors.cityId.message}</p>}
+              </div>
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="areaId">Area</label>
+              <select
+                id="areaId"
+                {...register("areaId")}
+              >
+                <option value="">Select Area (Optional)</option>
+                {areas?.map((area) => (
+                  <option key={area._id} value={area._id}>{area.name}</option>
+                ))}
+              </select>
+            </div>
             
             <div className="form-group">
               <label htmlFor="foodtype">Food Type</label>
