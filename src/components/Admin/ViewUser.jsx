@@ -15,7 +15,7 @@ const ViewUser = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('https://your-backend-api.com/user/all'); // Update endpoint as needed
+      const response = await axios.get('/usr/users');
       setUsers(response.data.data);
       setLoading(false);
     } catch (error) {
@@ -37,7 +37,7 @@ const ViewUser = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this user?')) {
       try {
-        await axios.delete(`/user/users/${id}`); // Update endpoint as needed
+        await axios.delete(`/usr/user/${id}`);
         fetchUsers();
       } catch (error) {
         console.error('Error deleting user:', error);
