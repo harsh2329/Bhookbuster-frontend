@@ -243,7 +243,7 @@
 // Test different API endpoints to find the correct one
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../../assets/css/FlipCard.css"; 
+import "../../assets/css/FirmCollections.css"; 
 
 const FlipCard = ({ frontContent, backContent }) => {
   const [isFlipped, setIsFlipped] = useState(false);
