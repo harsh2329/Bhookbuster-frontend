@@ -5,7 +5,7 @@
 // import 'react-toastify/dist/ReactToastify.css';
 // import { useNavigate, useLocation } from 'react-router-dom';
 // import '../../assets/css/Location.css';
-// import Rsidebar from './Rsidebar';
+// import Rsidebar from './Rsidebar';  
 // import { Link } from 'react-router-dom';
 
 
@@ -639,7 +639,7 @@ const RestaurantRegistration = () => {
             </div>
             
              {/* <div className="form-row"> */}
-              <div className="form-group">
+{/*               <div className="form-group">
                 <label htmlFor="stateId">State</label>
                 <select
                   id="stateId"
@@ -653,7 +653,7 @@ const RestaurantRegistration = () => {
                   ))}
                 </select>
                 {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
-              </div>
+              </div> */}
             {/* </div>  */}
             
             <div className="form-group">
