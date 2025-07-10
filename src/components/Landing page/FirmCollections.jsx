@@ -241,49 +241,160 @@
 
 // export default RestaurantCollection;
 // Test different API endpoints to find the correct one
-const testEndpoints = [
-  "https://bhookbuster-backend-3.onrender.com/location/all",
-  "https://bhookbuster-backend-3.onrender.com/locations/all",
-  "https://bhookbuster-backend-3.onrender.com/api/location/all",
-  "https://bhookbuster-backend-3.onrender.com/api/locations/all",
-  "https://bhookbuster-backend-3.onrender.com/restaurants/all",
-  "https://bhookbuster-backend-3.onrender.com/api/restaurants/all"
-];
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "../../assets/css/FlipCard.css"; 
 
-const testApiEndpoints = async () => {
-  for (const endpoint of testEndpoints) {
-    try {
-      console.log(`Testing endpoint: ${endpoint}`);
-      const response = await axios.get(endpoint);
-      console.log(`✅ Success for ${endpoint}:`, response.data);
-      return endpoint; // Return the working endpoint
-    } catch (error) {
-      console.log(`❌ Failed for ${endpoint}:`, error.message);
-    }
-  }
-  return null;
+const FlipCard = ({ frontContent, backContent }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  return (
+    <div
+      className={`flip-card ${isFlipped ? "flipped" : ""}`}
+      onClick={() => setIsFlipped((prev) => !prev)}
+    >
+      <div className="flip-card-inner">
+        <div className="flip-card-front">
+          {frontContent}
+        </div>
+        <div className="flip-card-back">
+          {backContent}
+        </div>
+      </div>
+    </div>
+  );
 };
 
-// Use this in your useEffect
-useEffect(() => {
-  const fetchRestaurantsData = async () => {
-    try {
-      // First test to find working endpoint
-      const workingEndpoint = await testApiEndpoints();
-      
-      if (!workingEndpoint) {
-        throw new Error("No working API endpoint found");
-      }
-      
-      const response = await axios.get(workingEndpoint);
-      setRestaurants(response.data.data || response.data || []);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching restaurant data:", error);
-      setError(error.message);
-      setLoading(false);
-    }
-  };
+const RestaurantCollection = () => {
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  fetchRestaurantsData();
-}, []);
+  useEffect(() => {
+    const fetchRestaurantData = async () => {
+      try {
+        console.log('Fetching restaurants from API...');
+        const response = await fetch("https://bhookbuster-backend-3.onrender.com/location/all");
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('API Response:', data);
+        
+        // Handle different response formats
+        if (data && data.data) {
+          setRestaurants(data.data);
+          console.log('Restaurants set:', data.data);
+        } else if (Array.isArray(data)) {
+          setRestaurants(data);
+          console.log('Restaurants set (direct array):', data);
+        } else {
+          console.log('No data in expected format:', data);
+          setRestaurants([]);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching restaurant data:", error);
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchRestaurantData();
+  }, []);
+
+  return (
+    <>
+      <div className="hero-box-main-container">
+        <h3 className="text-main">
+          Discover the Best Restaurants Near You!
+        </h3>
+      </div>
+
+      <section className="firmSection">
+        {loading ? (
+          <div className="loading-container">
+            <p>Loading restaurants...</p>
+            <p style={{fontSize: '12px', color: '#666'}}>
+              This may take 30+ seconds if the server is starting up...
+            </p>
+          </div>
+        ) : error ? (
+          <div className="error-container">
+            <h3>Unable to load restaurants</h3>
+            <p>Error: {error}</p>
+            <button onClick={() => window.location.reload()}>
+              Retry
+            </button>
+          </div>
+        ) : restaurants.length === 0 ? (
+          <div className="no-results">
+            <p>No restaurants found.</p>
+          </div>
+        ) : (
+          restaurants.map((restaurant) => {
+            const restaurantName = restaurant.title || restaurant.firmName;
+            const image = restaurant.imagePath || restaurant.image || "/assets/images/default.png";
+            const foodType = restaurant.foodtype || restaurant.category || "Restaurant";
+            const area = restaurant.address || restaurant.area || "Unknown Location";
+            const discount = restaurant.discount || restaurant.offer || "Special Offers Available";
+
+            return (
+              <FlipCard
+                key={restaurant._id}
+                frontContent={
+                  <div className="items-center">
+                    <img
+                      src={image}
+                      alt={restaurantName}
+                      className="object-cover"
+                    />
+                    <strong className="text-lg">{restaurantName}</strong>
+                    <div className="text-sm">{foodType}</div>
+                    <div className="text-sm">{area}</div>
+                    <div className="text-redfont-bold">{discount}</div>
+                  </div>
+                }
+                backContent={
+                  <div className="items-center">
+                    <h4 className="text-lg">{restaurantName}</h4>
+                    <p className="text-gray">
+                      {restaurant.description || "Enjoy delicious food at this amazing restaurant!"}
+                    </p>
+                    <div className="restaurant-details">
+                      {restaurant.timmings && (
+                        <div className="detail-item">
+                          <span>🕒 {restaurant.timmings}</span>
+                        </div>
+                      )}
+                      {restaurant.contactNumber && (
+                        <div className="detail-item">
+                          <span>📞 {restaurant.contactNumber}</span>
+                        </div>
+                      )}
+                      <div className="detail-item">
+                        <span className={restaurant.active ? "status-open" : "status-closed"}>
+                          {restaurant.active ? "🟢 Open Now" : "🔴 Closed"}
+                        </span>
+                      </div>
+                    </div>
+                    <Link 
+                      to={`/restaurant/${restaurant._id}`}
+                      className="rounded-hover"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                }
+              />
+            );
+          })
+        )}
+      </section>
+    </>
+  );
+};
+
+export default RestaurantCollection;
