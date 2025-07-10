@@ -5,13 +5,13 @@
 }
 
 .hero-box {
-  margin-top:25px;
+   
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
     width: 100%;
-    min-height: 80vh;
+    min-height: 100vh;
     top: 0;
   }
   
@@ -126,10 +126,11 @@
   
   .udon-image {
     position: absolute;
+    top:90px;
     right: 120px;
     margin-left: 900px;
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     z-index: 1;
     animation: rotate 20s linear infinite;
   }
