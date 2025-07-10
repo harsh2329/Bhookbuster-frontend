@@ -413,10 +413,7 @@ const RestaurantRegistration = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [states, setStates] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [areas, setAreas] = useState([]);
   const [selectedState, setSelectedState] = useState('');
-  const [selectedCity, setSelectedCity] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -433,18 +430,6 @@ const RestaurantRegistration = () => {
     setStates(res.data.data);
   };
 
-  const getCityByStateId = async (id) => {
-    const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/city/getcitybystateid/${id}`);
-    setCities(res.data.data);
-  };
-
-  const getAreaByCityId = async (id) => {
-    console.log("city function");
-    const res = await axios.get(`https://bhookbuster-backend-3.onrender.com/area/getareabycity/${id}`);
-    console.log(res.data);
-    setAreas(res.data.data);
-  };
-
   const { 
     register, 
     handleSubmit, 
@@ -459,9 +444,8 @@ const RestaurantRegistration = () => {
     }
   });
   
-  // Watch for changes in state and city selections
+  // Watch for changes in state selection
   const watchState = watch('stateId');
-  const watchCity = watch('cityId');
   
   // Get current location
   const getCurrentLocation = () => {
@@ -653,66 +637,23 @@ const RestaurantRegistration = () => {
               {errors.address && <p className="error-message">{errors.address.message}</p>}
             </div>
             
-            {/* RE-ENABLED STATE, CITY, AND AREA SELECTION */}
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="stateId">State</label>
-                <select
-                  id="stateId"
-                  {...register("stateId", { required: "State is required" })}
-                  className={errors.stateId ? "input-error" : ""}
-                  onChange={(e) => {
-                    setSelectedState(e.target.value);
-                    getCityByStateId(e.target.value);
-                    // Clear city and area when state changes
-                    setValue('cityId', '');
-                    setValue('areaId', '');
-                    setCities([]);
-                    setAreas([]);
-                  }}
-                >
-                  <option value="">Select State</option>
-                  {states.map((state) => (
-                    <option key={state._id} value={state._id}>{state.name}</option>
-                  ))}
-                </select>
-                {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="cityId">City</label>
-                <select
-                  id="cityId"
-                  {...register("cityId", { required: "City is required" })}
-                  className={errors.cityId ? "input-error" : ""}
-                  onChange={(e) => {
-                    setSelectedCity(e.target.value);
-                    getAreaByCityId(e.target.value);
-                    // Clear area when city changes
-                    setValue('areaId', '');
-                    setAreas([]);
-                  }}
-                >
-                  <option value="">Select City</option>     
-                  {cities && cities.map((city) => (
-                    <option key={city._id} value={city._id}>{city.name || city._id}</option>
-                  ))}
-                </select>
-                {errors.cityId && <p className="error-message">{errors.cityId.message}</p>}
-              </div>
-            </div>
-            
+            {/* STATE SELECTION ONLY - REMOVED CITY AND AREA */}
             <div className="form-group">
-              <label htmlFor="areaId">Area</label>
+              <label htmlFor="stateId">State</label>
               <select
-                id="areaId"
-                {...register("areaId")}
+                id="stateId"
+                {...register("stateId", { required: "State is required" })}
+                className={errors.stateId ? "input-error" : ""}
+                onChange={(e) => {
+                  setSelectedState(e.target.value);
+                }}
               >
-                <option value="">Select Area (Optional)</option>
-                {areas?.map((area) => (
-                  <option key={area._id} value={area._id}>{area.name}</option>
+                <option value="">Select State</option>
+                {states.map((state) => (
+                  <option key={state._id} value={state._id}>{state.name}</option>
                 ))}
               </select>
+              {errors.stateId && <p className="error-message">{errors.stateId.message}</p>}
             </div>
             
             <div className="form-group">
