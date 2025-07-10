@@ -1,249 +1,8 @@
-// import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import axios from "axios";
-// import { FaEye, FaEdit, FaTrash, FaPhoneAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
-// import "../../assets/css/FirmCollections.css";
-
-// const FlipCard = ({ frontContent, backContent }) => {
-//   const [isFlipped, setIsFlipped] = useState(false);
-
-//   return (
-//     <div
-//       className={`flip-card ${isFlipped ? "flipped" : ""}`}
-//       onClick={() => setIsFlipped((prev) => !prev)}
-//     >
-//       <div className="flip-card-inner">
-//         <div className="flip-card-front">
-//           {frontContent}
-//         </div>
-//         <div className="flip-card-back">
-//           {backContent}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const RestaurantCollection = () => {
-//   const [selectedCategory, setSelectedCategory] = useState("All");
-//   const [activeCategory, setActiveCategory] = useState("all");
-//   const [restaurants, setRestaurants] = useState([]);
-//   const [categories, setCategories] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [isAdmin, setIsAdmin] = useState(false); // Set to true if user is admin
-
-//   const filterHandler = (category, categoryId) => {
-//     setSelectedCategory(category);
-//     setActiveCategory(categoryId);
-//   };
-
-//   useEffect(() => {
-//     const fetchRestaurantsData = async () => {
-//       try {
-//         const response = await axios.get("https://bhookbuster-backend-3.onrender.com/location/all");
-//         setRestaurants(response.data.data || []);
-//         setLoading(false);
-//       } catch (error) {
-//         console.error("Error fetching restaurant data:", error);
-//         setLoading(false);
-//       }
-//     };
-
-//     const fetchCategories = async () => {
-//       try {
-//         const response = await axios.get("/category/categories");
-//         setCategories(response.data.data || []);
-//       } catch (error) {
-//         console.error("Error fetching categories:", error);
-//       }
-//     };
-
-//     // Check user role - this is a placeholder, implement your auth logic
-//     const checkUserRole = () => {
-//       const userRole = localStorage.getItem("userRole");
-//       setIsAdmin(userRole === "admin");
-//     };
-
-//     fetchRestaurantsData();
-//     fetchCategories();
-//     checkUserRole();
-//   }, []);
-
-//   const handleView = (id) => {
-//     console.log("View restaurant with ID:", id);
-//     // Implementation for viewing a restaurant's details
-//   };
-
-//   const handleEdit = (id) => {
-//     console.log("Edit restaurant with ID:", id);
-//     // Implementation for editing a restaurant
-//   };
-
-//   const handleDelete = async (id) => {
-//     if (window.confirm("Are you sure you want to delete this restaurant?")) {
-//       try {
-//         // Implement your API call for deletion
-//         await axios.delete(`/api/locations/delete/${id}`);
-//         // Refresh the list
-//         const response = await axios.get("/location/locations");
-//         setRestaurants(response.data.data || []);
-//       } catch (error) {
-//         console.error("Error deleting location:", error);
-//       }
-//     }
-//   };
-
-//   return (
-//     <>
-//       <div className="hero-box-main-container">
-//         <h3 className="text-main">
-//           Discover the Best Restaurants Near You
-//         </h3>
-//       </div>
-
-//       <div className="filterButtons">
-//         <button
-//           key="all"
-//           onClick={() => filterHandler("All", "all")}
-//           className={`border ${
-//             activeCategory === "all"
-//               ? "bg-blue-600 text-white"
-//               : "bg-white text-blue-600 border-blue-600"
-//           } transition duration-300 px-4 py-2 rounded-md mx-1`}
-//         >
-//           All
-//         </button>
-        
-//         {categories.map((category) => (
-//           <button
-//             key={category._id}
-//             onClick={() => filterHandler(category.name, category._id)}
-//             className={`border ${
-//               activeCategory === category._id
-//                 ? "bg-blue-600 text-white"
-//                 : "bg-white text-blue-600 border-blue-600"
-//             } transition duration-300 px-4 py-2 rounded-md mx-1`}
-//           >
-//             {category.name}
-//           </button>
-//         ))}
-//       </div>
-
-//       <section className="restaurantSection grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
-//         {loading ? (
-//           <p>Loading restaurants...</p>
-//         ) : (
-//           restaurants
-//             .filter(
-//               (restaurant) =>
-//                 selectedCategory === "All" ||
-//                 restaurant.category === activeCategory
-//             )
-//             .map((restaurant) => {
-//               const restaurantName = restaurant.title;
-//               const image = restaurant.imagePath || "/assets/images/default-restaurant.png";
-//               const foodType = restaurant.foodtype;
-//               const address = restaurant.address;
-//               const discount = restaurant.discount || "10%"; // Default discount or from data
-
-//               return (
-//                 <FlipCard
-//                   key={restaurant._id}
-//                   frontContent={
-//                     <div className="restaurant-card-front">
-//                       <div className="card-image-container">
-//                         <img
-//                           src={image}
-//                           alt={restaurantName}
-//                           className="restaurant-image"
-//                         />
-//                         {discount && (
-//                           <div className="discount-badge">
-//                             {discount} OFF
-//                           </div>
-//                         )}
-//                       </div>
-//                       <div className="card-content">
-//                         <h3 className="restaurant-name">{restaurantName}</h3>
-//                         <div className="restaurant-type">{foodType}</div>
-//                         <div className="restaurant-location">
-//                           <FaMapMarkerAlt className="icon" />
-//                           <span>{address}</span>
-//                         </div>
-//                         <div className="flip-prompt">
-//                           Click to view details
-//                         </div>
-//                       </div>
-//                     </div>
-//                   }
-//                   backContent={
-//                     <div className="restaurant-card-back">
-//                       <h4 className="back-title">{restaurantName}</h4>
-                      
-//                       <div className="description">
-//                         {restaurant.description || "Enjoy delicious food at this amazing restaurant with authentic cuisine and wonderful ambiance!"}
-//                       </div>
-                      
-//                       <div className="detail-item">
-//                         <FaClock className="detail-icon" />
-//                         <span>{restaurant.timmings || "9:00 AM - 10:00 PM"}</span>
-//                       </div>
-                      
-//                       <div className="detail-item">
-//                         <FaPhoneAlt className="detail-icon" />
-//                         <span>{restaurant.contactNumber || "Not Available"}</span>
-//                       </div>
-                      
-//                       <div className="detail-item">
-//                         <FaMapMarkerAlt className="detail-icon" />
-//                         <span>
-//                           {address}, 
-//                           {restaurant.areaId && restaurant.areaId.name}, 
-//                           {restaurant.cityId && restaurant.cityId.name}
-//                         </span>
-//                       </div>
-                      
-//                       <div className="status-container">
-//                         <span className={`status ${restaurant.active ? 'active' : 'inactive'}`}>
-//                           {restaurant.active ? 'Open Now' : 'Closed'}
-//                         </span>
-//                       </div>
-
-//                       <div className="action-buttons">
-//                         <Link 
-//                           to={`/restaurant/${restaurant._id}`}
-//                           className="view-details-btn"
-//                         >
-//                           View Details
-//                         </Link>
-                        
-//                         {isAdmin && (
-//                           <div className="admin-actions">
-//                             <button onClick={() => handleEdit(restaurant._id)} className="admin-btn edit-btn">
-//                               <FaEdit />
-//                             </button>
-//                             <button onClick={() => handleDelete(restaurant._id)} className="admin-btn delete-btn">
-//                               <FaTrash />
-//                             </button>
-//                           </div>
-//                         )}
-//                       </div>
-//                     </div>
-//                   }
-//                 />
-//               );
-//             })
-//         )}
-//       </section>
-//     </>
-//   );
-// };
-
-// export default RestaurantCollection;
-// Test different API endpoints to find the correct one
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../../assets/css/FirmCollections.css"; 
+import axios from "axios";
+import { FaEye, FaEdit, FaTrash, FaPhoneAlt, FaClock, FaMapMarkerAlt } from "react-icons/fa";
+import "../../assets/css/FirmCollections.css";
 
 const FlipCard = ({ frontContent, backContent }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -266,135 +25,220 @@ const FlipCard = ({ frontContent, backContent }) => {
 };
 
 const RestaurantCollection = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("all");
   const [restaurants, setRestaurants] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false); // Set to true if user is admin
+
+  const filterHandler = (category, categoryId) => {
+    setSelectedCategory(category);
+    setActiveCategory(categoryId);
+  };
 
   useEffect(() => {
-    const fetchRestaurantData = async () => {
+    const fetchRestaurantsData = async () => {
       try {
-        console.log('Fetching restaurants from API...');
-        const response = await fetch("https://bhookbuster-backend-3.onrender.com/location/all");
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        console.log('API Response:', data);
-        
-        // Handle different response formats
-        if (data && data.data) {
-          setRestaurants(data.data);
-          console.log('Restaurants set:', data.data);
-        } else if (Array.isArray(data)) {
-          setRestaurants(data);
-          console.log('Restaurants set (direct array):', data);
-        } else {
-          console.log('No data in expected format:', data);
-          setRestaurants([]);
-        }
+        const response = await axios.get("https://bhookbuster-backend-3.onrender.com/location/all");
+        setRestaurants(response.data.data || []);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching restaurant data:", error);
-        setError(error.message);
         setLoading(false);
       }
     };
 
-    fetchRestaurantData();
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/category/categories");
+        setCategories(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    // Check user role - this is a placeholder, implement your auth logic
+    const checkUserRole = () => {
+      const userRole = localStorage.getItem("userRole");
+      setIsAdmin(userRole === "admin");
+    };
+
+    fetchRestaurantsData();
+    fetchCategories();
+    checkUserRole();
   }, []);
+
+  const handleView = (id) => {
+    console.log("View restaurant with ID:", id);
+    // Implementation for viewing a restaurant's details
+  };
+
+  const handleEdit = (id) => {
+    console.log("Edit restaurant with ID:", id);
+    // Implementation for editing a restaurant
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this restaurant?")) {
+      try {
+        // Implement your API call for deletion
+        await axios.delete(`/api/locations/delete/${id}`);
+        // Refresh the list
+        const response = await axios.get("/location/locations");
+        setRestaurants(response.data.data || []);
+      } catch (error) {
+        console.error("Error deleting location:", error);
+      }
+    }
+  };
 
   return (
     <>
       <div className="hero-box-main-container">
         <h3 className="text-main">
-          Discover the Best Restaurants Near You!
+          Discover the Best Restaurants Near You
         </h3>
       </div>
 
-      <section className="firmSection">
-        {loading ? (
-          <div className="loading-container">
-            <p>Loading restaurants...</p>
-            <p style={{fontSize: '12px', color: '#666'}}>
-              This may take 30+ seconds if the server is starting up...
-            </p>
-          </div>
-        ) : error ? (
-          <div className="error-container">
-            <h3>Unable to load restaurants</h3>
-            <p>Error: {error}</p>
-            <button onClick={() => window.location.reload()}>
-              Retry
-            </button>
-          </div>
-        ) : restaurants.length === 0 ? (
-          <div className="no-results">
-            <p>No restaurants found.</p>
-          </div>
-        ) : (
-          restaurants.map((restaurant) => {
-            const restaurantName = restaurant.title || restaurant.firmName;
-            const image = restaurant.imagePath || restaurant.image || "/assets/images/default.png";
-            const foodType = restaurant.foodtype || restaurant.category || "Restaurant";
-            const area = restaurant.address || restaurant.area || "Unknown Location";
-            const discount = restaurant.discount || restaurant.offer || "Special Offers Available";
+      <div className="filterButtons">
+        <button
+          key="all"
+          onClick={() => filterHandler("All", "all")}
+          className={`border ${
+            activeCategory === "all"
+              ? "bg-blue-600 text-white"
+              : "bg-white text-blue-600 border-blue-600"
+          } transition duration-300 px-4 py-2 rounded-md mx-1`}
+        >
+          All
+        </button>
+        
+        {categories.map((category) => (
+          <button
+            key={category._id}
+            onClick={() => filterHandler(category.name, category._id)}
+            className={`border ${
+              activeCategory === category._id
+                ? "bg-blue-600 text-white"
+                : "bg-white text-blue-600 border-blue-600"
+            } transition duration-300 px-4 py-2 rounded-md mx-1`}
+          >
+            {category.name}
+          </button>
+        ))}
+      </div>
 
-            return (
-              <FlipCard
-                key={restaurant._id}
-                frontContent={
-                  <div className="items-center">
-                    <img
-                      src={image}
-                      alt={restaurantName}
-                      className="object-cover"
-                    />
-                    <strong className="text-lg">{restaurantName}</strong>
-                    <div className="text-sm">{foodType}</div>
-                    <div className="text-sm">{area}</div>
-                    <div className="text-redfont-bold">{discount}</div>
-                  </div>
-                }
-                backContent={
-                  <div className="items-center">
-                    <h4 className="text-lg">{restaurantName}</h4>
-                    <p className="text-gray">
-                      {restaurant.description || "Enjoy delicious food at this amazing restaurant!"}
-                    </p>
-                    <div className="restaurant-details">
-                      {restaurant.timmings && (
-                        <div className="detail-item">
-                          <span>🕒 {restaurant.timmings}</span>
+      <section className="restaurantSection grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+        {loading ? (
+          <p>Loading restaurants...</p>
+        ) : (
+          restaurants
+            .filter(
+              (restaurant) =>
+                selectedCategory === "All" ||
+                restaurant.category === activeCategory
+            )
+            .map((restaurant) => {
+              const restaurantName = restaurant.title;
+              const image = restaurant.imagePath || "/assets/images/default-restaurant.png";
+              const foodType = restaurant.foodtype;
+              const address = restaurant.address;
+              const discount = restaurant.discount || "10%"; // Default discount or from data
+
+              return (
+                <FlipCard
+                  key={restaurant._id}
+                  frontContent={
+                    <div className="restaurant-card-front">
+                      <div className="card-image-container">
+                        <img
+                          src={image}
+                          alt={restaurantName}
+                          className="restaurant-image"
+                        />
+                        {discount && (
+                          <div className="discount-badge">
+                            {discount} OFF
+                          </div>
+                        )}
+                      </div>
+                      <div className="card-content">
+                        <h3 className="restaurant-name">{restaurantName}</h3>
+                        <div className="restaurant-type">{foodType}</div>
+                        <div className="restaurant-location">
+                          <FaMapMarkerAlt className="icon" />
+                          <span>{address}</span>
                         </div>
-                      )}
-                      {restaurant.contactNumber && (
-                        <div className="detail-item">
-                          <span>📞 {restaurant.contactNumber}</span>
+                        <div className="flip-prompt">
+                          Click to view details
                         </div>
-                      )}
-                      <div className="detail-item">
-                        <span className={restaurant.active ? "status-open" : "status-closed"}>
-                          {restaurant.active ? "🟢 Open Now" : "🔴 Closed"}
-                        </span>
                       </div>
                     </div>
-                    <Link 
-                      to={`/restaurant/${restaurant._id}`}
-                      className="rounded-hover"
-                    >
-                      View Details
-                    </Link>
-                  </div>
-                }
-              />
-            );
-          })
+                  }
+                  backContent={
+                    <div className="restaurant-card-back">
+                      <h4 className="back-title">{restaurantName}</h4>
+                      
+                      <div className="description">
+                        {restaurant.description || "Enjoy delicious food at this amazing restaurant with authentic cuisine and wonderful ambiance!"}
+                      </div>
+                      
+                      <div className="detail-item">
+                        <FaClock className="detail-icon" />
+                        <span>{restaurant.timmings || "9:00 AM - 10:00 PM"}</span>
+                      </div>
+                      
+                      <div className="detail-item">
+                        <FaPhoneAlt className="detail-icon" />
+                        <span>{restaurant.contactNumber || "Not Available"}</span>
+                      </div>
+                      
+                      <div className="detail-item">
+                        <FaMapMarkerAlt className="detail-icon" />
+                        <span>
+                          {address}, 
+                          {restaurant.areaId && restaurant.areaId.name}, 
+                          {restaurant.cityId && restaurant.cityId.name}
+                        </span>
+                      </div>
+                      
+                      <div className="status-container">
+                        <span className={`status ${restaurant.active ? 'active' : 'inactive'}`}>
+                          {restaurant.active ? 'Open Now' : 'Closed'}
+                        </span>
+                      </div>
+
+                      <div className="action-buttons">
+                        <Link 
+                          to={`/restaurant/${restaurant._id}`}
+                          className="view-details-btn"
+                        >
+                          View Details
+                        </Link>
+                        
+                        {isAdmin && (
+                          <div className="admin-actions">
+                            <button onClick={() => handleEdit(restaurant._id)} className="admin-btn edit-btn">
+                              <FaEdit />
+                            </button>
+                            <button onClick={() => handleDelete(restaurant._id)} className="admin-btn delete-btn">
+                              <FaTrash />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  }
+                />
+              );
+            })
         )}
       </section>
     </>
   );
 };
 
-export default RestaurantCollection;
+// export default RestaurantCollection;
+// Test different API endpoints to find the correct one
+
