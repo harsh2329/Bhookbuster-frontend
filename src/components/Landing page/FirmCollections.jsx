@@ -239,6 +239,6 @@ const RestaurantCollection = () => {
   );
 };
 
-export default FirmCollections;
+export default RestaurantCollection;
 // Test different API endpoints to find the correct one
 
