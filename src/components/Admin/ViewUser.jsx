@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
-import '../../assets/css/ADashboard/AdminAllUsers.css';
+import '../../assets/css/ADashboard/ViewUser.css';
 
 function AdminAllUsers() {
   const [users, setUsers] = useState([]);
